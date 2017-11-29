@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Api.Controllers
+namespace Web.Controllers
 {
-    public class HomeController : Controller
+    public class UnAuthorizeController : Controller
     {
+        // GET: UnAuthorize
         public ActionResult Index()
         {
             return View();
