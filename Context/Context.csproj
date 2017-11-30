@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,10 +49,105 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\Branch_Manager.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Customer.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\DatBanOnline.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatBanOnline.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\DatBanOnline.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\DatBanOnline.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatBanOnline.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Deposit.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Employee.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Get_List_RestaurantBranch_All_Result.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Get_RestaurantBranch_By_Id_Result.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Image_Menu.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Image_TableType.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Menu.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Order.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Order_Menu.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Order_Table.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Permission.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\RestaurantBranch.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\RestaurantTable.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Role.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\sysdiagram.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Table_Type.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Database\" />
+    <EntityDeploy Include="Database\DatBanOnline.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatBanOnline.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Database\DatBanOnline.edmx.diagram">
+      <DependentUpon>DatBanOnline.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\DatBanOnline.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DatBanOnline.Context.cs</LastGenOutput>
+      <DependentUpon>DatBanOnline.edmx</DependentUpon>
+    </Content>
+    <Content Include="Database\DatBanOnline.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatBanOnline.edmx</DependentUpon>
+      <LastGenOutput>DatBanOnline.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

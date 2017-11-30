@@ -1,6 +1,0 @@
-D:\Project\Project_Sem3\Helpers_Constants\bin\Debug\Helpers_Constants.dll
-D:\Project\Project_Sem3\Helpers_Constants\bin\Debug\Helpers_Constants.pdb
-D:\Project\Project_Sem3\Helpers_Constants\obj\Debug\Helpers_Constants.csprojResolveAssemblyReference.cache
-D:\Project\Project_Sem3\Helpers_Constants\obj\Debug\Helpers_Constants.csproj.CoreCompileInputs.cache
-D:\Project\Project_Sem3\Helpers_Constants\obj\Debug\Helpers_Constants.dll
-D:\Project\Project_Sem3\Helpers_Constants\obj\Debug\Helpers_Constants.pdb
