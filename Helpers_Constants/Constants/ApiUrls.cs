@@ -23,6 +23,15 @@ namespace Helpers_Constants.Constants
             public string Find = $"{BaseUrl}/find/";
         }
 
+        public class RestaurantBranch
+        {
+            private static readonly string BaseUrl = $"{_apiUrl}/branch";
+
+            public string GetAll = $"{BaseUrl}/getall";
+
+            public string Find = $"{BaseUrl}/find/";
+        }
+
         public class Security
         {
             private static readonly string BaseUrl = $"{_apiUrl}/security";
