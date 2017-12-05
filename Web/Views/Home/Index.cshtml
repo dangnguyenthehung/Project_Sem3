@@ -1,12 +1,26 @@
 ﻿@using Model.Models
+@using Web.Models
 @{
     ViewBag.Title = "Home Page";
 }
 
-@{
-    var list = (List<RestaurantBranch>) ViewBag.list;
-}
-@foreach (var item in list)
-{
-    <p>@item.IdBranch, @item.Address, @item.Description</p>
-}
+
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-pull-3">
+        <p class="category">Radios</p>
+
+        
+        @*<div class="radio">
+            <input type="radio" name="radio1" id="radio1" value="option1">
+            <label for="radio1">
+                Radio is off
+            </label>
+        </div>
+        <div class="radio">
+            <input type="radio" name="radio1" id="radio2" value="option2" checked="">
+            <label for="radio2">
+                Radio is on
+            </label>
+        </div>*@
+    </div>
+</div>

@@ -25,6 +25,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="IdRole" Type="int" Nullable="false" />
           <Property Name="SignUpDate" Type="datetime" />
+          <Property Name="Password" Type="varchar" MaxLength="24" />
         </EntityType>
         <EntityType Name="Deposit">
           <Key>
@@ -49,6 +50,7 @@
           <Property Name="IdRole" Type="int" Nullable="false" />
           <Property Name="EnterDate" Type="datetime" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="Password" Type="varchar" MaxLength="24" />
         </EntityType>
         <EntityType Name="Employee_Roles">
           <Key>
@@ -378,6 +380,14 @@
           <Parameter Name="IdBranch" Type="int" Mode="In" />
         </Function>
         <Function Name="Get_List_RestaurantBranch_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Get_List_Table_Available" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RestaurantId" Type="int" Mode="In" />
+          <Parameter Name="BeginTime" Type="datetime" Mode="In" />
+          <Parameter Name="EndTime" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Get_List_Table_By_Restaurant_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RestaurantId" Type="int" Mode="In" />
+        </Function>
         <Function Name="Get_RestaurantBranch_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdBranch" Type="int" Mode="In" />
         </Function>
@@ -563,11 +573,11 @@
             <End Role="Role" EntitySet="Roles" />
           </AssociationSet>
           <FunctionImport Name="Delete_RestaurantBranch">
-            <Parameter Name="IdBranch" Mode="In" Type="Int32" />
+          <Parameter Name="IdBranch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_List_RestaurantBranch_All" ReturnType="Collection(DatBanOnLineModel.Get_List_RestaurantBranch_All_Result)" />
           <FunctionImport Name="Get_RestaurantBranch_By_Id" ReturnType="Collection(DatBanOnLineModel.Get_RestaurantBranch_By_Id_Result)">
-            <Parameter Name="IdBranch" Mode="In" Type="Int32" />
+          <Parameter Name="IdBranch" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Insert_RestaurantBranch">
             <Parameter Name="Address" Mode="In" Type="String" />
@@ -577,6 +587,14 @@
             <Parameter Name="IdBranch" Mode="In" Type="Int32" />
             <Parameter Name="Address" Mode="In" Type="String" />
             <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Get_List_Table_By_Restaurant_Id" ReturnType="Collection(DatBanOnLineModel.Get_List_Table_By_Restaurant_Id_Result)">
+          <Parameter Name="RestaurantId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_List_Table_Available" ReturnType="Collection(DatBanOnLineModel.Get_List_Table_Available_Result)">
+            <Parameter Name="RestaurantId" Mode="In" Type="Int32" />
+            <Parameter Name="BeginTime" Mode="In" Type="DateTime" />
+            <Parameter Name="EndTime" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
@@ -602,6 +620,7 @@
           <Property Name="IdRole" Type="Int32" Nullable="false" />
           <Property Name="SignUpDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK_Orders_Customer" FromRole="Customer" ToRole="Order" />
+          <Property Name="Password" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Deposit">
           <Key>
@@ -631,6 +650,7 @@
           <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK_Employee_RestaurantBranch" FromRole="Employee" ToRole="RestaurantBranch" />
           <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK_Orders_Employee" FromRole="Employee" ToRole="Order" />
           <NavigationProperty Name="Roles" Relationship="DatBanOnLineModel.Employee_Roles" FromRole="Employee" ToRole="Role" />
+          <Property Name="Password" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Image_Menu">
           <Key>
@@ -962,6 +982,20 @@
           <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <ComplexType Name="Get_List_Table_By_Restaurant_Id_Result">
+          <Property Type="Int32" Name="IdTable" Nullable="false" />
+          <Property Type="Int32" Name="RestaurantId" Nullable="false" />
+          <Property Type="Int32" Name="TableNumber" Nullable="true" />
+          <Property Type="Int32" Name="IdTableType" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="Get_List_Table_Available_Result">
+          <Property Type="Int32" Name="IdTable" Nullable="false" />
+          <Property Type="Int32" Name="RestaurantId" Nullable="false" />
+          <Property Type="Int32" Name="TableNumber" Nullable="true" />
+          <Property Type="Int32" Name="IdTableType" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -981,6 +1015,7 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DatBanOnLineModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="SignUpDate" ColumnName="SignUpDate" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -1004,6 +1039,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="DatBanOnLineModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="EnterDate" ColumnName="EnterDate" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
@@ -1170,6 +1206,28 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Insert_RestaurantBranch" FunctionName="DatBanOnLineModel.Store.Insert_RestaurantBranch" />
           <FunctionImportMapping FunctionImportName="Update_RestaurantBranch" FunctionName="DatBanOnLineModel.Store.Update_RestaurantBranch" />
+          <FunctionImportMapping FunctionImportName="Get_List_Table_By_Restaurant_Id" FunctionName="DatBanOnLineModel.Store.Get_List_Table_By_Restaurant_Id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_List_Table_By_Restaurant_Id_Result">
+                <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
+                <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_List_Table_Available" FunctionName="DatBanOnLineModel.Store.Get_List_Table_Available">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_List_Table_Available_Result">
+                <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
+                <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
