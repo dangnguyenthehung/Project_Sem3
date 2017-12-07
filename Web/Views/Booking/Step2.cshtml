@@ -1,0 +1,13 @@
+﻿@model Model.ViewModels.BookingViewModel
+@{
+    ViewBag.Title = "Step2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.BookingInfo.FullName</h2>
+
+@foreach (var item in Model.ListTables)
+{
+    <p>Ban so: @item.TableNumber</p>
+}
+

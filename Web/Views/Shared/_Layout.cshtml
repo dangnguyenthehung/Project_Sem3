@@ -20,6 +20,8 @@
     <link href="~/Content/assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="~/Content/assets/css/demo.css" rel="stylesheet" />
+    
+    <link href="~/Content/site.css" rel="stylesheet" />
 </head>
 <body class="index-page sidebar-collapse">
 
@@ -28,32 +30,16 @@
 <!-- End Navbar -->
 
 <!-- Content -->
-<div class="wrapper">
-    <div class="page-header clear-filter" filter-color="orange">
-        <div class="page-header-image" data-parallax="true" style="background-image: url('~/Content/assets/img/header.jpg');">
-        </div>
-        <div class="container">
-            <div class="content-center brand">
-                <img class="n-logo" src="~/Content/assets/img/now-logo.png" alt="">
-                <h1 class="h1-seo">Now UI Kit.</h1>
-                <h3>A beautiful Bootstrap 4 UI kit. Yours free.</h3>
-                <a href="#" data-toggle="modal" class="btn btn-primary btn-round btn-lg" data-target="#myModal">Booking Table</a>
-            </div>
-        </div>
-    </div>
-    <div id="main">
-        <div class="container">
-
-            @RenderBody()
-
-        </div>
-    </div>
-    <!-- Footer -->
-    @Html.Partial("_PartialLayoutFooter")
-    <!-- end footer -->
+<div id="layoutContent">
+   @RenderBody() 
 </div>
-<!-- end content -->
 
+
+<!-- end content -->
+    
+<!-- Footer -->
+@Html.Partial("_PartialLayoutFooter")
+<!-- end footer -->
 @Html.Partial("_PartialBookingPopup")
     
 

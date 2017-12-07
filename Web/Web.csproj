@@ -399,6 +399,7 @@
     <Content Include="Views\Shared\_PartialLayoutNavigator.cshtml" />
     <Content Include="Views\Shared\_PartialLayoutFooter.cshtml" />
     <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\Booking\Step2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

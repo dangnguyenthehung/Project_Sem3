@@ -11,5 +11,7 @@ namespace Helpers_Constants.Constants
         public static string LoginAccount = "LoginAccount";
 
         public static string AdminAccount = "AdminAccount";
+
+        public static string BookingInfo = "BookingInfo";
     }
 }

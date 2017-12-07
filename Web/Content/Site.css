@@ -1,8 +1,7 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -21,4 +20,7 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+#layoutContent {
+    padding-top: 60px;
 }

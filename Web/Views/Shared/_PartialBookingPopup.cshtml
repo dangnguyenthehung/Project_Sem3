@@ -1,6 +1,5 @@
 ﻿@using Model.Models
 @using Web.Models
-@model Model.DTO.BookingInfoDTO
 
 @{
     List<RestaurantBranch> list = RestaurantBranchModel.GetAll();
@@ -12,7 +11,7 @@
             <div class="row">
                 <div class="card card-signup" data-background-color="orange">
                     <fieldset>
-                        @using (Html.BeginForm("Step2", "Booking", FormMethod.Post))
+                        @using (Html.BeginForm("Index", "Booking", FormMethod.Post))
                         {
                             <div class="header text-center">
                                 <h4 class="title title-up">Infomation</h4>
@@ -23,28 +22,34 @@
                                         <i class="now-ui-icons users_circle-08"></i>
                                     </span>
                                     @*<input type="text" class="form-control" placeholder="First Name...">*@
-                                    @Html.TextBoxFor(m => m.FullName, new {@class="form-control", @placeholder = "Full Name" })
+                                    @Html.TextBox("FullName", null, new {@class="form-control", @placeholder = "Full Name" })
                                 </div>
                                 <div class="input-group form-group-no-border">
                                     <span class="input-group-addon">
                                         <i class="now-ui-icons text_caps-small"></i>
                                     </span>
                                     @*<input type="text" placeholder="Id number..." class="form-control" />*@
-                                    @Html.TextBoxFor(m => m.CMND, new { @class = "form-control", @placeholder = "CMND" })
+                                    @Html.TextBox("CMND", null, new { @class = "form-control", @placeholder = "CMND" })
                                 </div>
                                 <div class="input-group form-group-no-border">
                                     <span class="input-group-addon">
                                         <i class="now-ui-icons ui-1_email-85"></i>
                                     </span>
                                     @*<input type="text" class="form-control" placeholder="Number...">*@
-                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @placeholder = "Phone number" })
+                                    @Html.TextBox("Phone", null, new { @class = "form-control", @placeholder = "Phone number" })
                                 </div>
                                 <div class="input-group form-group-no-border">
                                     <span class="input-group-addon">
                                         <i class="now-ui-icons ui-1_email-85"></i>
                                     </span>
                                     @*<input type="text" class="form-control" placeholder="Address...">*@
-                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                    @Html.TextBox("Address", null, new { @class = "form-control", @placeholder = "Address" })
+                                </div>
+                                <div class="input-group form-group-no-border">
+                                    <span class="input-group-addon">
+                                        <i class="now-ui-icons ui-1_calendar-60"></i>
+                                    </span>
+                                    @Html.TextBox("OrderDate", System.DateTime.Today.ToString("dd/MM/yyyy"), new { @class = "form-control date-picker" })
                                 </div>
                                 <div>
                                     <p class="text-center">Select Branch</p>
@@ -56,7 +61,7 @@
 
                                             <div class="radio">
 
-                                                @Html.RadioButtonFor(m => m.IdBranch, item.IdBranch, new {@class = "", @id = inputId})
+                                                @Html.RadioButton("IdBranch", item.IdBranch, new {@class = "", @id = inputId})
 
                                                 <label for="@inputId">
                                                     @item.Address

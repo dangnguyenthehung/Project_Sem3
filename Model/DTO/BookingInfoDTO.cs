@@ -17,5 +17,7 @@ namespace Model.DTO
         public string Address { get; set; }
 
         public int IdBranch { get; set; }
+
+        public DateTime OrderDate { get; set; }
     }
 }
