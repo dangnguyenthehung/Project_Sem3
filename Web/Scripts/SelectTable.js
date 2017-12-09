@@ -33,11 +33,12 @@ $(document).ready(function () {
         var url = APICall.SelectTable;
         var beginTime = $("#beginTime").val();
         var endTime = $("#endTime").val();
+        var orderDate = $("#OrderDate").val();
         var numberOfPeople = $("#numberOfPeople").val();
 
         $.post(
             url,
-            { BeginTime: beginTime, EndTime: endTime, NumberOfCustomers: numberOfPeople, ListNumberOfTable: arr },
+            { OrderDate: orderDate, BeginTime: beginTime, EndTime: endTime, NumberOfCustomers: numberOfPeople, ListNumberOfTable: arr },
             function (data) {
             console.log(data);
         });

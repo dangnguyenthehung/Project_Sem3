@@ -69,8 +69,13 @@ namespace Web.Controllers
             if (Session[SessionConstants.BookingInfo] != null)
             {
                 var bookingInfo = (BookingInfoDTO)Session[SessionConstants.BookingInfo];
+                var begin = new DateTime(details.OrderDate.Year, details.OrderDate.Month, details.OrderDate.Day, details.BeginTime.Hour, details.BeginTime.Minute,0);
 
-                
+                var end = new DateTime(details.OrderDate.Year, details.OrderDate.Month, details.OrderDate.Day, details.EndTime.Hour, details.EndTime.Minute, 0);
+
+                details.BeginTime = begin;
+                details.EndTime = end;
+
                 var viewModel = new BookingViewModel()
                 {
                     BookingInfo = bookingInfo,

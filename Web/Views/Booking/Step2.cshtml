@@ -54,13 +54,19 @@
         new SelectListItem { Text = "22:00", Value = "22:00" }
     }, "Value", "Text", GioDefault.ToString());
 }
-<div class="container">
+<div class="container" style="padding-top: 50px">
     <div class="row">
         <br />
         <div class="col-xs-12 col-md-12">
             <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    @Model.BookingInfo.FullName
+                <div class="col-xs-12 col-md-6">
+                    <p>Họ tên: @Model.BookingInfo.FullName</p>
+                    <p>SĐT: @Model.BookingInfo.Phone</p>
+                    <p>Địa chỉ: @Model.BookingInfo.Address</p>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <p>CMND: @Model.BookingInfo.CMND</p>
+                    <p>Chi nhánh: @Model.BookingInfo.IdBranch</p>
                 </div>
             </div>
             <div class="row">
@@ -68,24 +74,32 @@
                     @using (Html.BeginForm("Step2", "Booking", FormMethod.Post, new {@class = "form-group", @id = "selectTable"}))
                     {
                         <div class="row">
-                            <div class='col-sm-4'>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="input-group form-group-no-border">
+                                    <span class="input-group-addon">
+                                        <i class="now-ui-icons ui-1_calendar-60"></i>
+                                    </span>
+                                    @Html.TextBox("OrderDate", Model.BookingInfo.OrderDate, new { @class = "form-control date-picker" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
                                     <div class='input-group'>
                                         @Html.DropDownList("beginTime", ListGio, new { @class = "form-control ngay", @id = "beginTime", @style = "padding-left: 5px" })
                                     </div>
                                 </div>
                             </div>
-                            <div class='col-sm-4'>
+                            <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
-                                    <div class='input-group' id='endTime'>
+                                    <div class='input-group'>
                                         @Html.DropDownList("endTime", ListGio, new { @class = "form-control ngay", @id = "endTime", @style = "padding-left: 5px" })
                                     </div>
                                 </div>
                             </div>
-                            <div class='col-sm-4'>
+                            <div class="col-sm-6 col-md-3">
                                 <div class="form-group">
                                     <div class='input-group'>
-                                        <input type='number' class="form-control" id="numberOfPeople" placeholder="Number of people"/>
+                                        <input type='number' class="form-control" id="numberOfPeople" placeholder="Number of people" />
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +107,7 @@
                         <div class="row">
                             @foreach (var type in tableType)
                             {
-                                var numberList = Enumerable.Range(1, type.Count).ToList();
+                                var numberList = Enumerable.Range(0, type.Count).ToList();
                                 var idType = type.First().IdTableType;
 
                                 var selectList = numberList.Select(i => new SelectListItem
