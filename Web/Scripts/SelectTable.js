@@ -31,10 +31,13 @@ $(document).ready(function () {
 
     $("#submitSelectTable").click(function() {
         var url = APICall.SelectTable;
+        var beginTime = $("#beginTime").val();
+        var endTime = $("#endTime").val();
+        var numberOfPeople = $("#numberOfPeople").val();
 
         $.post(
             url,
-            { ListNumberOfTable: arr },
+            { BeginTime: beginTime, EndTime: endTime, NumberOfCustomers: numberOfPeople, ListNumberOfTable: arr },
             function (data) {
             console.log(data);
         });
