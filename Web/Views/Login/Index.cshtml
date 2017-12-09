@@ -1,0 +1,53 @@
+﻿@model Model.Models.Login
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <section class="col-xs-12">
+        <article class="col-xs-12 col-md-4 col-md-offset-4">
+            <h2 class="text-center">Đăng nhập</h2>
+            <fieldset>
+                @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <p class="text-danger">@ViewBag.error</p>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @Html.LabelFor(a => a.UserName)
+                            </div>
+                            <div class="col-xs-12">
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12">
+                                @Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @Html.LabelFor(a => a.Password)
+                            </div>
+                            <div class="col-xs-12">
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-xs-12">
+                                @Html.PasswordFor(a => a.Password, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success col-xs-12" value="Đăng nhập" />
+                    </div>
+
+                }
+            </fieldset>
+        </article>
+    </section>
+</div>
