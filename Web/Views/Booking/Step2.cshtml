@@ -2,12 +2,51 @@
 @{
     ViewBag.Title = "Step2";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
-<h2>@Model.BookingInfo.FullName</h2>
-
-@foreach (var item in Model.ListTables)
-{
-    <p>Ban so: @item.TableNumber</p>
+    var tableType = Model.ListAvailableTables.GroupBy(t => t.IdTableType).Select(gr => gr.ToList()).ToList();
 }
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    @Model.BookingInfo.FullName
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    @using (Html.BeginForm("Step2", "Booking", FormMethod.Post, new { @class = "form-group", @id="selectTable" }))
+                    {
+                        <div class="row">
+                            @foreach (var type in tableType)
+                            {
+                                var numberList = Enumerable.Range(1, type.Count).ToList();
+                                var idType = type.First().IdTableType;
+
+                                var selectList = numberList.Select(i => new SelectListItem
+                                {
+                                    Text = i.ToString(),
+                                    Value = i.ToString()
+                                });
+
+                                <div class="col-xs-12 col-md-3">
+                                    <p>Loại bàn: @idType</p>
+
+                                    @Html.DropDownList(idType.ToString(), selectList, new { @class = "form-control numberOfTable", @data_type = idType, @id = idType })
+
+                                </div>
+
+                            }
+
+                        </div>
+                        <button type="button" class="btn btn-success" id="submitSelectTable">Submit</button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/SelectTable.js"></script>
+
 

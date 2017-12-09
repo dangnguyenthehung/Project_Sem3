@@ -12,6 +12,8 @@ namespace Model.ViewModels
     {
         public BookingInfoDTO BookingInfo { get; set; }
 
-        public List<Table> ListTables { get; set; }
+        public List<Table> ListAvailableTables { get; set; }
+
+        public BookingDetailDTO BookingDetail { get; set; }
     }
 }

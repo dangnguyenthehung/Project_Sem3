@@ -17,6 +17,5 @@ namespace Context.Database
         public int RestaurantId { get; set; }
         public Nullable<int> TableNumber { get; set; }
         public Nullable<int> IdTableType { get; set; }
-        public string Description { get; set; }
     }
 }

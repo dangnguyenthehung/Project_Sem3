@@ -23,7 +23,6 @@
           <Property Name="FullName" Type="nvarchar" MaxLength="100" />
           <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
-          <Property Name="IdRole" Type="int" Nullable="false" />
           <Property Name="SignUpDate" Type="datetime" />
           <Property Name="Password" Type="varchar" MaxLength="24" />
         </EntityType>
@@ -47,7 +46,6 @@
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Phone" Type="varchar" MaxLength="15" />
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
-          <Property Name="IdRole" Type="int" Nullable="false" />
           <Property Name="EnterDate" Type="datetime" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
           <Property Name="Password" Type="varchar" MaxLength="24" />
@@ -116,10 +114,11 @@
           <Property Name="NumberOfTable" Type="int" />
           <Property Name="NumberOfCustomer" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
-          <Property Name="OrderDate" Type="date" />
-          <Property Name="OrderTime" Type="time" Precision="7" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="OrderStatus" Type="int" />
+          <Property Name="IdBranch" Type="int" />
+          <Property Name="BeginTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -172,6 +171,18 @@
           <Property Name="TableCapacity" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <Association Name="FK__Orders__IdBranch__66603565">
+          <End Role="RestaurantBranch" Type="Self.RestaurantBranch" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RestaurantBranch">
+              <PropertyRef Name="IdBranch" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IdBranch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Branch_Manager_Employee">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="Branch_Manager" Type="Self.Branch_Manager" Multiplicity="*" />
@@ -418,6 +429,10 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table_Type" EntityType="Self.Table_Type" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Orders__IdBranch__66603565" Association="Self.FK__Orders__IdBranch__66603565">
+            <End Role="RestaurantBranch" EntitySet="RestaurantBranch" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="FK_Branch_Manager_Employee" Association="Self.FK_Branch_Manager_Employee">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Branch_Manager" EntitySet="Branch_Manager" />
@@ -596,6 +611,10 @@
             <Parameter Name="BeginTime" Mode="In" Type="DateTime" />
             <Parameter Name="EndTime" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <AssociationSet Name="FK__Orders__IdBranch__66603565" Association="DatBanOnLineModel.FK__Orders__IdBranch__66603565">
+            <End Role="RestaurantBranch" EntitySet="RestaurantBranches" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
           <Key>
@@ -617,7 +636,6 @@
           <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="IdRole" Type="Int32" Nullable="false" />
           <Property Name="SignUpDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK_Orders_Customer" FromRole="Customer" ToRole="Order" />
           <Property Name="Password" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
@@ -643,7 +661,6 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="IdRole" Type="Int32" Nullable="false" />
           <Property Name="EnterDate" Type="DateTime" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Branch_Manager" Relationship="DatBanOnLineModel.FK_Branch_Manager_Employee" FromRole="Employee" ToRole="Branch_Manager" />
@@ -716,8 +733,6 @@
           <Property Name="NumberOfTable" Type="Int32" />
           <Property Name="NumberOfCustomer" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="OrderDate" Type="DateTime" Precision="0" />
-          <Property Name="OrderTime" Type="Time" Precision="7" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="OrderStatus" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="DatBanOnLineModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
@@ -725,6 +740,10 @@
           <NavigationProperty Name="Employee" Relationship="DatBanOnLineModel.FK_Orders_Employee" FromRole="Order" ToRole="Employee" />
           <NavigationProperty Name="Order_Menu" Relationship="DatBanOnLineModel.FK_Order_Menu_Orders" FromRole="Order" ToRole="Order_Menu" />
           <NavigationProperty Name="Order_Table" Relationship="DatBanOnLineModel.FK_Order_Table_Orders" FromRole="Order" ToRole="Order_Table" />
+          <Property Name="IdBranch" Type="Int32" />
+          <Property Name="BeginTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK__Orders__IdBranch__66603565" FromRole="Order" ToRole="RestaurantBranch" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -745,6 +764,7 @@
           <NavigationProperty Name="Branch_Manager" Relationship="DatBanOnLineModel.FK_Branch_Manager_RestaurantBranch" FromRole="RestaurantBranch" ToRole="Branch_Manager" />
           <NavigationProperty Name="Employees" Relationship="DatBanOnLineModel.FK_Employee_RestaurantBranch" FromRole="RestaurantBranch" ToRole="Employee" />
           <NavigationProperty Name="RestaurantTables" Relationship="DatBanOnLineModel.FK_RestaurantTable_RestaurantBranch" FromRole="RestaurantBranch" ToRole="RestaurantTable" />
+          <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK__Orders__IdBranch__66603565" FromRole="RestaurantBranch" ToRole="Order" />
         </EntityType>
         <EntityType Name="RestaurantTable">
           <Key>
@@ -994,8 +1014,19 @@
           <Property Type="Int32" Name="RestaurantId" Nullable="false" />
           <Property Type="Int32" Name="TableNumber" Nullable="true" />
           <Property Type="Int32" Name="IdTableType" Nullable="true" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <Association Name="FK__Orders__IdBranch__66603565">
+          <End Type="DatBanOnLineModel.RestaurantBranch" Role="RestaurantBranch" Multiplicity="0..1" />
+          <End Type="DatBanOnLineModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RestaurantBranch">
+              <PropertyRef Name="IdBranch" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IdBranch" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1017,7 +1048,6 @@
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="SignUpDate" ColumnName="SignUpDate" />
-                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -1042,7 +1072,6 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="EnterDate" ColumnName="EnterDate" />
-                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1107,10 +1136,11 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DatBanOnLineModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+                <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
                 <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="NumberOfCustomer" ColumnName="NumberOfCustomer" />
                 <ScalarProperty Name="NumberOfTable" ColumnName="NumberOfTable" />
@@ -1224,7 +1254,6 @@
                 <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
                 <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
                 <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

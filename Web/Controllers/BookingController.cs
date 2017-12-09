@@ -23,7 +23,7 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.OrderDate = System.DateTime.Now;
+                
                 Session[SessionConstants.BookingInfo] = model;
 
                 return RedirectToAction("Step2", "Booking");
@@ -44,7 +44,7 @@ namespace Web.Controllers
                 {
                     RestaurantId = bookingInfo.IdBranch,
                     BeginTime = bookingInfo.OrderDate,
-                    EndTime = bookingInfo.OrderDate
+                    EndTime = bookingInfo.OrderDate.AddDays(1)
 
                 };
                 var table = TableModel.GetTableAvailable(tableFilter);
@@ -52,10 +52,32 @@ namespace Web.Controllers
                 var viewModel = new BookingViewModel()
                 {
                     BookingInfo = bookingInfo,
-                    ListTables = table
+                    ListAvailableTables = table
                 };
 
                 return View(viewModel);
+            }
+
+
+            var url = HttpContext.Request.UrlReferrer;
+            return Redirect(url.ToString());
+        }
+
+        [HttpPost]
+        public ActionResult Step2(BookingDetailDTO details)
+        {
+            if (Session[SessionConstants.BookingInfo] != null)
+            {
+                var bookingInfo = (BookingInfoDTO)Session[SessionConstants.BookingInfo];
+
+                
+                var viewModel = new BookingViewModel()
+                {
+                    BookingInfo = bookingInfo,
+                    BookingDetail = details
+                };
+
+                return View("Finish");
             }
 
 

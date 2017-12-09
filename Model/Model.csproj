@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\BookingDetailDTO.cs" />
     <Compile Include="DTO\BookingInfoDTO.cs" />
+    <Compile Include="DTO\NumberOfTableDTO.cs" />
     <Compile Include="DTO\RolesMapping.cs" />
     <Compile Include="DTO\TableFilterDTO.cs" />
     <Compile Include="Functions\HelperFunctions.cs" />

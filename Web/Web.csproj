@@ -378,6 +378,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SelectTable.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -400,6 +401,7 @@
     <Content Include="Views\Shared\_PartialLayoutFooter.cshtml" />
     <Content Include="Views\Booking\Index.cshtml" />
     <Content Include="Views\Booking\Step2.cshtml" />
+    <Content Include="Views\Booking\Finish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
