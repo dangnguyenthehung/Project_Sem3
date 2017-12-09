@@ -28,10 +28,11 @@ namespace Context.Database
         public Nullable<int> NumberOfTable { get; set; }
         public Nullable<int> NumberOfCustomer { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<System.DateTime> OrderDate { get; set; }
-        public Nullable<System.TimeSpan> OrderTime { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public Nullable<int> OrderStatus { get; set; }
+        public Nullable<int> IdBranch { get; set; }
+        public Nullable<System.DateTime> BeginTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -41,5 +42,6 @@ namespace Context.Database
         public virtual ICollection<Order_Menu> Order_Menu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Table> Order_Table { get; set; }
+        public virtual RestaurantBranch RestaurantBranch { get; set; }
     }
 }

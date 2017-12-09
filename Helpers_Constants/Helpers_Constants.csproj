@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="ApiCall\BaseHelper.cs" />
     <Compile Include="ApiCall\LoginHelper.cs" />
+    <Compile Include="ApiCall\RestaurantBranchHelper.cs" />
     <Compile Include="ApiCall\SecurityHelper.cs" />
+    <Compile Include="ApiCall\TableHelper.cs" />
     <Compile Include="Constants\ApiUrls.cs" />
     <Compile Include="Constants\PermissionConstants.cs" />
     <Compile Include="Constants\SessionConstants.cs" />

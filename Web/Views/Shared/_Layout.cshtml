@@ -1,42 +1,66 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using Model.Models
+@using Web.Models
+
+@*@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")*@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Content/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="~/Content/assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Now Ui Kit by Creative Tim</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- CSS Files -->
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/Content/assets/css/demo.css" rel="stylesheet" />
+    
+    <link href="~/Content/site.css" rel="stylesheet" />
+    
+    <!-- Core JS Files -->
+    <script src="~/Content/assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+<body class="index-page sidebar-collapse">
+<script>
+    var APICall = {
+        SelectTable: '@Url.Action("Step2", "Booking")'
+    }    
+</script>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+<!-- Navbar -->
+@Html.Partial("_PartialLayoutNavigator")
+<!-- End Navbar -->
+
+<!-- Content -->
+<div id="layoutContent">
+    @RenderBody()
+</div>
+
+
+<!-- end content -->
+
+<!-- Footer -->
+@Html.Partial("_PartialLayoutFooter")
+<!-- end footer -->
+@Html.Partial("_PartialBookingPopup")
+
+
+<script src="~/Content/assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="~/Content/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!-- Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="~/Content/assets/js/plugins/bootstrap-switch.js"></script>
+<!-- Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<script src="~/Content/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+<!-- Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+<script src="~/Content/assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+<script src="~/Content/assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+
 </body>
 </html>

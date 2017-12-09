@@ -29,9 +29,9 @@ namespace Context.Database
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
-        public int IdRole { get; set; }
         public Nullable<System.DateTime> EnterDate { get; set; }
         public string Description { get; set; }
+        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Branch_Manager> Branch_Manager { get; set; }

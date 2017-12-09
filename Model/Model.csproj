@@ -41,15 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\BookingDetailDTO.cs" />
+    <Compile Include="DTO\BookingInfoDTO.cs" />
+    <Compile Include="DTO\NumberOfTableDTO.cs" />
     <Compile Include="DTO\RolesMapping.cs" />
+    <Compile Include="DTO\TableFilterDTO.cs" />
     <Compile Include="Functions\HelperFunctions.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\RestaurantBranch.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BookingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enum\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
