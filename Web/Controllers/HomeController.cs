@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Helpers_Constants.Constants;
+using Web.Models;
+using Model.Models;
 
 namespace Web.Controllers
 {
@@ -11,6 +13,8 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.list = RestaurantBranchModel.GetAll();
+
             return View();
         }
 

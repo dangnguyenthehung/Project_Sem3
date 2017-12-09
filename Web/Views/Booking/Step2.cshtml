@@ -1,0 +1,140 @@
+﻿@model Model.ViewModels.BookingViewModel
+@{
+    ViewBag.Title = "Step2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var tableType = Model.ListAvailableTables.GroupBy(t => t.IdTableType).Select(gr => gr.ToList()).ToList();
+
+    var GioHienTai = DateTime.Now.TimeOfDay.Hours;
+    var GioDefault = "9:00";
+
+    GioHienTai = GioHienTai + 2;
+    if (GioHienTai > 22)
+    {
+        GioDefault = "9:00";
+    }
+    else
+    {
+        GioDefault = GioHienTai.ToString() + ":00";
+    }
+    var ListGio = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Text = "6:00", Value = "6:00" },
+        new SelectListItem { Text = "6:30", Value = "6:30" },
+        new SelectListItem { Text = "7:00", Value = "7:00" },
+        new SelectListItem { Text = "7:30", Value = "7:30" },
+        new SelectListItem { Text = "8:00", Value = "8:00" },
+        new SelectListItem { Text = "8:30", Value = "8:30" },
+        new SelectListItem { Text = "9:00", Value = "9:00"},
+        new SelectListItem { Text = "9:30", Value = "9:30" },
+        new SelectListItem { Text = "10:00", Value = "10:00" },
+        new SelectListItem { Text = "10:30", Value = "10:30" },
+        new SelectListItem { Text = "11:00", Value = "11:00" },
+        new SelectListItem { Text = "11:30", Value = "11:30" },
+        new SelectListItem { Text = "12:00", Value = "12:00" },
+        new SelectListItem { Text = "12:30", Value = "12:30" },
+        new SelectListItem { Text = "13:00", Value = "13:00" },
+        new SelectListItem { Text = "13:30", Value = "13:30" },
+        new SelectListItem { Text = "14:00", Value = "14:00" },
+        new SelectListItem { Text = "14:30", Value = "14:30" },
+        new SelectListItem { Text = "15:00", Value = "15:00" },
+        new SelectListItem { Text = "15:30", Value = "15:30" },
+        new SelectListItem { Text = "16:00", Value = "16:00" },
+        new SelectListItem { Text = "16:30", Value = "16:30" },
+        new SelectListItem { Text = "17:00", Value = "17:00" },
+        new SelectListItem { Text = "17:30", Value = "17:30" },
+        new SelectListItem { Text = "18:00", Value = "18:00" },
+        new SelectListItem { Text = "18:30", Value = "18:30" },
+        new SelectListItem { Text = "19:00", Value = "19:00" },
+        new SelectListItem { Text = "19:30", Value = "19:30" },
+        new SelectListItem { Text = "20:00", Value = "20:00" },
+        new SelectListItem { Text = "20:30", Value = "20:30" },
+        new SelectListItem { Text = "21:00", Value = "21:00" },
+        new SelectListItem { Text = "21:30", Value = "21:30" },
+        new SelectListItem { Text = "22:00", Value = "22:00" }
+    }, "Value", "Text", GioDefault.ToString());
+}
+<div class="container" style="padding-top: 50px">
+    <div class="row">
+        <br />
+        <div class="col-xs-12 col-md-12">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <p>Họ tên: @Model.BookingInfo.FullName</p>
+                    <p>SĐT: @Model.BookingInfo.Phone</p>
+                    <p>Địa chỉ: @Model.BookingInfo.Address</p>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <p>CMND: @Model.BookingInfo.CMND</p>
+                    <p>Chi nhánh: @Model.BookingInfo.IdBranch</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    @using (Html.BeginForm("Step2", "Booking", FormMethod.Post, new {@class = "form-group", @id = "selectTable"}))
+                    {
+                        <div class="row">
+                            <div class="col-sm-6 col-md-3">
+                                <div class="input-group form-group-no-border">
+                                    <span class="input-group-addon">
+                                        <i class="now-ui-icons ui-1_calendar-60"></i>
+                                    </span>
+                                    @Html.TextBox("OrderDate", Model.BookingInfo.OrderDate, new { @class = "form-control date-picker" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <div class='input-group'>
+                                        @Html.DropDownList("beginTime", ListGio, new { @class = "form-control ngay", @id = "beginTime", @style = "padding-left: 5px" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <div class='input-group'>
+                                        @Html.DropDownList("endTime", ListGio, new { @class = "form-control ngay", @id = "endTime", @style = "padding-left: 5px" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="form-group">
+                                    <div class='input-group'>
+                                        <input type='number' class="form-control" id="numberOfPeople" placeholder="Number of people" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach (var type in tableType)
+                            {
+                                var numberList = Enumerable.Range(0, type.Count).ToList();
+                                var idType = type.First().IdTableType;
+
+                                var selectList = numberList.Select(i => new SelectListItem
+                                {
+                                    Text = i.ToString(),
+                                    Value = i.ToString()
+                                });
+
+                                <div class="col-xs-12 col-md-3">
+                                    <p>Loại bàn: @idType</p>
+
+                                    @Html.DropDownList(idType.ToString(), selectList, new {@class = "form-control numberOfTable", @data_type = idType, @id = idType})
+
+                                </div>
+                            }
+
+                        </div>
+                        <button type="button" class="btn btn-success" id="submitSelectTable">Submit</button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/SelectTable.js"></script>
+
+

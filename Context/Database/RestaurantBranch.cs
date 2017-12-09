@@ -20,6 +20,7 @@ namespace Context.Database
             this.Branch_Manager = new HashSet<Branch_Manager>();
             this.Employees = new HashSet<Employee>();
             this.RestaurantTables = new HashSet<RestaurantTable>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int IdBranch { get; set; }
@@ -32,5 +33,7 @@ namespace Context.Database
         public virtual ICollection<Employee> Employees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RestaurantTable> RestaurantTables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

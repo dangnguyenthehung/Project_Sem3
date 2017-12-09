@@ -96,5 +96,31 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_RestaurantBranch", idBranchParameter, addressParameter, descriptionParameter);
         }
+    
+        public virtual ObjectResult<Get_List_Table_By_Restaurant_Id_Result> Get_List_Table_By_Restaurant_Id(Nullable<int> restaurantId)
+        {
+            var restaurantIdParameter = restaurantId.HasValue ?
+                new ObjectParameter("RestaurantId", restaurantId) :
+                new ObjectParameter("RestaurantId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_List_Table_By_Restaurant_Id_Result>("Get_List_Table_By_Restaurant_Id", restaurantIdParameter);
+        }
+    
+        public virtual ObjectResult<Get_List_Table_Available_Result> Get_List_Table_Available(Nullable<int> restaurantId, Nullable<System.DateTime> beginTime, Nullable<System.DateTime> endTime)
+        {
+            var restaurantIdParameter = restaurantId.HasValue ?
+                new ObjectParameter("RestaurantId", restaurantId) :
+                new ObjectParameter("RestaurantId", typeof(int));
+    
+            var beginTimeParameter = beginTime.HasValue ?
+                new ObjectParameter("BeginTime", beginTime) :
+                new ObjectParameter("BeginTime", typeof(System.DateTime));
+    
+            var endTimeParameter = endTime.HasValue ?
+                new ObjectParameter("EndTime", endTime) :
+                new ObjectParameter("EndTime", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_List_Table_Available_Result>("Get_List_Table_Available", restaurantIdParameter, beginTimeParameter, endTimeParameter);
+        }
     }
 }
