@@ -1,0 +1,430 @@
+.popup_gallery {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    display: none
+}
+
+.popup_gallery .cover_popup {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.3
+}
+
+.popup_gallery .close_button {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    right: 2vw;
+    top: 4vw;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bolder
+}
+
+.popup_gallery iframe {
+    border: 2px solid white;
+    position: absolute;
+    width: 70vw;
+    height: 40vw;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
+}
+
+#slider_show_gallery {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    overflow: hidden;
+    padding: 0;
+    margin-left: 0;
+    padding-bottom: 30px
+}
+
+#slider_show_gallery #waterwheel {
+    display: inherit;
+    position: absolute;
+    width: 38vw;
+    height: 38vw;
+    left: 100%;
+    top: 50%;
+    z-index: -1;
+    margin-top: -19vw;
+    margin-left: -19vw;
+    -webkit-transition: all 1s;
+    transition: all 1s
+}
+
+#slider_show_gallery .content_slider_show_gallery {
+    display: inherit;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: auto;
+    right: 0;
+    top: 50%;
+    margin-top: -50vh
+}
+
+#slider_show_gallery .content_slider_show_gallery .content_description {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0
+}
+
+#slider_show_gallery .content_slider_show_gallery .content_description .img {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    -webkit-transition: top 0.5s;
+    transition: top 0.5s;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    overflow: hidden;
+    -webkit-transition: width 1s height 1s;
+    transition: width 1s height 1s
+}
+
+#slider_show_gallery .content_slider_show_gallery .content_description .description {
+    position: relative;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: top 0.5s;
+    transition: top 0.5s;
+    background-image: url("../image/board_demo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    overflow: hidden;
+    -webkit-transition: all 0.1s
+}
+
+#slider_show_gallery .content_slider_show_gallery .content_description .description div {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    -webkit-transition: all 0.3s;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+    display: none
+}
+
+#slider_show_gallery .content_slider_show_gallery .content_description .description div .title {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    top: 10%;
+    -webkit-transition: all 0.3s;
+    font-size: 3vw;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s
+}
+
+#slider_show_gallery .content_slider_show_gallery .content_description .description div .button {
+    position: absolute;
+    padding: 2px;
+    color: white;
+    width: auto;
+    height: auto;
+    font-size: 2vw;
+    border: 1px solid white;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s
+}
+
+#slider_show_gallery .content_slider_show_gallery .content_description .description div .button:hover {
+    font-size: 2.1vw;
+    font-weight: bold
+}
+
+#slider_show_gallery .content_slider_show_gallery .content_description .description div .description_case {
+    position: relative;
+    width: 70%;
+    top: 64%;
+    margin-left: 15%;
+    text-align: center;
+    overflow: hidden;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    font-size: 1vw
+}
+
+.pointer {
+    cursor: pointer
+}
+
+.Item_B2 {
+    position: absolute;
+    top: 77vh;
+    margin-top: -10vw;
+    right: 15vw;
+    width: 35vw;
+    height: 15vw;
+    -webkit-transform: rotateZ(-20deg);
+    -ms-transform: rotate(-20deg);
+    transform: rotateZ(-20deg);
+    z-index: 0;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    overflow: hidden
+}
+
+.Item_B1 {
+    position: absolute;
+    top: 77vh;
+    right: 15vw;
+    width: 35vw;
+    margin-top: -10vw;
+    height: 15vw;
+    -webkit-transform: rotateZ(-20deg);
+    -ms-transform: rotate(-20deg);
+    transform: rotateZ(-20deg);
+    z-index: 1;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    overflow: hidden;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%)
+}
+
+.Item_B1:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    transition: -webkit-filter 0.1s;
+    -webkit-transition: -webkit-filter 0.1s;
+    transition: filter 0.1s;
+    -webkit-transition: filter 0.1s, -webkit-filter 0.1s;
+    transition: filter 0.1s, -webkit-filter 0.1s
+}
+
+.Item_Center {
+    position: absolute;
+    top: 50vh;
+    margin-top: -15vw;
+    right: 10vw;
+    width: 55vw;
+    height: 30vw;
+    z-index: 5;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    overflow: hidden
+}
+
+.Item_Center:hover .content_description img {
+    width: 83% !important;
+    height: 87% !important;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s
+}
+
+.Item_Center:hover .content_description .img {
+    width: 92% !important;
+    height: 92% !important;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s
+}
+
+.Item_Center:hover .content_description .description div {
+    display: block !important;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s
+}
+
+.Item_T1:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    -webkit-transition: -webkit-filter 0.1s;
+    transition: -webkit-filter 0.1s;
+    transition: filter 0.1s;
+    -webkit-transition: filter 0.1s, -webkit-filter 0.1s;
+    transition: filter 0.1s, -webkit-filter 0.1s
+}
+
+.Item_T1 {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    position: absolute;
+    top: 30vh;
+    margin-top: -10vw;
+    right: 15vw;
+    width: 35vw;
+    height: 15vw;
+    -webkit-transform: rotateZ(20deg);
+    -ms-transform: rotate(20deg);
+    transform: rotateZ(20deg);
+    z-index: 1;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    overflow: hidden
+}
+
+.Item_T2 {
+    position: absolute;
+    top: 30vh;
+    margin-top: -10vw;
+    right: 15vw;
+    width: 35vw;
+    height: 15vw;
+    -webkit-transform: rotateZ(20deg);
+    -ms-transform: rotate(20deg);
+    transform: rotateZ(20deg);
+    z-index: 0;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    overflow: hidden
+}
+
+.center {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
+}
+
+#slider_show_gallery .title_container {
+    text-shadow: 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+    color: #6fc041;
+    font-size: 2.5em;
+    font-weight: bolder;
+    padding: 0px 0px 10px 50px;
+    line-height: 1.5em;
+    margin-top: 20vh
+}
+
+@media only screen and (min-width: 480px) {
+    #slider_show_gallery .title_container {
+        font-size: 2em
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #slider_show_gallery .title_container {
+        font-size: 2em
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #slider_show_gallery .title_container {
+        font-size: 2em
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    #slider_show_gallery .title_container {
+        font-size: 2.5em
+    }
+}
+
+#slider_show_gallery p {
+    width: 30vw;
+    position: absolute;
+    font-size: 1.2em;
+    padding: 0px 0px 0px 50px
+}
+
+@media only screen and (min-width: 320px) {
+    #slider_show_gallery p {
+        font-size: 1em
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    #slider_show_gallery p {
+        font-size: 1.2em
+    }
+}
+
+#slider_show_gallery .content_slider_show_gallery #slider_1 .content_description .img {
+    background-image: url(../porfolio/Championdash_820.png)
+}
+
+#slider_show_gallery .content_slider_show_gallery #slider_2 .content_description .img {
+    background-image: url(../porfolio/Championdash_820.png)
+}
+
+#slider_show_gallery .content_slider_show_gallery #slider_3 .content_description .img {
+    background-image: url(../porfolio/CharacterDesign_820.png)
+}
+
+#slider_show_gallery .content_slider_show_gallery #slider_4 .content_description .img {
+    background-image: url(../porfolio/Robinword_820.png)
+}
+
+#slider_show_gallery .content_slider_show_gallery #slider_5 .content_description .img {
+    background-image: url(../porfolio/Readytowork_820.png)
+}
+
+@media only screen and (max-width: 568px) {
+    #slider_show_gallery {
+        display: none
+    }
+
+    #icon_bar {
+        display: block
+    }
+
+    #bt_logo {
+        display: none
+    }
+
+    #bt_gallery {
+        display: none
+    }
+
+    #navigation_responsive ul {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column
+    }
+
+    #navigation_responsive ul div {
+        display: none
+    }
+
+    #navigation_responsive ul div ul {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column
+    }
+
+    #navigation_responsive ul div ul li {
+        text-align: center
+    }
+}
+
+@media only screen and (min-width: 569px) {
+    #navigation_responsive ul div {
+        display: block !important
+    }
+}

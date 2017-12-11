@@ -5,21 +5,32 @@
 }
 
 <div class="wrapper">
-    <div class="page-header clear-filter" filter-color="orange">
-        @*<div class="page-header-image" data-parallax="true" style="background-image: url('~/Content/assets/img/header.jpg');">
-        </div>*@
-        <div class="container">
-            <div class="content-center brand">
-                <img class="n-logo" src="~/Content/assets/img/now-logo.png" alt="">
-                <h1 class="h1-seo">Now UI Kit.</h1>
-                <h3>A beautiful Bootstrap 4 UI kit. Yours free.</h3>
-                <a href="#" data-toggle="modal" class="btn btn-primary btn-round btn-lg" data-target="#myModal">Booking Table</a>
-            </div>
-        </div>
+    <div class="popup_gallery">
+        <div class="cover_popup"></div>
+        <div class="close_button"> X</div>
+        <iframe id="video"></iframe>
     </div>
-    <div id="main">
-        <div class="container">
-
+    <div id="parallax">
+        <div class="layer" id="background">
+            <img src="assets/image/background.jpg">
+            <div class="layer" id="effect"></div>
         </div>
+        <div class="layer animate-flicker" id="light"></div>
+        <div class="layer" id="window"></div>
+
+    </div>
+
+    <div id="navigation_responsive">
+        <ul>
+            <li id="icon_bar"><i class="fa fa-home fa-2x" aria-hidden="true"></i></li>
+            <div>
+                <ul>
+                    <li id="bt_about">ABOUT</li>
+                    <li id="bt_service">SERVICES</li>
+                    <li id="bt_gallery">GALLERY</li>
+                    <li id="bt_contact">CONTACT</li>
+                </ul>
+            </div>
+        </ul>
     </div>
 </div>

@@ -1,0 +1,10 @@
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\bin\Debug\Helpers_Constants.dll
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\bin\Debug\Helpers_Constants.pdb
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\bin\Debug\Model.dll
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\bin\Debug\Model.pdb
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\obj\Debug\Helpers_Constants.csprojResolveAssemblyReference.cache
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\obj\Debug\Helpers_Constants.csproj.CoreCompileInputs.cache
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\obj\Debug\Helpers_Constants.dll
+C:\Users\Minh Tri\Desktop\Project_Sem3\Helpers_Constants\obj\Debug\Helpers_Constants.pdb

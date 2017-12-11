@@ -1,0 +1,11 @@
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\bin\Debug\Context.dll.config
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\bin\Debug\Context.dll
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\bin\Debug\Context.pdb
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\bin\Debug\EntityFramework.dll
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\bin\Debug\EntityFramework.xml
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\obj\Debug\Context.csprojResolveAssemblyReference.cache
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\obj\Debug\Context.csproj.CoreCompileInputs.cache
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\obj\Debug\Context.dll
+C:\Users\Minh Tri\Desktop\Project_Sem3\Context\obj\Debug\Context.pdb
