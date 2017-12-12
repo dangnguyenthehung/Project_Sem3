@@ -122,5 +122,103 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_List_Table_Available_Result>("Get_List_Table_Available", restaurantIdParameter, beginTimeParameter, endTimeParameter);
         }
+    
+        public virtual ObjectResult<Get_List_TableType_Result> Get_List_TableType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_List_TableType_Result>("Get_List_TableType");
+        }
+    
+        public virtual ObjectResult<Get_Customer_By_Login_Result> Get_Customer_By_Login(string userName, string password)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Customer_By_Login_Result>("Get_Customer_By_Login", userNameParameter, passwordParameter);
+        }
+    
+        public virtual ObjectResult<Get_Employee_By_Login_Result> Get_Employee_By_Login(string userName, string password)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Employee_By_Login_Result>("Get_Employee_By_Login", userNameParameter, passwordParameter);
+        }
+    
+        public virtual int Insert_Customer(string cMND, string fullName, string phone, string address, string password)
+        {
+            var cMNDParameter = cMND != null ?
+                new ObjectParameter("CMND", cMND) :
+                new ObjectParameter("CMND", typeof(string));
+    
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("FullName", fullName) :
+                new ObjectParameter("FullName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var addressParameter = address != null ?
+                new ObjectParameter("Address", address) :
+                new ObjectParameter("Address", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Customer", cMNDParameter, fullNameParameter, phoneParameter, addressParameter, passwordParameter);
+        }
+    
+        public virtual int Insert_Order(Nullable<int> idCustomer, Nullable<int> numberOfTable, Nullable<int> numberOfCustomer, Nullable<int> idBranch, Nullable<System.DateTime> beginTime, Nullable<System.DateTime> endTime, Nullable<int> orderStatus, string description)
+        {
+            var idCustomerParameter = idCustomer.HasValue ?
+                new ObjectParameter("IdCustomer", idCustomer) :
+                new ObjectParameter("IdCustomer", typeof(int));
+    
+            var numberOfTableParameter = numberOfTable.HasValue ?
+                new ObjectParameter("NumberOfTable", numberOfTable) :
+                new ObjectParameter("NumberOfTable", typeof(int));
+    
+            var numberOfCustomerParameter = numberOfCustomer.HasValue ?
+                new ObjectParameter("NumberOfCustomer", numberOfCustomer) :
+                new ObjectParameter("NumberOfCustomer", typeof(int));
+    
+            var idBranchParameter = idBranch.HasValue ?
+                new ObjectParameter("IdBranch", idBranch) :
+                new ObjectParameter("IdBranch", typeof(int));
+    
+            var beginTimeParameter = beginTime.HasValue ?
+                new ObjectParameter("BeginTime", beginTime) :
+                new ObjectParameter("BeginTime", typeof(System.DateTime));
+    
+            var endTimeParameter = endTime.HasValue ?
+                new ObjectParameter("EndTime", endTime) :
+                new ObjectParameter("EndTime", typeof(System.DateTime));
+    
+            var orderStatusParameter = orderStatus.HasValue ?
+                new ObjectParameter("OrderStatus", orderStatus) :
+                new ObjectParameter("OrderStatus", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Order", idCustomerParameter, numberOfTableParameter, numberOfCustomerParameter, idBranchParameter, beginTimeParameter, endTimeParameter, orderStatusParameter, descriptionParameter);
+        }
+    
+        public virtual int Insert_Order_Table()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Order_Table");
+        }
     }
 }

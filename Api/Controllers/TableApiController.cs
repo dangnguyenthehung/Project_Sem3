@@ -61,5 +61,28 @@ namespace Api.Controllers
             return response;
         }
 
+
+        //Table type
+
+        [Route("get_list_tabletype")]
+        [HttpGet]
+        public HttpResponseMessage Get_List_TableType()
+        {
+            var response = new HttpResponseMessage();
+
+            var result = Helper.Get_List_TableType();
+
+            if (result != null)
+            {
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                return response;
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+
     }
 }

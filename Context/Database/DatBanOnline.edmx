@@ -119,6 +119,7 @@
           <Property Name="IdBranch" Type="int" />
           <Property Name="BeginTime" Type="datetime" />
           <Property Name="EndTime" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -390,6 +391,14 @@
         <Function Name="Delete_RestaurantBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdBranch" Type="int" Mode="In" />
         </Function>
+        <Function Name="Get_Customer_By_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Get_Employee_By_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="Get_List_RestaurantBranch_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Get_List_Table_Available" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RestaurantId" Type="int" Mode="In" />
@@ -399,9 +408,28 @@
         <Function Name="Get_List_Table_By_Restaurant_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RestaurantId" Type="int" Mode="In" />
         </Function>
+        <Function Name="Get_List_TableType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Get_RestaurantBranch_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdBranch" Type="int" Mode="In" />
         </Function>
+        <Function Name="Insert_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CMND" Type="varchar" Mode="In" />
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Insert_Order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCustomer" Type="int" Mode="In" />
+          <Parameter Name="NumberOfTable" Type="int" Mode="In" />
+          <Parameter Name="NumberOfCustomer" Type="int" Mode="In" />
+          <Parameter Name="IdBranch" Type="int" Mode="In" />
+          <Parameter Name="BeginTime" Type="datetime" Mode="In" />
+          <Parameter Name="EndTime" Type="datetime" Mode="In" />
+          <Parameter Name="OrderStatus" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Insert_Order_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Insert_RestaurantBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Address" Type="nvarchar" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
@@ -615,6 +643,33 @@
             <End Role="RestaurantBranch" EntitySet="RestaurantBranches" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+          <FunctionImport Name="Get_List_TableType" ReturnType="Collection(DatBanOnLineModel.Get_List_TableType_Result)" />
+          <FunctionImport Name="Get_Customer_By_Login" ReturnType="Collection(DatBanOnLineModel.Get_Customer_By_Login_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Employee_By_Login" ReturnType="Collection(DatBanOnLineModel.Get_Employee_By_Login_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Customer">
+            <Parameter Name="CMND" Mode="In" Type="String" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Order">
+            <Parameter Name="IdCustomer" Mode="In" Type="Int32" />
+            <Parameter Name="NumberOfTable" Mode="In" Type="Int32" />
+            <Parameter Name="NumberOfCustomer" Mode="In" Type="Int32" />
+            <Parameter Name="IdBranch" Mode="In" Type="Int32" />
+            <Parameter Name="BeginTime" Mode="In" Type="DateTime" />
+            <Parameter Name="EndTime" Mode="In" Type="DateTime" />
+            <Parameter Name="OrderStatus" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Order_Table" />
         </EntityContainer>
         <EntityType Name="Branch_Manager">
           <Key>
@@ -744,6 +799,7 @@
           <Property Name="BeginTime" Type="DateTime" Precision="3" />
           <Property Name="EndTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK__Orders__IdBranch__66603565" FromRole="Order" ToRole="RestaurantBranch" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -1027,6 +1083,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Get_List_TableType_Result">
+          <Property Type="Int32" Name="Id_Table_Type" Nullable="false" />
+          <Property Type="Int32" Name="TableCapacity" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="Get_Customer_By_Login_Result">
+          <Property Type="Int32" Name="IdCustomer" Nullable="false" />
+          <Property Type="String" Name="CMND" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="SignUpDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="24" />
+        </ComplexType>
+        <ComplexType Name="Get_Employee_By_Login_Result">
+          <Property Type="Int32" Name="IdEmployee" Nullable="false" />
+          <Property Type="String" Name="StaffId" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="IdBranch" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="EnterDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="24" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1136,6 +1218,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DatBanOnLineModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
                 <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
@@ -1257,6 +1340,47 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_List_TableType" FunctionName="DatBanOnLineModel.Store.Get_List_TableType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_List_TableType_Result">
+                <ScalarProperty Name="Id_Table_Type" ColumnName="Id_Table_Type" />
+                <ScalarProperty Name="TableCapacity" ColumnName="TableCapacity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Customer_By_Login" FunctionName="DatBanOnLineModel.Store.Get_Customer_By_Login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_Customer_By_Login_Result">
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SignUpDate" ColumnName="SignUpDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Employee_By_Login" FunctionName="DatBanOnLineModel.Store.Get_Employee_By_Login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_Employee_By_Login_Result">
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EnterDate" ColumnName="EnterDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Insert_Customer" FunctionName="DatBanOnLineModel.Store.Insert_Customer" />
+          <FunctionImportMapping FunctionImportName="Insert_Order" FunctionName="DatBanOnLineModel.Store.Insert_Order" />
+          <FunctionImportMapping FunctionImportName="Insert_Order_Table" FunctionName="DatBanOnLineModel.Store.Insert_Order_Table" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

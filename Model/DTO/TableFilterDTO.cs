@@ -8,7 +8,9 @@ namespace Model.DTO
 {
     public class TableFilterDTO
     {
-        public int RestaurantId { get; set; }
+        public int IdBranch { get; set; }
+
+        public string BranchAddress { get; set; }
 
         public DateTime BeginTime { get; set; }
 

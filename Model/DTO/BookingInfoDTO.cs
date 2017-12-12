@@ -8,6 +8,8 @@ namespace Model.DTO
 {
     public class BookingInfoDTO
     {
+        public int IdCustomer { get; set; }
+
         public string FullName { get; set; }
 
         public string CMND { get; set; }

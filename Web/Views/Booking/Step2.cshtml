@@ -1,4 +1,5 @@
-﻿@model Model.ViewModels.BookingViewModel
+﻿@using Web.SingleTon
+@model Model.ViewModels.BookingViewModel
 @{
     ViewBag.Title = "Step2";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -66,7 +67,7 @@
                 </div>
                 <div class="col-xs-12 col-md-6">
                     <p>CMND: @Model.BookingInfo.CMND</p>
-                    <p>Chi nhánh: @Model.BookingInfo.IdBranch</p>
+                    <p>Chi nhánh: @BranchSingleTon.GetAddress(Model.BookingInfo.IdBranch)</p>
                 </div>
             </div>
             <div class="row">
