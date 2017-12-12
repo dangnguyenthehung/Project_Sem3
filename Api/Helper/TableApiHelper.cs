@@ -43,7 +43,7 @@ namespace Api.Helper
                 {
                     using (var context = new DatBanOnlineEntities())
                     {
-                        var response = context.Get_List_Table_Available(model.RestaurantId, model.BeginTime, model.EndTime).ToList();
+                        var response = context.Get_List_Table_Available(model.IdBranch, model.BeginTime, model.EndTime).ToList();
 
                         var result = response.Select(t => t.Cast<Table>()).ToList();
 
@@ -52,6 +52,27 @@ namespace Api.Helper
                 }
 
                 return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        //Table Type
+
+        public List<TableType> Get_List_TableType()
+        {
+            try
+            {
+                using (var context = new DatBanOnlineEntities())
+                {
+                    var response = context.Get_List_TableType().ToList();
+
+                    var result = response.Select(t => t.Cast<TableType>()).ToList();
+
+                    return result;
+                }
             }
             catch (Exception ex)
             {

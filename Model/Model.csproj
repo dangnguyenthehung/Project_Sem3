@@ -51,6 +51,7 @@
     <Compile Include="Models\RestaurantBranch.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Table.cs" />
+    <Compile Include="Models\TableType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BookingViewModel.cs" />
   </ItemGroup>

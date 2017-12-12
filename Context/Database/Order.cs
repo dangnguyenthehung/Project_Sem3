@@ -33,6 +33,7 @@ namespace Context.Database
         public Nullable<int> IdBranch { get; set; }
         public Nullable<System.DateTime> BeginTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
+        public string Description { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

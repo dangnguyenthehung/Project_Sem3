@@ -162,6 +162,8 @@
     <Compile Include="Security\CustomAuthorize.cs" />
     <Compile Include="Security\MyPrincipal.cs" />
     <Compile Include="Security\SessionPersister.cs" />
+    <Compile Include="SingleTon\TableTypeSingleTon.cs" />
+    <Compile Include="SingleTon\BranchSingleTon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\assets\css\bootstrap.min.css" />

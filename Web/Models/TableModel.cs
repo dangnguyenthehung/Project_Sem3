@@ -27,5 +27,13 @@ namespace Web.Models
 
             return Helper.GetTableAvailable(url, model);
         }
+
+        //Table type
+        public static List<TableType> GetListTableTypes()
+        {
+            var url = ApiUrl.Get_List_TableType;
+
+            return Helper.GetListTableTypes(url);
+        }
     }
 }
