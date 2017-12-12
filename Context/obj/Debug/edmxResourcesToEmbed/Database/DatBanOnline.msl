@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatBanOnLineModelStoreContainer" CdmEntityContainer="DatBanOnlineEntities">
+    <EntitySetMapping Name="Branch_Manager">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Branch_Manager">
+        <MappingFragment StoreEntitySet="Branch_Manager">
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+          <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+          <ScalarProperty Name="Id_Branch_Manager" ColumnName="Id_Branch_Manager" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="SignUpDate" ColumnName="SignUpDate" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="CMND" ColumnName="CMND" />
+          <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deposits">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Deposit">
+        <MappingFragment StoreEntitySet="Deposit">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+          <ScalarProperty Name="Id_Deposit" ColumnName="Id_Deposit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="EnterDate" ColumnName="EnterDate" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Image_Menu">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Image_Menu">
+        <MappingFragment StoreEntitySet="Image_Menu">
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+          <ScalarProperty Name="Id_Image_Menu" ColumnName="Id_Image_Menu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Image_TableType">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Image_TableType">
+        <MappingFragment StoreEntitySet="Image_TableType">
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Id_Table_Type" ColumnName="Id_Table_Type" />
+          <ScalarProperty Name="Id_Image_Table_Type" ColumnName="Id_Image_Table_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Menu">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Order_Menu">
+        <MappingFragment StoreEntitySet="Order_Menu">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+          <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+          <ScalarProperty Name="Id_Order_Menu" ColumnName="Id_Order_Menu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Table">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Order_Table">
+        <MappingFragment StoreEntitySet="Order_Table">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+          <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+          <ScalarProperty Name="Id_Order_Table" ColumnName="Id_Order_Table" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="NumberOfCustomer" ColumnName="NumberOfCustomer" />
+          <ScalarProperty Name="NumberOfTable" ColumnName="NumberOfTable" />
+          <ScalarProperty Name="IdEmployee_Verify" ColumnName="IdEmployee_Verify" />
+          <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+          <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Permission">
+        <MappingFragment StoreEntitySet="Permission">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+          <ScalarProperty Name="IdPermission" ColumnName="IdPermission" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RestaurantBranches">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.RestaurantBranch">
+        <MappingFragment StoreEntitySet="RestaurantBranch">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RestaurantTables">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.RestaurantTable">
+        <MappingFragment StoreEntitySet="RestaurantTable">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
+          <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
+          <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+          <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Type">
+      <EntityTypeMapping TypeName="DatBanOnLineModel.Table_Type">
+        <MappingFragment StoreEntitySet="Table_Type">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TableCapacity" ColumnName="TableCapacity" />
+          <ScalarProperty Name="Id_Table_Type" ColumnName="Id_Table_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Employee_Roles" TypeName="DatBanOnLineModel.Employee_Roles" StoreEntitySet="Employee_Roles">
+      <EndProperty Name="Role">
+        <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+      </EndProperty>
+      <EndProperty Name="Employee">
+        <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="Delete_RestaurantBranch" FunctionName="DatBanOnLineModel.Store.Delete_RestaurantBranch" />
+    <FunctionImportMapping FunctionImportName="Get_List_RestaurantBranch_All" FunctionName="DatBanOnLineModel.Store.Get_List_RestaurantBranch_All">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_List_RestaurantBranch_All_Result">
+          <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Get_RestaurantBranch_By_Id" FunctionName="DatBanOnLineModel.Store.Get_RestaurantBranch_By_Id">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_RestaurantBranch_By_Id_Result">
+          <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Insert_RestaurantBranch" FunctionName="DatBanOnLineModel.Store.Insert_RestaurantBranch" />
+    <FunctionImportMapping FunctionImportName="Update_RestaurantBranch" FunctionName="DatBanOnLineModel.Store.Update_RestaurantBranch" />
+    <FunctionImportMapping FunctionImportName="Get_List_Table_By_Restaurant_Id" FunctionName="DatBanOnLineModel.Store.Get_List_Table_By_Restaurant_Id">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_List_Table_By_Restaurant_Id_Result">
+          <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+          <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+          <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
+          <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Get_List_Table_Available" FunctionName="DatBanOnLineModel.Store.Get_List_Table_Available">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_List_Table_Available_Result">
+          <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+          <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+          <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
+          <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
