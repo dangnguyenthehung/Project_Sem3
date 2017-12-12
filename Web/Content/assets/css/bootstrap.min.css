@@ -2692,10 +2692,9 @@ input[type=submit].btn-block {
     transition: opacity .15s linear
 }
 
-    .fade.show,
-    .fade.in {
-        opacity: 1
-    }
+.fade.show {
+    opacity: 1
+}
 
 .collapse {
     display: none
