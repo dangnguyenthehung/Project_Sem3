@@ -47,6 +47,7 @@
     <Compile Include="ApiCall\LoginHelper.cs" />
     <Compile Include="ApiCall\RestaurantBranchHelper.cs" />
     <Compile Include="ApiCall\SecurityHelper.cs" />
+    <Compile Include="ApiCall\OrderHelper.cs" />
     <Compile Include="ApiCall\TableHelper.cs" />
     <Compile Include="Constants\ApiUrls.cs" />
     <Compile Include="Constants\PermissionConstants.cs" />

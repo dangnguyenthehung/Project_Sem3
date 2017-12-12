@@ -399,6 +399,9 @@
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Get_List_Order_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdOrder" Type="int" Mode="In" />
+        </Function>
         <Function Name="Get_List_RestaurantBranch_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Get_List_Table_Available" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RestaurantId" Type="int" Mode="In" />
@@ -409,6 +412,9 @@
           <Parameter Name="RestaurantId" Type="int" Mode="In" />
         </Function>
         <Function Name="Get_List_TableType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Get_Order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdOrder" Type="int" Mode="In" />
+        </Function>
         <Function Name="Get_RestaurantBranch_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdBranch" Type="int" Mode="In" />
         </Function>
@@ -652,14 +658,14 @@
             <Parameter Name="UserName" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Insert_Customer">
+          <FunctionImport Name="Insert_Customer" ReturnType="Collection(DatBanOnLineModel.Insert_Customer_Result)">
             <Parameter Name="CMND" Mode="In" Type="String" />
             <Parameter Name="FullName" Mode="In" Type="String" />
             <Parameter Name="Phone" Mode="In" Type="String" />
             <Parameter Name="Address" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Insert_Order">
+          <FunctionImport Name="Insert_Order" ReturnType="Collection(DatBanOnLineModel.Insert_Order_Result)">
             <Parameter Name="IdCustomer" Mode="In" Type="Int32" />
             <Parameter Name="NumberOfTable" Mode="In" Type="Int32" />
             <Parameter Name="NumberOfCustomer" Mode="In" Type="Int32" />
@@ -670,6 +676,12 @@
             <Parameter Name="Description" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Insert_Order_Table" />
+          <FunctionImport Name="Get_List_Order_Table" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_Table_Result)">
+            <Parameter Name="IdOrder" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Order" ReturnType="Collection(DatBanOnLineModel.Get_Order_Result)">
+            <Parameter Name="IdOrder" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
           <Key>
@@ -1109,6 +1121,33 @@
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Password" Nullable="true" MaxLength="24" />
         </ComplexType>
+        <ComplexType Name="Insert_Order_Result">
+          <Property Type="Int32" Name="IdOrder" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Insert_Customer_Result">
+          <Property Type="Int32" Name="IdCustomer" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Get_List_Order_Table_Result">
+          <Property Type="Int32" Name="Id_Order_Table" Nullable="false" />
+          <Property Type="Int32" Name="IdOrder" Nullable="true" />
+          <Property Type="Int32" Name="IdTable" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="Get_Order_Result">
+          <Property Type="Int32" Name="IdOrder" Nullable="false" />
+          <Property Type="Int32" Name="IdCustomer" Nullable="true" />
+          <Property Type="Int32" Name="IdEmployee_Verify" Nullable="true" />
+          <Property Type="Int32" Name="NumberOfTable" Nullable="true" />
+          <Property Type="Int32" Name="NumberOfCustomer" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastUpdate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="OrderStatus" Nullable="true" />
+          <Property Type="Int32" Name="IdBranch" Nullable="true" />
+          <Property Type="DateTime" Name="BeginTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1378,9 +1417,50 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Insert_Customer" FunctionName="DatBanOnLineModel.Store.Insert_Customer" />
-          <FunctionImportMapping FunctionImportName="Insert_Order" FunctionName="DatBanOnLineModel.Store.Insert_Order" />
+          <FunctionImportMapping FunctionImportName="Insert_Customer" FunctionName="DatBanOnLineModel.Store.Insert_Customer" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Insert_Customer_Result">
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Insert_Order" FunctionName="DatBanOnLineModel.Store.Insert_Order" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Insert_Order_Result">
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Insert_Order_Table" FunctionName="DatBanOnLineModel.Store.Insert_Order_Table" />
+          <FunctionImportMapping FunctionImportName="Get_List_Order_Table" FunctionName="DatBanOnLineModel.Store.Get_List_Order_Table">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_List_Order_Table_Result">
+                <ScalarProperty Name="Id_Order_Table" ColumnName="Id_Order_Table" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Order" FunctionName="DatBanOnLineModel.Store.Get_Order">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_Order_Result">
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="IdEmployee_Verify" ColumnName="IdEmployee_Verify" />
+                <ScalarProperty Name="NumberOfTable" ColumnName="NumberOfTable" />
+                <ScalarProperty Name="NumberOfCustomer" ColumnName="NumberOfCustomer" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

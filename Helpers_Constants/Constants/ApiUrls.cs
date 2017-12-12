@@ -41,6 +41,15 @@ namespace Helpers_Constants.Constants
             public string Get_List_TableType = $"{BaseUrl}/get_list_tabletype/";
         }
 
+        public class Order
+        {
+            private static readonly string BaseUrl = $"{_apiUrl}/order";
+
+            public string Insert = $"{BaseUrl}/insert";
+            public string Get_By_Id = $"{BaseUrl}/get_by_id/";
+            public string Get_List_Order_Table = $"{BaseUrl}/get_list_order_table/";
+        }
+
         public class Security
         {
             private static readonly string BaseUrl = $"{_apiUrl}/security";

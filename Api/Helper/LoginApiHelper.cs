@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Context.Database;
+using Model.Functions;
 using Model.Models;
 
 namespace Api.Helper
@@ -15,21 +17,21 @@ namespace Api.Helper
                 return null;
             }
 
-            //using (var entities = new ())
-            //{
-            //    try
-            //    {
-            //        var result = entities.
+            using (var entities = new DatBanOnlineEntities())
+            {
+                try
+                {
+                    var result = entities.Get_Customer_By_Login(account.UserName, account.Password).SingleOrDefault();
 
-            //        var response = result.Cast<Account>();
+                    var response = result.Cast<Account>();
 
-            //        return response;
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        Console.WriteLine(e);
-            //    }
-            //}
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
             return null;
         }
 

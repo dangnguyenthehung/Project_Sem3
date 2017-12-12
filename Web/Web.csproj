@@ -154,6 +154,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Models\RestaurantBranchModel.cs" />
     <Compile Include="Models\SecurityModel.cs" />
@@ -254,6 +255,7 @@
     <Content Include="Views\Booking\Index.cshtml" />
     <Content Include="Views\Booking\Step2.cshtml" />
     <Content Include="Views\Booking\Finish.cshtml" />
+    <Content Include="Views\Booking\Preview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

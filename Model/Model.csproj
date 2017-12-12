@@ -41,19 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\BookingDetailDTO.cs" />
-    <Compile Include="DTO\BookingInfoDTO.cs" />
-    <Compile Include="DTO\NumberOfTableDTO.cs" />
+    <Compile Include="DTO\OrderDTO.cs" />
+    <Compile Include="DTO\Order_TableDTO.cs" />
+    <Compile Include="DTO\OrderTableTableType.cs" />
     <Compile Include="DTO\RolesMapping.cs" />
     <Compile Include="DTO\TableFilterDTO.cs" />
     <Compile Include="Functions\HelperFunctions.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Orders.cs" />
+    <Compile Include="Models\Order_Table.cs" />
     <Compile Include="Models\RestaurantBranch.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Models\TableType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\BookingViewModel.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Enum\" />
