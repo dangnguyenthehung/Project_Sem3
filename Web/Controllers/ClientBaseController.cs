@@ -28,17 +28,17 @@ namespace Web.Controllers
             }
             
             // Check login State
-            if (SessionPersister.LoginAccount == null)
+            if (SessionPersister.CustomerAccount == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {
-                    controller = "DangNhap",
+                    controller = "Login",
                     action = "Index"
                 }));
             }
             else
             {
-                var taiKhoan = SessionPersister.LoginAccount;
+                var taiKhoan = SessionPersister.CustomerAccount;
             }
 
             base.OnActionExecuted(filterContext);

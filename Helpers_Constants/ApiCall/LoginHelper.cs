@@ -10,47 +10,27 @@ using Model.Models;
 
 namespace Helpers_Constants.ApiCall
 {
-    public class LoginHelper
+    public class LoginHelper : BaseHelper
     {
-        public Account Login(string apiUrl, Login account)
+        public Customer CustomerLogin(string apiUrl, Login account)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(apiUrl);
-
-                var obj = JsonConvert.SerializeObject(account);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var content = new StringContent(obj, Encoding.UTF8, "application/json");
-
-                var response = client.PostAsync(client.BaseAddress, content).Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = JsonConvert.DeserializeObject<Account>(response.Content.ReadAsStringAsync().Result);
-                    return result;
-                }
-
-                return null;
-            }
+            return _Get_By_Params_Object<Customer, Login>(apiUrl, account);
         }
 
-        public Account Find(string apiUrl, string userName)
+        public Customer FindCustomer(string apiUrl, string userName)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(apiUrl);
-
-                var response = client.GetAsync(userName).Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = JsonConvert.DeserializeObject<Account>(response.Content.ReadAsStringAsync().Result);
-                    return result;
-                }
-
-                return null;
-            }
+            return _Get_By_Keyword<Customer>(apiUrl, userName);
         }
+
+        public Employee EmployeeLogin(string apiUrl, Login account)
+        {
+            return _Get_By_Params_Object<Employee, Login>(apiUrl, account);
+        }
+
+        public Employee FindEmployee(string apiUrl, string userName)
+        {
+            return _Get_By_Keyword<Employee>(apiUrl, userName);
+        }
+
     }
 }

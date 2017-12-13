@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,5 +19,11 @@ namespace Model.Models
         public DateTime EnterDate { get; set; }
         public string Description { get; set; }
         public string Password { get; set; }
+
+        [DisplayName("Roles")]
+        public List<int> Roles { get; set; }
+
+        [DisplayName("Permission")]
+        public List<int> Permissions { get; set; }
     }
 }

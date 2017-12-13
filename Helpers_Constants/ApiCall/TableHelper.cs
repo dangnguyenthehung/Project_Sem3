@@ -17,7 +17,7 @@ namespace Helpers_Constants.ApiCall
 
         public List<Table> GetTableAvailable(string apiUrl, TableFilterDTO model)
         {
-            return _Get_By_Params_Object<Table, TableFilterDTO>(apiUrl, model);
+            return _Get_By_Params_Object<List<Table>, TableFilterDTO>(apiUrl, model);
         }
 
         //table type

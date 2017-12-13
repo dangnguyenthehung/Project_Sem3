@@ -16,19 +16,45 @@ namespace Api.Controllers
         private static readonly LoginApiHelper Helper = new LoginApiHelper();
 
         [HttpPost]
-        [Route("submit")]
-        public HttpResponseMessage Login([FromBody] Login account)
+        [Route("customer")]
+        public HttpResponseMessage CustomerLogin([FromBody] Login account)
         {
             var response = new HttpResponseMessage();
 
             if (account != null)
             {
-                var result = Helper.Login(account);
+                var result = Helper.CustomerLogin(account);
 
                 if (result != null)
                 {
-                    //Login success, get account roles
-                    Helper.GetAccountRoles(ref result);
+                    //Customer dont have any special permission
+                    result.Permissions = new List<int>();
+
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                    return response;
+                }
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+
+        [HttpPost]
+        [Route("employee")]
+        public HttpResponseMessage EmployeeLogin([FromBody] Login account)
+        {
+            var response = new HttpResponseMessage();
+
+            if (account != null)
+            {
+                var result = Helper.EmployeeLogin(account);
+
+                if (result != null)
+                {
+                    //Get lisst permission
+                    Helper.GetEmployeePermission(ref result);
 
                     response.StatusCode = HttpStatusCode.OK;
                     response.Content = new StringContent(JsonConvert.SerializeObject(result));
@@ -42,14 +68,37 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("find/{userName}")]
-        public HttpResponseMessage Find(string userName)
+        [Route("findcustomer/{userName}")]
+        public HttpResponseMessage FindCustomer(string userName)
         {
             var response = new HttpResponseMessage();
 
             if (!string.IsNullOrEmpty(userName))
             {
-                Account result = Helper.Find(userName);
+                var result = Helper.FindCustomer(userName);
+
+                if (result != null)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                    return response;
+                }
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+
+        [HttpGet]
+        [Route("findemployee/{userName}")]
+        public HttpResponseMessage FindEmployee(string userName)
+        {
+            var response = new HttpResponseMessage();
+
+            if (!string.IsNullOrEmpty(userName))
+            {
+                var result = Helper.FindEmployee(userName);
 
                 if (result != null)
                 {

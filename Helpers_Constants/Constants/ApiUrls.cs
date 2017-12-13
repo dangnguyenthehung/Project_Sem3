@@ -14,14 +14,18 @@ namespace Helpers_Constants.Constants
         {
             _apiUrl = url;
         }
-
-        public class DangNhap
+        
+        public class Login
         {
             private static readonly string BaseUrl = $"{_apiUrl}/login";
 
-            public string Login = $"{BaseUrl}/submit";
-            public string Find = $"{BaseUrl}/find/";
+            public string Customer = $"{BaseUrl}/customer";
+            public string Employee = $"{BaseUrl}/employee";
+
+            public string FindCustomer = $"{BaseUrl}/findcustomer/";
+            public string FindEmployee = $"{BaseUrl}/findemployee/";
         }
+
 
         public class RestaurantBranch
         {
@@ -49,6 +53,7 @@ namespace Helpers_Constants.Constants
             public string Get_By_Id = $"{BaseUrl}/get_by_id/";
             public string Get_List_Order_Table = $"{BaseUrl}/get_list_order_table/";
         }
+
 
         public class Security
         {

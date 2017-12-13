@@ -9,25 +9,25 @@ namespace Web.Security
 {
     public class MyPrincipal : IPrincipal
     {
-        private Account account;
+        private Employee Employee;
 
-        public MyPrincipal(Account acc)
+        public MyPrincipal(Employee acc)
         {
             if (acc != null)
             {
-                account = acc;
-                Identity = new GenericIdentity(account.UserName);
+                Employee = acc;
+                Identity = new GenericIdentity(Employee.StaffId);
             }
             else
             {
-                account = new Account();
+                Employee = new Employee();
             }
         }
 
         public bool IsInRole(string permissionStr)
         {
             int permission = int.Parse(permissionStr);
-            var res = account.Permissions.Any(r => r == permission);
+            var res = Employee.Permissions.Any(r => r == permission);
 
             return res;
         }
