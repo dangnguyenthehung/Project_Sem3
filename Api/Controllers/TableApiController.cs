@@ -60,7 +60,25 @@ namespace Api.Controllers
             response.StatusCode = HttpStatusCode.BadRequest;
             return response;
         }
+        [Route("get_list_table_all")]
+        [HttpGet]
+        public HttpResponseMessage Get_List_Table_All()
+        {
+            var response = new HttpResponseMessage();
 
+            var result = Helper.Get_List_Table_All();
+
+            if (result != null)
+            {
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                return response;
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
 
         //Table type
 

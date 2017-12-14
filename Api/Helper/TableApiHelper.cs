@@ -59,6 +59,24 @@ namespace Api.Helper
             }
         }
 
+        public List<Table> Get_List_Table_All()
+        {
+            try
+            {
+                using (var context = new DatBanOnlineEntities())
+                {
+                    var response = context.Get_All_Table().ToList();
+
+                    var result = response.Select(t => t.Cast<Table>()).ToList();
+
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         //Table Type
 
         public List<TableType> Get_List_TableType()

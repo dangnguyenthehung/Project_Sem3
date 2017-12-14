@@ -82,9 +82,11 @@
             <div class="w3-row-padding">
                 @using (Html.BeginForm("Step2", "Booking", FormMethod.Post))
                 {
+                    @Html.HiddenFor(m => m.Order.BeginTime)
+                    @Html.HiddenFor(m => m.Order.IdBranch)
+                    @Html.HiddenFor(m => m.Order.IdCustomer)
                     foreach (var group in tableType)
                     {
-
                         <div class="w3-third w3-container w3-margin-bottom">
                             <img src="~/Content/assets/image/table2.jpg" alt="TABLE FOR 2 PEOPLE"
                                  class="w3-animate-opacity">
@@ -108,14 +110,36 @@
                         </div>
 
                     }
-                    <div class="col-xs-12">
-                        <input type="submit" value="Submit" class="btn btn-success"/>
+                    <div class="w3-third w3-container w3-margin-bottom">
+                        <div class="form-group">
+                            <div class='input-group'>
+                                @Html.TextBoxFor(m => m.Order.NumberOfCustomer, new { @class = "form-control", @id = "BeginTime", @style = "padding-left: 5px" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class='input-group'>
+                                @Html.DropDownList("BeginTime", ListGio, new {@class = "form-control", @id = "BeginTime", @style = "padding-left: 5px"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class='input-group'>
+                                @Html.DropDownList("EndTime", ListGio, new {@class = "form-control", @id = "EndTime", @style = "padding-left: 5px"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class='input-group'>
+                                @Html.TextAreaFor(m => m.Order.Description, new { @class = "form-control", @rows = 5, @style = "padding-left: 5px" })
+                            </div>
+                        </div>
                     </div>
-                }
-                
+                        <div class="col-xs-12">
+                            <input type="submit" value="Submit" class="btn btn-success" />
+                        </div>
+                        }
 
-                <a style="margin-left: 40%" href="nucleo-icons.html" class="btn btn-primary btn-round btn-lg" target="_blank">View Demo Icons</a>
-            </div>
+
+                        <a style="margin-left: 40%" href="nucleo-icons.html" class="btn btn-primary btn-round btn-lg" target="_blank">View Demo Icons</a>
+                    </div>
         </div>
 
 

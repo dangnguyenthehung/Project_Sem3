@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Helpers_Constants.Constants;
 using Model.DTO;
+using Model.Enum;
 using Model.Models;
 using Model.ViewModels;
 using Web.Models;
@@ -27,7 +28,7 @@ namespace Web.Controllers
             var viewModel = new OrderViewModel();
             if (ModelState.IsValid)
             {
-
+                model.IdCustomer = 4;
                 viewModel.Order = model;
                 SessionPersister.OrderInfomation = viewModel;
 
@@ -81,13 +82,14 @@ namespace Web.Controllers
             {
                 if (SessionPersister.OrderInfomation != null)
                 {
+                    var begin = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute, 0);
 
-                    var begin = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute, 0);
+                    var end = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
 
-                    var end = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
-
+                    
                     viewModel.Order.BeginTime = begin;
                     viewModel.Order.EndTime = end;
+                    viewModel.Order.NumberOfTable = viewModel.ListIdTable.Count;
 
                     //update info to viewModel
 
@@ -128,28 +130,37 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
-        public ActionResult Finish()
+        [HttpPost]
+        public ActionResult Finish(OrderViewModel submitData)
         {
             if (SessionPersister.OrderInfomation != null)
             {
-                var viewModel = SessionPersister.OrderInfomation;
-                
-                var data = new OrderDTO()
-                {
-                    Order = viewModel.Order,
-                    ListIdTable = viewModel.ListIdTable
-                };
-
-                var result = OrderModel.Insert(data);
-
                 var message = MessageConstants.OrderFail;
-                if (result > 0)
+
+                var viewModel = SessionPersister.OrderInfomation;
+
+                if (submitData.Order.IdBranch == viewModel.Order.IdBranch && submitData.Order.IdCustomer == viewModel.Order.IdCustomer && submitData.Order.BeginTime == viewModel.Order.BeginTime)
                 {
-                    message = MessageConstants.OrderSuccess;
+                    viewModel.Order.OrderStatus = (int)Enums.OrderStatus.New;
+
+                    var data = new OrderDTO()
+                    {
+                        Order = viewModel.Order,
+                        ListIdTable = viewModel.ListIdTable
+                    };
                     
+                    var result = OrderModel.Insert(data);
+
+                    if (result > 0)
+                    {
+                        message = MessageConstants.OrderSuccess;
+
+                        return RedirectToAction("Index", "Message", new { message });
+                    }
+
                 }
 
+                message = MessageConstants.OrderFail;
                 return RedirectToAction("Index", "Message", new { message });
             }
 
