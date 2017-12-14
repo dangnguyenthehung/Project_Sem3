@@ -87,11 +87,12 @@
                     @Html.HiddenFor(m => m.Order.IdCustomer)
                     foreach (var group in tableType)
                     {
+                        var capacity = TableTypeSingleTon.GetCapacity(group.First().IdTableType);
                         <div class="w3-third w3-container w3-margin-bottom">
                             <img src="~/Content/assets/image/table2.jpg" alt="TABLE FOR 2 PEOPLE"
                                  class="w3-animate-opacity">
                             <div class="w3-container">
-                                <p style="margin-top: 10px; font-size: 1em"><b>BÀN @group.Capacity NGƯỜI</b>
+                                <p style="margin-top: 10px; font-size: 1em"><b>BÀN @capacity NGƯỜI</b>
                                 </p>
                                 <p><b>Số lượng bàn còn trống: @group.Count</b>
                                 </p>
