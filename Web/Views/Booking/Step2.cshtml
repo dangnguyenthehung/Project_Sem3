@@ -80,50 +80,41 @@
 
         <div id="News" class="tabcontent">
             <div class="w3-row-padding">
-              
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="~/Content/assets/image/table2.jpg" alt="TABLE FOR 2 PEOPLE"
-                         class="w3-animate-opacity">
-                    <div class="w3-container">
-                        <p style="margin-top: 10px; font-size: 1em"><b>BÀN 2 NGƯỜI</b></p>
-                        <p><b>Số lượng bàn còn trống:</b></p>
-                        <select>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                        </select>
+                @using (Html.BeginForm("Step2", "Booking", FormMethod.Post))
+                {
+                    foreach (var group in tableType)
+                    {
+
+                        <div class="w3-third w3-container w3-margin-bottom">
+                            <img src="~/Content/assets/image/table2.jpg" alt="TABLE FOR 2 PEOPLE"
+                                 class="w3-animate-opacity">
+                            <div class="w3-container">
+                                <p style="margin-top: 10px; font-size: 1em"><b>BÀN @group.Capacity NGƯỜI</b>
+                                </p>
+                                <p><b>Số lượng bàn còn trống: @group.Count</b>
+                                </p>
+                                @foreach (var item in group)
+                                {
+                                    var tableId = "table" + item.IdTable;
+                                    <div class="checkbox">
+                                        <input name="ListIdTable" type="checkbox" id="@tableId" value="@item.IdTable"/>
+                                        <label for="@tableId">
+                                            Bàn số @item.TableNumber
+                                        </label>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+
+                    }
+                    <div class="col-xs-12">
+                        <input type="submit" value="Submit" class="btn btn-success"/>
                     </div>
-                </div>
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="~/Content/assets/image/table2.jpg" alt="TABLE FOR 2 PEOPLE"
-                         class="w3-animate-opacity">
-                    <div class="w3-container">
-                        <p style="margin-top: 10px; font-size: 1em"><b>BÀN 4 NGƯỜI</b></p>
-                        <p><b>Số lượng bàn còn trống:</b></p>
-                        <select>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="~/Content/assets/image/table2.jpg" alt="TABLE FOR 2 PEOPLE"
-                         class="w3-animate-opacity">
-                    <div class="w3-container">
-                        <p style="margin-top: 10px; font-size: 1em"><b>BÀN 6 NGƯỜI</b></p>
-                        <p><b>Số lượng bàn còn trống:</b></p>
-                        <select>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </div>
-                </div>
-                <a  style="margin-left: 40%" href="nucleo-icons.html" class="btn btn-primary btn-round btn-lg" target="_blank">View Demo Icons</a>
+                }
+                
+
+                <a style="margin-left: 40%" href="nucleo-icons.html" class="btn btn-primary btn-round btn-lg" target="_blank">View Demo Icons</a>
             </div>
         </div>
 

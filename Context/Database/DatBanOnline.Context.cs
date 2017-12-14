@@ -238,5 +238,23 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Order_Result>("Get_Order", idOrderParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> Get_Employee_Permission_By_Id(Nullable<int> idEmployee)
+        {
+            var idEmployeeParameter = idEmployee.HasValue ?
+                new ObjectParameter("IdEmployee", idEmployee) :
+                new ObjectParameter("IdEmployee", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Get_Employee_Permission_By_Id", idEmployeeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Get_Employee_Roles_By_Id(Nullable<int> idEmployee)
+        {
+            var idEmployeeParameter = idEmployee.HasValue ?
+                new ObjectParameter("IdEmployee", idEmployee) :
+                new ObjectParameter("IdEmployee", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Get_Employee_Roles_By_Id", idEmployeeParameter);
+        }
     }
 }

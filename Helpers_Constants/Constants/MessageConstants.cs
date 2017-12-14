@@ -19,5 +19,9 @@ namespace Helpers_Constants.Constants
         public static string DeleteFail = "Delete Fail";
 
         public static string LoginFail = "Login Fail";
+
+        public static string OrderSuccess = "Order Success";
+
+        public static string OrderFail = "Order Fail";
     }
 }

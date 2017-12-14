@@ -15,9 +15,9 @@ namespace Web.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            if (SessionPersister.LoginAccount != null)
+            if (SessionPersister.CustomerAccount != null)
             {
-                SessionPersister.LoginAccount = null;
+                SessionPersister.CustomerAccount = null;
             }
 
             return View();
@@ -29,11 +29,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var loginAccount = LoginModel.Login(model);
-                LoginModel.GetAccountPermissions(ref loginAccount);
-
-                //Get Menu visibility state for generate menu
-                //MenuLayoutVisibilityConstant.CheckMenuVisibilityState(loginAccount);
+                var loginAccount = LoginModel.CustomerLogin(model);
+                
 
                 if (loginAccount == null)
                 {
@@ -43,8 +40,7 @@ namespace Web.Controllers
                 else
                 {
                     //Save login info to session
-                    SessionPersister.LoginAccount = loginAccount;
-                    //Session[SessionConstants.LoginAccountName] = result.HoTen;
+                    SessionPersister.CustomerAccount = loginAccount;
                 }
 
                 return RedirectToAction("Index", "Home");

@@ -15,7 +15,7 @@ namespace Web.Security
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             string permission = Permission;
-            if (SessionPersister.LoginAccount == null)
+            if (SessionPersister.EmployeeAccount == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {
@@ -26,7 +26,7 @@ namespace Web.Security
             }
             else
             {
-                var acc = SessionPersister.LoginAccount;
+                var acc = SessionPersister.EmployeeAccount;
 
                 var principal = new MyPrincipal(acc);
 

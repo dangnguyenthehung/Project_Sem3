@@ -10,7 +10,7 @@ namespace Api.Helper
 {
     public class LoginApiHelper
     {
-        public Account Login(Login account)
+        public Model.Models.Customer CustomerLogin(Login account)
         {
             if (account == null)
             {
@@ -23,7 +23,7 @@ namespace Api.Helper
                 {
                     var result = entities.Get_Customer_By_Login(account.UserName, account.Password).SingleOrDefault();
 
-                    var response = result.Cast<Account>();
+                    var response = result.Cast<Model.Models.Customer>();
 
                     return response;
                 }
@@ -35,28 +35,60 @@ namespace Api.Helper
             return null;
         }
 
-        public void GetAccountRoles(ref Account account)
+        public Model.Models.Employee EmployeeLogin(Login account)
+        {
+            if (account == null)
+            {
+                return null;
+            }
+
+            using (var entities = new DatBanOnlineEntities())
+            {
+                try
+                {
+                    var result = entities.Get_Employee_By_Login(account.UserName, account.Password).SingleOrDefault();
+
+                    var response = result.Cast<Model.Models.Employee>();
+
+                    return response;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+            return null;
+        }
+
+        public void GetEmployeePermission(ref Model.Models.Employee account)
         {
             if (account == null)
             {
                 return;
             }
 
-            //using (var entities = )
-            //{
-            //    try
-            //    {
-            //        //map roles mới get được vào tài khoản
-            //        //account.Roles = entities.QLSX_Get_DanhSach_Roles_By_ID_TaiKhoan(account.ID_TaiKhoan).Select(r => r.ID_Role).ToList();
-            //    }
-            //    catch (Exception e)
-            //    {
-            //        Console.WriteLine(e);
-            //    }
-            //}
+            using (var entities = new DatBanOnlineEntities())
+            {
+                try
+                {
+                    
+                    var listPermisson = entities.Get_Employee_Permission_By_Id(account.IdEmployee).ToList();
+
+                    account.Permissions = listPermisson.Select(p => p.Cast<int>()).ToList();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
         }
 
-        public Account Find(string userName)
+        public Model.Models.Customer FindCustomer(string userName)
+        {
+            return null;
+        }
+
+        public Model.Models.Employee FindEmployee(string userName)
         {
             return null;
         }

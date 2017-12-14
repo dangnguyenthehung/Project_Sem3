@@ -135,7 +135,7 @@ namespace Helpers_Constants.ApiCall
             }
         }
 
-        protected internal List<T> _Get_By_Keyword<T>(string apiUrl, string keyword)
+        protected internal T _Get_By_Keyword<T>(string apiUrl, string keyword)
         {
             using (var client = new HttpClient())
             {
@@ -145,12 +145,12 @@ namespace Helpers_Constants.ApiCall
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = JsonConvert.DeserializeObject<List<T>>(response.Content.ReadAsStringAsync().Result);
+                    var result = JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
 
                     return result;
                 }
 
-                return null;
+                return default(T);
             }
         }
 
@@ -192,7 +192,7 @@ namespace Helpers_Constants.ApiCall
             }
         }
 
-        protected internal List<T> _Get_By_Params_Object<T, Q>(string apiUrl, Q param)
+        protected internal T _Get_By_Params_Object<T, Q>(string apiUrl, Q param)
         {
             using (var client = new HttpClient())
             {
@@ -207,13 +207,15 @@ namespace Helpers_Constants.ApiCall
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = JsonConvert.DeserializeObject<List<T>>(response.Content.ReadAsStringAsync().Result);
+                    var result = JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
 
                     return result;
                 }
 
-                return null;
+                return default(T);
             }
         }
+        
+
     }
 }

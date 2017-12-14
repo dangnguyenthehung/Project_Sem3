@@ -399,6 +399,12 @@
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Get_Employee_Permission_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmployee" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Get_Employee_Roles_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmployee" Type="int" Mode="In" />
+        </Function>
         <Function Name="Get_List_Order_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdOrder" Type="int" Mode="In" />
         </Function>
@@ -677,10 +683,16 @@
           </FunctionImport>
           <FunctionImport Name="Insert_Order_Table" />
           <FunctionImport Name="Get_List_Order_Table" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_Table_Result)">
-            <Parameter Name="IdOrder" Mode="In" Type="Int32" />
+          <Parameter Name="IdOrder" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_Order" ReturnType="Collection(DatBanOnLineModel.Get_Order_Result)">
-            <Parameter Name="IdOrder" Mode="In" Type="Int32" />
+          <Parameter Name="IdOrder" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Employee_Permission_By_Id" ReturnType="Collection(Int32)">
+            <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Employee_Roles_By_Id" ReturnType="Collection(Int32)">
+            <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
@@ -1461,6 +1473,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Employee_Permission_By_Id" FunctionName="DatBanOnLineModel.Store.Get_Employee_Permission_By_Id" />
+          <FunctionImportMapping FunctionImportName="Get_Employee_Roles_By_Id" FunctionName="DatBanOnLineModel.Store.Get_Employee_Roles_By_Id" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

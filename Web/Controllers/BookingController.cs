@@ -8,6 +8,7 @@ using Model.DTO;
 using Model.Models;
 using Model.ViewModels;
 using Web.Models;
+using Web.Security;
 using Web.SingleTon;
 
 namespace Web.Controllers
@@ -23,27 +24,26 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Index(Orders model)
         {
+            var viewModel = new OrderViewModel();
             if (ModelState.IsValid)
             {
-                var viewModel = new OrderViewModel()
-                {
-                    Order = model
-                };
-                Session[SessionConstants.Order] = viewModel;
+
+                viewModel.Order = model;
+                SessionPersister.OrderInfomation = viewModel;
 
                 return RedirectToAction("Step2", "Booking");
             }
 
-            return View(model);
+            return View(viewModel);
         }
 
 
         [HttpGet]
         public ActionResult Step2()
         {
-            if (Session[SessionConstants.Order] != null)
+            if (SessionPersister.OrderInfomation != null)
             {
-                var viewModel = (OrderViewModel)Session[SessionConstants.Order];
+                var viewModel = SessionPersister.OrderInfomation;
 
                 var order = viewModel.Order;
 
@@ -60,8 +60,7 @@ namespace Web.Controllers
                 //update info to viewModel
                 viewModel.ListAvailableTables = table;
 
-                Session.Remove(SessionConstants.Order);
-                Session[SessionConstants.Order] = viewModel;
+                SessionPersister.OrderInfomation = viewModel;
 
                 return View(viewModel);
             }
@@ -78,24 +77,27 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Step2(OrderViewModel viewModel)
         {
-            if (Session[SessionConstants.Order] != null)
+            if (viewModel.ListIdTable.Any())
             {
-                
-                var begin = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute,0);
+                if (SessionPersister.OrderInfomation != null)
+                {
 
-                var end = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
+                    var begin = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute, 0);
 
-                viewModel.Order.BeginTime = begin;
-                viewModel.Order.EndTime = end;
-                
-                //update info to viewModel
-                
-                Session.Remove(SessionConstants.Order);
-                Session[SessionConstants.Order] = viewModel;
+                    var end = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
+
+                    viewModel.Order.BeginTime = begin;
+                    viewModel.Order.EndTime = end;
+
+                    //update info to viewModel
+
+                    SessionPersister.OrderInfomation = viewModel;
 
 
-                return RedirectToAction("Preview");
+                    return RedirectToAction("Preview");
+                }
             }
+            
 
             var url = HttpContext.Request.UrlReferrer;
 
@@ -110,9 +112,9 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Preview()
         {
-            if (Session[SessionConstants.Order] != null)
+            if (SessionPersister.OrderInfomation != null)
             {
-                var viewModel = (OrderViewModel)Session[SessionConstants.Order];
+                var viewModel = SessionPersister.OrderInfomation;
                 
                 return View(viewModel);
             }
@@ -129,20 +131,26 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Finish()
         {
-            if (Session[SessionConstants.Order] != null)
+            if (SessionPersister.OrderInfomation != null)
             {
-                var viewModel = (OrderViewModel)Session[SessionConstants.Order];
+                var viewModel = SessionPersister.OrderInfomation;
                 
                 var data = new OrderDTO()
                 {
                     Order = viewModel.Order,
                     ListIdTable = viewModel.ListIdTable
                 };
+
                 var result = OrderModel.Insert(data);
 
+                var message = MessageConstants.OrderFail;
+                if (result > 0)
+                {
+                    message = MessageConstants.OrderSuccess;
+                    
+                }
 
-
-                return View(viewModel);
+                return RedirectToAction("Index", "Message", new { message });
             }
 
             var url = HttpContext.Request.UrlReferrer;
