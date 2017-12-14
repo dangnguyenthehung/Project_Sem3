@@ -7,7 +7,18 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-
+.fade.show {
+    opacity: 1;
+}
+.modal.show .modal-dialog {
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translate(0,0);
+}
+.card {
+    display: block !important;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
