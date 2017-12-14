@@ -391,6 +391,7 @@
         <Function Name="Delete_RestaurantBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdBranch" Type="int" Mode="In" />
         </Function>
+        <Function Name="Get_All_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Get_Customer_By_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -689,11 +690,12 @@
           <Parameter Name="IdOrder" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_Employee_Permission_By_Id" ReturnType="Collection(Int32)">
-            <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
+          <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_Employee_Roles_By_Id" ReturnType="Collection(Int32)">
-            <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
+          <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Get_All_Table" ReturnType="Collection(DatBanOnLineModel.Get_All_Table_Result)" />
         </EntityContainer>
         <EntityType Name="Branch_Manager">
           <Key>
@@ -1160,6 +1162,13 @@
           <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <ComplexType Name="Get_All_Table_Result">
+          <Property Type="Int32" Name="IdTable" Nullable="false" />
+          <Property Type="Int32" Name="RestaurantId" Nullable="false" />
+          <Property Type="Int32" Name="TableNumber" Nullable="true" />
+          <Property Type="Int32" Name="IdTableType" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1475,6 +1484,17 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Get_Employee_Permission_By_Id" FunctionName="DatBanOnLineModel.Store.Get_Employee_Permission_By_Id" />
           <FunctionImportMapping FunctionImportName="Get_Employee_Roles_By_Id" FunctionName="DatBanOnLineModel.Store.Get_Employee_Roles_By_Id" />
+          <FunctionImportMapping FunctionImportName="Get_All_Table" FunctionName="DatBanOnLineModel.Store.Get_All_Table">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_All_Table_Result">
+                <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
+                <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

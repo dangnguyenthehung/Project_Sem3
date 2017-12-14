@@ -76,6 +76,9 @@
     <Compile Include="Database\Employee.cs">
       <DependentUpon>DatBanOnline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\Get_All_Table_Result.cs">
+      <DependentUpon>DatBanOnline.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Get_Customer_By_Login_Result.cs">
       <DependentUpon>DatBanOnline.tt</DependentUpon>
     </Compile>

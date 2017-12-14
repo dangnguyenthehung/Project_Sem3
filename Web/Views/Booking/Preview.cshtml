@@ -1,8 +1,40 @@
-﻿@model Model.ViewModels.OrderViewModel
+﻿@using Web.SingleTon
+@model Model.ViewModels.OrderViewModel
 @{
     ViewBag.Title = "Preview";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Preview</h2>
+<div class="text-center" style="color: white">
+    @if (Model?.Order != null)
+    {
+        <p>
+            @BranchSingleTon.GetAddress(Model.Order.IdBranch)
+        </p>
+        <p>
+            @Model.Order.BeginTime
+        </p>
+        <p>
+            @Model.Order.EndTime
+        </p>
+        <h3>Cac ban dat:</h3>
+        foreach (var item in Model.ListIdTable)
+        {
+            <p>
+                Bàn số: @TableSingleTon.GetTableNumber(item)
+            </p>
+        }
 
+        using (Html.BeginForm("Finish", "Booking", FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.Order.IdBranch)
+            @Html.HiddenFor(m => m.Order.IdCustomer)
+            @Html.HiddenFor(m => m.Order.BeginTime)
+
+            <input type="submit" class="btn btn-success" value="It's ok, book now"/>
+        }
+    }
+
+
+</div>

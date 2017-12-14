@@ -28,6 +28,13 @@ namespace Web.Models
             return Helper.GetTableAvailable(url, model);
         }
 
+        public static List<Table> GetListTable()
+        {
+            var url = ApiUrl.Get_All;
+
+            return Helper.GetAllTable(url);
+        }
+
         //Table type
         public static List<TableType> GetListTableTypes()
         {

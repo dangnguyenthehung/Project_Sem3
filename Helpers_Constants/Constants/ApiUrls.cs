@@ -40,6 +40,7 @@ namespace Helpers_Constants.Constants
         {
             private static readonly string BaseUrl = $"{_apiUrl}/table";
 
+            public string Get_All = $"{BaseUrl}/get_list_table_all";
             public string Get_By_Id_Restaurant = $"{BaseUrl}/get_by_id_restaurant";
             public string Get_Table_Available = $"{BaseUrl}/get_table_available/";
             public string Get_List_TableType = $"{BaseUrl}/get_list_tabletype/";

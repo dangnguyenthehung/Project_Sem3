@@ -256,5 +256,10 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Get_Employee_Roles_By_Id", idEmployeeParameter);
         }
+    
+        public virtual ObjectResult<Get_All_Table_Result> Get_All_Table()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_All_Table_Result>("Get_All_Table");
+        }
     }
 }
