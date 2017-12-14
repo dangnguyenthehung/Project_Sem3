@@ -2,7 +2,7 @@
 @using Web.Models
 
 @*@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")*@
+    @Scripts.Render("~/bundles/modernizr")*@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,67 +19,49 @@
     <link href="~/Content/assets/css/customStyle.css" rel="stylesheet" />
     <link href="~/Content/assets/css/main.css" rel="stylesheet" />
     <link href="~/Content/assets/css/slider.css" rel="stylesheet" />
-    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="~/Content/site.css" rel="stylesheet" />  
+    <link href="~/Content/site.css" rel="stylesheet" />
     <!-- Core JS Files -->
     <script type="text/javascript" src="~/Content/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/Content/assets/js/jquery.ba-throttle-debounce.min.js"></script>
 </head>
 <body class="index-page sidebar-collapse">
-<script>
+    <script>
     var APICall = {
         SelectTable: '@Url.Action("Step2", "Booking")'
-    }    
-</script>
+    }
+    </script>
 
-<!-- Navbar -->
-@Html.Partial("_PartialLayoutNavigator")
-<!-- End Navbar -->
-
-<!-- Content -->
+    <!-- Navbar -->
+    @Html.Partial("_PartialLayoutNavigator")
+    <!-- End Navbar -->
+    <!-- Content -->
 <div id="layoutContent">
-    @RenderBody()
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
 </div>
 
 
-<!-- end content -->
+    <!-- end content -->
+    <!-- Footer -->
+    @Html.Partial("_PartialLayoutFooter")
+    <!-- end footer -->
+    @Html.Partial("_PartialBookingPopup")
 
-<!-- Footer -->
-@Html.Partial("_PartialLayoutFooter")
-<!-- end footer -->
-@Html.Partial("_PartialBookingPopup")
 
-<script>
-    function openPage(pageName, elmnt, color) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-        }
-        document.getElementById(pageName).style.display = "block";
-        elmnt.style.backgroundColor = color;
-
-    }
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-</script>
-
-<script src="~/Content/assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="~/Content/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="~/Content/assets/js/plugins/bootstrap-switch.js"></script>
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="~/Content/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-<!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-<script src="/Content/assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-<script src="~/Content/assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
-@*<script src="~/Content/assets/js/bundle.js" type="text/javascript"></script>*@
+    <script src="~/Content/assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="~/Content/assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="~/Content/assets/js/plugins/bootstrap-switch.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="~/Content/assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+    <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+    <script src="/Content/assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+    <script src="~/Content/assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+    <script src="~/Content/assets/js/bundle.js" type="text/javascript"></script>
 </body>
 </html>
