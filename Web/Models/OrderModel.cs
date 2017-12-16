@@ -21,6 +21,20 @@ namespace Web.Models
             return Helper.GetById(url, id);
         }
 
+        public static List<Orders> GetByOrderStatus(int status)
+        {
+            var url = ApiUrl.Get_List_Order_By_Status;
+
+            return Helper.GetByOrderStatus(url, status);
+        }
+
+        public static List<Orders> GetAll()
+        {
+            var url = ApiUrl.Get_All;
+
+            return Helper.GetAll(url);
+        }
+
         public static List<Order_Table> GetListOrderTable(int id)
         {
             var url = ApiUrl.Get_List_Order_Table;

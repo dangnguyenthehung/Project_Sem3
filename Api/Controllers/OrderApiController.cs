@@ -89,9 +89,51 @@ namespace Api.Controllers
             return response;
         }
 
+        [Route("get_list_order_by_status/{id}")]
+        [HttpGet]
+        public HttpResponseMessage Get_List_Order_By_Status(int id)
+        {
+            var response = new HttpResponseMessage();
+
+            if (id > 0)
+            {
+                var result = Helper.Get_List_Order_By_Status(id);
+
+                if (result != null)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                    return response;
+                }
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+
+        [Route("get_all/")]
+        [HttpGet]
+        public HttpResponseMessage Get_All()
+        {
+            var response = new HttpResponseMessage();
+
+            var result = Helper.GetAll();
+
+            if (result != null)
+            {
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                return response;
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
 
         //Order Table
-        
+
         private bool Insert_Order_Table(int idOrder, List<int> listTables)
         {
             List<OrderTableTableType> dataTable = new List<OrderTableTableType>();
