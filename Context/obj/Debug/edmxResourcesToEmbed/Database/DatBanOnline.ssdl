@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatBanOnLineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Branch_Manager">
+    <Key>
+      <PropertyRef Name="Id_Branch_Manager" />
+    </Key>
+    <Property Name="Id_Branch_Manager" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdBranch" Type="int" Nullable="false" />
+    <Property Name="IdEmployee" Type="int" Nullable="false" />
+    <Property Name="LastUpdate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="IdCustomer" />
+    </Key>
+    <Property Name="IdCustomer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CMND" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" />
+    <Property Name="SignUpDate" Type="datetime" />
+    <Property Name="Password" Type="varchar" MaxLength="24" />
+  </EntityType>
+  <EntityType Name="Deposit">
+    <Key>
+      <PropertyRef Name="Id_Deposit" />
+    </Key>
+    <Property Name="Id_Deposit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdOrder" Type="int" Nullable="false" />
+    <Property Name="Value" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="IdEmployee" />
+    </Key>
+    <Property Name="IdEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StaffId" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+    <Property Name="IdBranch" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" />
+    <Property Name="EnterDate" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="Password" Type="varchar" MaxLength="24" />
+  </EntityType>
+  <EntityType Name="Employee_Roles">
+    <Key>
+      <PropertyRef Name="IdRole" />
+      <PropertyRef Name="IdEmployee" />
+    </Key>
+    <Property Name="IdRole" Type="int" Nullable="false" />
+    <Property Name="IdEmployee" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Image_Menu">
+    <Key>
+      <PropertyRef Name="Id_Image_Menu" />
+    </Key>
+    <Property Name="Id_Image_Menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdMenu" Type="int" />
+    <Property Name="Url" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Image_TableType">
+    <Key>
+      <PropertyRef Name="Id_Image_Table_Type" />
+    </Key>
+    <Property Name="Id_Image_Table_Type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Table_Type" Type="int" />
+    <Property Name="Url" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="IdMenu" />
+    </Key>
+    <Property Name="IdMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="LastUpdate" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Order_Menu">
+    <Key>
+      <PropertyRef Name="Id_Order_Menu" />
+    </Key>
+    <Property Name="Id_Order_Menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdOrder" Type="int" Nullable="false" />
+    <Property Name="IdMenu" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Total" Type="decimal" Precision="12" Scale="2" />
+  </EntityType>
+  <EntityType Name="Order_Table">
+    <Key>
+      <PropertyRef Name="Id_Order_Table" />
+    </Key>
+    <Property Name="Id_Order_Table" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdOrder" Type="int" />
+    <Property Name="IdTable" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="IdOrder" />
+    </Key>
+    <Property Name="IdOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCustomer" Type="int" />
+    <Property Name="IdEmployee_Verify" Type="int" />
+    <Property Name="NumberOfTable" Type="int" />
+    <Property Name="NumberOfCustomer" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="LastUpdate" Type="datetime" />
+    <Property Name="OrderStatus" Type="int" />
+    <Property Name="IdBranch" Type="int" />
+    <Property Name="BeginTime" Type="datetime" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="IdPermission" />
+    </Key>
+    <Property Name="IdPermission" Type="int" Nullable="false" />
+    <Property Name="IdRole" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="RestaurantBranch">
+    <Key>
+      <PropertyRef Name="IdBranch" />
+    </Key>
+    <Property Name="IdBranch" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="RestaurantTable">
+    <Key>
+      <PropertyRef Name="IdTable" />
+    </Key>
+    <Property Name="IdTable" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RestaurantId" Type="int" Nullable="false" />
+    <Property Name="TableNumber" Type="int" />
+    <Property Name="IdTableType" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="IdRole" />
+    </Key>
+    <Property Name="IdRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Table_Type">
+    <Key>
+      <PropertyRef Name="Id_Table_Type" />
+    </Key>
+    <Property Name="Id_Table_Type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableCapacity" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <Association Name="FK__Orders__IdBranch__66603565">
+    <End Role="RestaurantBranch" Type="Self.RestaurantBranch" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantBranch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="IdBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Manager_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Branch_Manager" Type="Self.Branch_Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="IdEmployee" />
+      </Principal>
+      <Dependent Role="Branch_Manager">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Manager_RestaurantBranch">
+    <End Role="RestaurantBranch" Type="Self.RestaurantBranch" Multiplicity="1" />
+    <End Role="Branch_Manager" Type="Self.Branch_Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantBranch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="Branch_Manager">
+        <PropertyRef Name="IdBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Deposit_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Deposit" Type="Self.Deposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="IdOrder" />
+      </Principal>
+      <Dependent Role="Deposit">
+        <PropertyRef Name="IdOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_RestaurantBranch">
+    <End Role="RestaurantBranch" Type="Self.RestaurantBranch" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantBranch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="IdBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Roles_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Employee_Roles" Type="Self.Employee_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="IdEmployee" />
+      </Principal>
+      <Dependent Role="Employee_Roles">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Roles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Employee_Roles" Type="Self.Employee_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IdRole" />
+      </Principal>
+      <Dependent Role="Employee_Roles">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Image_Menu_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Image_Menu" Type="Self.Image_Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="IdMenu" />
+      </Principal>
+      <Dependent Role="Image_Menu">
+        <PropertyRef Name="IdMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Image_TableType_Table_Type">
+    <End Role="Table_Type" Type="Self.Table_Type" Multiplicity="0..1" />
+    <End Role="Image_TableType" Type="Self.Image_TableType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Type">
+        <PropertyRef Name="Id_Table_Type" />
+      </Principal>
+      <Dependent Role="Image_TableType">
+        <PropertyRef Name="Id_Table_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Menu_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+    <End Role="Order_Menu" Type="Self.Order_Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="IdMenu" />
+      </Principal>
+      <Dependent Role="Order_Menu">
+        <PropertyRef Name="IdMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Menu_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Order_Menu" Type="Self.Order_Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="IdOrder" />
+      </Principal>
+      <Dependent Role="Order_Menu">
+        <PropertyRef Name="IdOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Table_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="Order_Table" Type="Self.Order_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="IdOrder" />
+      </Principal>
+      <Dependent Role="Order_Table">
+        <PropertyRef Name="IdOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Table_RestaurantTable">
+    <End Role="RestaurantTable" Type="Self.RestaurantTable" Multiplicity="0..1" />
+    <End Role="Order_Table" Type="Self.Order_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantTable">
+        <PropertyRef Name="IdTable" />
+      </Principal>
+      <Dependent Role="Order_Table">
+        <PropertyRef Name="IdTable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IdCustomer" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="IdCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="IdEmployee" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="IdEmployee_Verify" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Permission_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IdRole" />
+      </Principal>
+      <Dependent Role="Permission">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestaurantTable_RestaurantBranch">
+    <End Role="RestaurantBranch" Type="Self.RestaurantBranch" Multiplicity="1" />
+    <End Role="RestaurantTable" Type="Self.RestaurantTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantBranch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="RestaurantTable">
+        <PropertyRef Name="RestaurantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestaurantTable_Table_Type">
+    <End Role="Table_Type" Type="Self.Table_Type" Multiplicity="0..1" />
+    <End Role="RestaurantTable" Type="Self.RestaurantTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Type">
+        <PropertyRef Name="Id_Table_Type" />
+      </Principal>
+      <Dependent Role="RestaurantTable">
+        <PropertyRef Name="IdTableType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Delete_RestaurantBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdBranch" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Get_All_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Get_Customer_By_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Get_Employee_By_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Get_Employee_Permission_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEmployee" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Get_Employee_Roles_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEmployee" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Get_List_Order_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Get_List_Order_By_Status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderStatus" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Get_List_Order_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdOrder" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Get_List_RestaurantBranch_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Get_List_Table_Available" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RestaurantId" Type="int" Mode="In" />
+    <Parameter Name="BeginTime" Type="datetime" Mode="In" />
+    <Parameter Name="EndTime" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Get_List_Table_By_Restaurant_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RestaurantId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Get_List_TableType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Get_Order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdOrder" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Get_RestaurantBranch_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdBranch" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Insert_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CMND" Type="varchar" Mode="In" />
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Insert_Order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdCustomer" Type="int" Mode="In" />
+    <Parameter Name="NumberOfTable" Type="int" Mode="In" />
+    <Parameter Name="NumberOfCustomer" Type="int" Mode="In" />
+    <Parameter Name="IdBranch" Type="int" Mode="In" />
+    <Parameter Name="BeginTime" Type="datetime" Mode="In" />
+    <Parameter Name="EndTime" Type="datetime" Mode="In" />
+    <Parameter Name="OrderStatus" Type="int" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Insert_Order_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Insert_RestaurantBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="Update_RestaurantBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdBranch" Type="int" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="DatBanOnLineModelStoreContainer">
+    <EntitySet Name="Branch_Manager" EntityType="Self.Branch_Manager" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deposit" EntityType="Self.Deposit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee_Roles" EntityType="Self.Employee_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image_Menu" EntityType="Self.Image_Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image_TableType" EntityType="Self.Image_TableType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Menu" EntityType="Self.Order_Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Table" EntityType="Self.Order_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RestaurantBranch" EntityType="Self.RestaurantBranch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RestaurantTable" EntityType="Self.RestaurantTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Type" EntityType="Self.Table_Type" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Orders__IdBranch__66603565" Association="Self.FK__Orders__IdBranch__66603565">
+      <End Role="RestaurantBranch" EntitySet="RestaurantBranch" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Manager_Employee" Association="Self.FK_Branch_Manager_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Branch_Manager" EntitySet="Branch_Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Manager_RestaurantBranch" Association="Self.FK_Branch_Manager_RestaurantBranch">
+      <End Role="RestaurantBranch" EntitySet="RestaurantBranch" />
+      <End Role="Branch_Manager" EntitySet="Branch_Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Deposit_Orders" Association="Self.FK_Deposit_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Deposit" EntitySet="Deposit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_RestaurantBranch" Association="Self.FK_Employee_RestaurantBranch">
+      <End Role="RestaurantBranch" EntitySet="RestaurantBranch" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Roles_Employee" Association="Self.FK_Employee_Roles_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Employee_Roles" EntitySet="Employee_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Roles_Roles" Association="Self.FK_Employee_Roles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Employee_Roles" EntitySet="Employee_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Image_Menu_Menu" Association="Self.FK_Image_Menu_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="Image_Menu" EntitySet="Image_Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Image_TableType_Table_Type" Association="Self.FK_Image_TableType_Table_Type">
+      <End Role="Table_Type" EntitySet="Table_Type" />
+      <End Role="Image_TableType" EntitySet="Image_TableType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Menu_Menu" Association="Self.FK_Order_Menu_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="Order_Menu" EntitySet="Order_Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Menu_Orders" Association="Self.FK_Order_Menu_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Order_Menu" EntitySet="Order_Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Table_Orders" Association="Self.FK_Order_Table_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Order_Table" EntitySet="Order_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Table_RestaurantTable" Association="Self.FK_Order_Table_RestaurantTable">
+      <End Role="RestaurantTable" EntitySet="RestaurantTable" />
+      <End Role="Order_Table" EntitySet="Order_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Employee" Association="Self.FK_Orders_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Permission_Roles" Association="Self.FK_Permission_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Permission" EntitySet="Permission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestaurantTable_RestaurantBranch" Association="Self.FK_RestaurantTable_RestaurantBranch">
+      <End Role="RestaurantBranch" EntitySet="RestaurantBranch" />
+      <End Role="RestaurantTable" EntitySet="RestaurantTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestaurantTable_Table_Type" Association="Self.FK_RestaurantTable_Table_Type">
+      <End Role="Table_Type" EntitySet="Table_Type" />
+      <End Role="RestaurantTable" EntitySet="RestaurantTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

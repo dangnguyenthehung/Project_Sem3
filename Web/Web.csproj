@@ -193,6 +193,8 @@
     <Content Include="Content\assets\image\board_demo.png" />
     <Content Include="Content\assets\image\guongnuoc.png" />
     <Content Include="Content\assets\image\khesang.png" />
+    <Content Include="Content\assets\image\layout_table.jpg" />
+    <Content Include="Content\assets\image\layout_table.png" />
     <Content Include="Content\assets\image\table2.jpg" />
     <Content Include="Content\assets\image\table4.jpg" />
     <Content Include="Content\assets\image\window.png" />
