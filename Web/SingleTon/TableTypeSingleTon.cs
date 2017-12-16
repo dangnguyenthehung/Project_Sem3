@@ -24,7 +24,7 @@ namespace Web.SingleTon
             _listTypes = TableModel.GetListTableTypes();
         }
 
-        public static List<TableType> GetListBranches()
+        public static List<TableType> GetListTypes()
         {
             if (_listTypes == null)
             {

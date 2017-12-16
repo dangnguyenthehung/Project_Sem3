@@ -20,6 +20,11 @@ namespace Helpers_Constants.ApiCall
             return _Get_By_Params_Object<List<Table>, TableFilterDTO>(apiUrl, model);
         }
 
+        public List<Table> GetAllTable(string apiUrl)
+        {
+            return _Get_All<Table>(apiUrl);
+        }
+
         //table type
         public List<TableType> GetListTableTypes(string apiUrl)
         {
