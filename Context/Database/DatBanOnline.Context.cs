@@ -261,5 +261,19 @@ namespace Context.Database
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_All_Table_Result>("Get_All_Table");
         }
+    
+        public virtual ObjectResult<Get_List_Order_All_Result> Get_List_Order_All()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_List_Order_All_Result>("Get_List_Order_All");
+        }
+    
+        public virtual ObjectResult<Get_List_Order_By_Status_Result> Get_List_Order_By_Status(Nullable<int> orderStatus)
+        {
+            var orderStatusParameter = orderStatus.HasValue ?
+                new ObjectParameter("OrderStatus", orderStatus) :
+                new ObjectParameter("OrderStatus", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_List_Order_By_Status_Result>("Get_List_Order_By_Status", orderStatusParameter);
+        }
     }
 }

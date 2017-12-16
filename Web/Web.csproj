@@ -144,6 +144,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BookingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\ClientBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -168,6 +171,20 @@
     <Compile Include="SingleTon\BranchSingleTon.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin\css\bootstrap.min.css" />
+    <Content Include="Content\admin\css\demo.css" />
+    <Content Include="Content\admin\css\material-dashboard.css" />
+    <Content Include="Content\admin\img\apple-icon.png" />
+    <Content Include="Content\admin\img\cover.jpeg" />
+    <Content Include="Content\admin\img\faces\marc.jpg" />
+    <Content Include="Content\admin\img\favicon.png" />
+    <Content Include="Content\admin\img\mask.png" />
+    <Content Include="Content\admin\img\new_logo.png" />
+    <Content Include="Content\admin\img\sidebar-1.jpg" />
+    <Content Include="Content\admin\img\sidebar-2.jpg" />
+    <Content Include="Content\admin\img\sidebar-3.jpg" />
+    <Content Include="Content\admin\img\sidebar-4.jpg" />
+    <Content Include="Content\admin\img\tim_80x80.png" />
     <Content Include="Content\assets\css\customStyle.css" />
     <Content Include="Content\assets\css\main.css" />
     <Content Include="Content\assets\css\now-ui-kit.css" />
@@ -227,8 +244,23 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Scripts\admin\js\arrive.min.js" />
+    <Content Include="Scripts\admin\js\bootstrap-notify.js" />
+    <Content Include="Scripts\admin\js\bootstrap.min.js" />
+    <Content Include="Scripts\admin\js\chartist.min.js" />
+    <Content Include="Scripts\admin\js\demo.js" />
+    <Content Include="Scripts\admin\js\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\admin\js\material-dashboard.js" />
+    <Content Include="Scripts\admin\js\material.min.js" />
+    <Content Include="Scripts\admin\js\perfect-scrollbar.jquery.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PartialSidebar.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PartialMobileNavigator.cshtml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -270,6 +302,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\assets\img\presentation-page\" />
     <Folder Include="Views\ClientBase\" />
   </ItemGroup>
   <ItemGroup>

@@ -406,6 +406,10 @@
         <Function Name="Get_Employee_Roles_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEmployee" Type="int" Mode="In" />
         </Function>
+        <Function Name="Get_List_Order_All" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Get_List_Order_By_Status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderStatus" Type="int" Mode="In" />
+        </Function>
         <Function Name="Get_List_Order_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdOrder" Type="int" Mode="In" />
         </Function>
@@ -696,6 +700,10 @@
           <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_All_Table" ReturnType="Collection(DatBanOnLineModel.Get_All_Table_Result)" />
+          <FunctionImport Name="Get_List_Order_All" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_All_Result)" />
+          <FunctionImport Name="Get_List_Order_By_Status" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_By_Status_Result)">
+            <Parameter Name="OrderStatus" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
           <Key>
@@ -1169,6 +1177,34 @@
           <Property Type="Int32" Name="IdTableType" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <ComplexType Name="Get_List_Order_All_Result">
+          <Property Type="Int32" Name="IdOrder" Nullable="false" />
+          <Property Type="Int32" Name="IdCustomer" Nullable="true" />
+          <Property Type="Int32" Name="IdEmployee_Verify" Nullable="true" />
+          <Property Type="Int32" Name="NumberOfTable" Nullable="true" />
+          <Property Type="Int32" Name="NumberOfCustomer" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastUpdate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="OrderStatus" Nullable="true" />
+          <Property Type="Int32" Name="IdBranch" Nullable="true" />
+          <Property Type="DateTime" Name="BeginTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="Get_List_Order_By_Status_Result">
+          <Property Type="Int32" Name="IdOrder" Nullable="false" />
+          <Property Type="Int32" Name="IdCustomer" Nullable="true" />
+          <Property Type="Int32" Name="IdEmployee_Verify" Nullable="true" />
+          <Property Type="Int32" Name="NumberOfTable" Nullable="true" />
+          <Property Type="Int32" Name="NumberOfCustomer" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="LastUpdate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="OrderStatus" Nullable="true" />
+          <Property Type="Int32" Name="IdBranch" Nullable="true" />
+          <Property Type="DateTime" Name="BeginTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1491,6 +1527,42 @@
                 <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
                 <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
                 <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_List_Order_All" FunctionName="DatBanOnLineModel.Store.Get_List_Order_All">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_List_Order_All_Result">
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="IdEmployee_Verify" ColumnName="IdEmployee_Verify" />
+                <ScalarProperty Name="NumberOfTable" ColumnName="NumberOfTable" />
+                <ScalarProperty Name="NumberOfCustomer" ColumnName="NumberOfCustomer" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_List_Order_By_Status" FunctionName="DatBanOnLineModel.Store.Get_List_Order_By_Status">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_List_Order_By_Status_Result">
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="IdEmployee_Verify" ColumnName="IdEmployee_Verify" />
+                <ScalarProperty Name="NumberOfTable" ColumnName="NumberOfTable" />
+                <ScalarProperty Name="NumberOfCustomer" ColumnName="NumberOfCustomer" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+                <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
