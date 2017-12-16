@@ -24,18 +24,17 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Index(Orders model)
         {
+            var viewModel = new OrderViewModel();
             if (ModelState.IsValid)
             {
-                var viewModel = new OrderViewModel()
-                {
-                    Order = model
-                };
+
+                viewModel.Order = model;
                 SessionPersister.OrderInfomation = viewModel;
 
                 return RedirectToAction("Step2", "Booking");
             }
 
-            return View(model);
+            return View(viewModel);
         }
 
 
@@ -78,23 +77,27 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult Step2(OrderViewModel viewModel)
         {
-            if (SessionPersister.OrderInfomation != null)
+            if (viewModel.ListIdTable.Any())
             {
-                
-                var begin = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute,0);
+                if (SessionPersister.OrderInfomation != null)
+                {
 
-                var end = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
+                    var begin = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute, 0);
 
-                viewModel.Order.BeginTime = begin;
-                viewModel.Order.EndTime = end;
+                    var end = new DateTime(viewModel.OrderDate.Year, viewModel.OrderDate.Month, viewModel.OrderDate.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
 
-                //update info to viewModel
+                    viewModel.Order.BeginTime = begin;
+                    viewModel.Order.EndTime = end;
 
-                SessionPersister.OrderInfomation = viewModel;
+                    //update info to viewModel
+
+                    SessionPersister.OrderInfomation = viewModel;
 
 
-                return RedirectToAction("Preview");
+                    return RedirectToAction("Preview");
+                }
             }
+            
 
             var url = HttpContext.Request.UrlReferrer;
 
