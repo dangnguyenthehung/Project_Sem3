@@ -275,5 +275,14 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_List_Order_By_Status_Result>("Get_List_Order_By_Status", orderStatusParameter);
         }
+    
+        public virtual ObjectResult<Get_Customer_By_Id_Result> Get_Customer_By_Id(Nullable<int> idCustomer)
+        {
+            var idCustomerParameter = idCustomer.HasValue ?
+                new ObjectParameter("IdCustomer", idCustomer) :
+                new ObjectParameter("IdCustomer", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Customer_By_Id_Result>("Get_Customer_By_Id", idCustomerParameter);
+        }
     }
 }

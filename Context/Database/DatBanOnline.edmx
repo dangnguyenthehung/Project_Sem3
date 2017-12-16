@@ -392,6 +392,9 @@
           <Parameter Name="IdBranch" Type="int" Mode="In" />
         </Function>
         <Function Name="Get_All_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Get_Customer_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCustomer" Type="int" Mode="In" />
+        </Function>
         <Function Name="Get_Customer_By_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -702,7 +705,10 @@
           <FunctionImport Name="Get_All_Table" ReturnType="Collection(DatBanOnLineModel.Get_All_Table_Result)" />
           <FunctionImport Name="Get_List_Order_All" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_All_Result)" />
           <FunctionImport Name="Get_List_Order_By_Status" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_By_Status_Result)">
-            <Parameter Name="OrderStatus" Mode="In" Type="Int32" />
+          <Parameter Name="OrderStatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Customer_By_Id" ReturnType="Collection(DatBanOnLineModel.Get_Customer_By_Id_Result)">
+            <Parameter Name="IdCustomer" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
@@ -1205,6 +1211,15 @@
           <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <ComplexType Name="Get_Customer_By_Id_Result">
+          <Property Type="Int32" Name="IdCustomer" Nullable="false" />
+          <Property Type="String" Name="CMND" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="SignUpDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="24" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1564,6 +1579,19 @@
                 <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Customer_By_Id" FunctionName="DatBanOnLineModel.Store.Get_Customer_By_Id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_Customer_By_Id_Result">
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SignUpDate" ColumnName="SignUpDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
