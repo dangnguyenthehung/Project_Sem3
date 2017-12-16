@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatBanOnLineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DatBanOnlineEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Branch_Manager" EntityType="DatBanOnLineModel.Branch_Manager" />
+    <EntitySet Name="Customers" EntityType="DatBanOnLineModel.Customer" />
+    <EntitySet Name="Deposits" EntityType="DatBanOnLineModel.Deposit" />
+    <EntitySet Name="Employees" EntityType="DatBanOnLineModel.Employee" />
+    <EntitySet Name="Image_Menu" EntityType="DatBanOnLineModel.Image_Menu" />
+    <EntitySet Name="Image_TableType" EntityType="DatBanOnLineModel.Image_TableType" />
+    <EntitySet Name="Menus" EntityType="DatBanOnLineModel.Menu" />
+    <EntitySet Name="Order_Menu" EntityType="DatBanOnLineModel.Order_Menu" />
+    <EntitySet Name="Order_Table" EntityType="DatBanOnLineModel.Order_Table" />
+    <EntitySet Name="Orders" EntityType="DatBanOnLineModel.Order" />
+    <EntitySet Name="Permissions" EntityType="DatBanOnLineModel.Permission" />
+    <EntitySet Name="RestaurantBranches" EntityType="DatBanOnLineModel.RestaurantBranch" />
+    <EntitySet Name="RestaurantTables" EntityType="DatBanOnLineModel.RestaurantTable" />
+    <EntitySet Name="Roles" EntityType="DatBanOnLineModel.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="DatBanOnLineModel.sysdiagram" />
+    <EntitySet Name="Table_Type" EntityType="DatBanOnLineModel.Table_Type" />
+    <AssociationSet Name="FK_Branch_Manager_Employee" Association="DatBanOnLineModel.FK_Branch_Manager_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Branch_Manager" EntitySet="Branch_Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Manager_RestaurantBranch" Association="DatBanOnLineModel.FK_Branch_Manager_RestaurantBranch">
+      <End Role="RestaurantBranch" EntitySet="RestaurantBranches" />
+      <End Role="Branch_Manager" EntitySet="Branch_Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Customer" Association="DatBanOnLineModel.FK_Orders_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Deposit_Orders" Association="DatBanOnLineModel.FK_Deposit_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Deposit" EntitySet="Deposits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_RestaurantBranch" Association="DatBanOnLineModel.FK_Employee_RestaurantBranch">
+      <End Role="RestaurantBranch" EntitySet="RestaurantBranches" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Employee" Association="DatBanOnLineModel.FK_Orders_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Image_Menu_Menu" Association="DatBanOnLineModel.FK_Image_Menu_Menu">
+      <End Role="Menu" EntitySet="Menus" />
+      <End Role="Image_Menu" EntitySet="Image_Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Image_TableType_Table_Type" Association="DatBanOnLineModel.FK_Image_TableType_Table_Type">
+      <End Role="Table_Type" EntitySet="Table_Type" />
+      <End Role="Image_TableType" EntitySet="Image_TableType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Menu_Menu" Association="DatBanOnLineModel.FK_Order_Menu_Menu">
+      <End Role="Menu" EntitySet="Menus" />
+      <End Role="Order_Menu" EntitySet="Order_Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Menu_Orders" Association="DatBanOnLineModel.FK_Order_Menu_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Order_Menu" EntitySet="Order_Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Table_Orders" Association="DatBanOnLineModel.FK_Order_Table_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Order_Table" EntitySet="Order_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Table_RestaurantTable" Association="DatBanOnLineModel.FK_Order_Table_RestaurantTable">
+      <End Role="RestaurantTable" EntitySet="RestaurantTables" />
+      <End Role="Order_Table" EntitySet="Order_Table" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Permission_Roles" Association="DatBanOnLineModel.FK_Permission_Roles">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Permission" EntitySet="Permissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestaurantTable_RestaurantBranch" Association="DatBanOnLineModel.FK_RestaurantTable_RestaurantBranch">
+      <End Role="RestaurantBranch" EntitySet="RestaurantBranches" />
+      <End Role="RestaurantTable" EntitySet="RestaurantTables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestaurantTable_Table_Type" Association="DatBanOnLineModel.FK_RestaurantTable_Table_Type">
+      <End Role="Table_Type" EntitySet="Table_Type" />
+      <End Role="RestaurantTable" EntitySet="RestaurantTables" />
+    </AssociationSet>
+    <AssociationSet Name="Employee_Roles" Association="DatBanOnLineModel.Employee_Roles">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+    <FunctionImport Name="Delete_RestaurantBranch">
+      <Parameter Name="IdBranch" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_List_RestaurantBranch_All" ReturnType="Collection(DatBanOnLineModel.Get_List_RestaurantBranch_All_Result)" />
+    <FunctionImport Name="Get_RestaurantBranch_By_Id" ReturnType="Collection(DatBanOnLineModel.Get_RestaurantBranch_By_Id_Result)">
+      <Parameter Name="IdBranch" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Insert_RestaurantBranch">
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Update_RestaurantBranch">
+      <Parameter Name="IdBranch" Mode="In" Type="Int32" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Get_List_Table_By_Restaurant_Id" ReturnType="Collection(DatBanOnLineModel.Get_List_Table_By_Restaurant_Id_Result)">
+      <Parameter Name="RestaurantId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_List_Table_Available" ReturnType="Collection(DatBanOnLineModel.Get_List_Table_Available_Result)">
+      <Parameter Name="RestaurantId" Mode="In" Type="Int32" />
+      <Parameter Name="BeginTime" Mode="In" Type="DateTime" />
+      <Parameter Name="EndTime" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <AssociationSet Name="FK__Orders__IdBranch__66603565" Association="DatBanOnLineModel.FK__Orders__IdBranch__66603565">
+      <End Role="RestaurantBranch" EntitySet="RestaurantBranches" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <FunctionImport Name="Get_List_TableType" ReturnType="Collection(DatBanOnLineModel.Get_List_TableType_Result)" />
+    <FunctionImport Name="Get_Customer_By_Login" ReturnType="Collection(DatBanOnLineModel.Get_Customer_By_Login_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Get_Employee_By_Login" ReturnType="Collection(DatBanOnLineModel.Get_Employee_By_Login_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Insert_Customer" ReturnType="Collection(DatBanOnLineModel.Insert_Customer_Result)">
+      <Parameter Name="CMND" Mode="In" Type="String" />
+      <Parameter Name="FullName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Insert_Order" ReturnType="Collection(DatBanOnLineModel.Insert_Order_Result)">
+      <Parameter Name="IdCustomer" Mode="In" Type="Int32" />
+      <Parameter Name="NumberOfTable" Mode="In" Type="Int32" />
+      <Parameter Name="NumberOfCustomer" Mode="In" Type="Int32" />
+      <Parameter Name="IdBranch" Mode="In" Type="Int32" />
+      <Parameter Name="BeginTime" Mode="In" Type="DateTime" />
+      <Parameter Name="EndTime" Mode="In" Type="DateTime" />
+      <Parameter Name="OrderStatus" Mode="In" Type="Int32" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Insert_Order_Table" />
+    <FunctionImport Name="Get_List_Order_Table" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_Table_Result)">
+      <Parameter Name="IdOrder" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_Order" ReturnType="Collection(DatBanOnLineModel.Get_Order_Result)">
+      <Parameter Name="IdOrder" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_Employee_Permission_By_Id" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_Employee_Roles_By_Id" ReturnType="Collection(Int32)">
+      <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Get_All_Table" ReturnType="Collection(DatBanOnLineModel.Get_All_Table_Result)" />
+    <FunctionImport Name="Get_List_Order_All" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_All_Result)" />
+    <FunctionImport Name="Get_List_Order_By_Status" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_By_Status_Result)">
+      <Parameter Name="OrderStatus" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Branch_Manager">
+    <Key>
+      <PropertyRef Name="Id_Branch_Manager" />
+    </Key>
+    <Property Name="Id_Branch_Manager" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBranch" Type="Int32" Nullable="false" />
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Employee" Relationship="DatBanOnLineModel.FK_Branch_Manager_Employee" FromRole="Branch_Manager" ToRole="Employee" />
+    <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK_Branch_Manager_RestaurantBranch" FromRole="Branch_Manager" ToRole="RestaurantBranch" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="IdCustomer" />
+    </Key>
+    <Property Name="IdCustomer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CMND" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="SignUpDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK_Orders_Customer" FromRole="Customer" ToRole="Order" />
+    <Property Name="Password" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Deposit">
+    <Key>
+      <PropertyRef Name="Id_Deposit" />
+    </Key>
+    <Property Name="Id_Deposit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdOrder" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="Decimal" Precision="12" Scale="2" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Order" Relationship="DatBanOnLineModel.FK_Deposit_Orders" FromRole="Deposit" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="IdEmployee" />
+    </Key>
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StaffId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IdBranch" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="EnterDate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Branch_Manager" Relationship="DatBanOnLineModel.FK_Branch_Manager_Employee" FromRole="Employee" ToRole="Branch_Manager" />
+    <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK_Employee_RestaurantBranch" FromRole="Employee" ToRole="RestaurantBranch" />
+    <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK_Orders_Employee" FromRole="Employee" ToRole="Order" />
+    <NavigationProperty Name="Roles" Relationship="DatBanOnLineModel.Employee_Roles" FromRole="Employee" ToRole="Role" />
+    <Property Name="Password" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Image_Menu">
+    <Key>
+      <PropertyRef Name="Id_Image_Menu" />
+    </Key>
+    <Property Name="Id_Image_Menu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdMenu" Type="Int32" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Menu" Relationship="DatBanOnLineModel.FK_Image_Menu_Menu" FromRole="Image_Menu" ToRole="Menu" />
+  </EntityType>
+  <EntityType Name="Image_TableType">
+    <Key>
+      <PropertyRef Name="Id_Image_Table_Type" />
+    </Key>
+    <Property Name="Id_Image_Table_Type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Table_Type" Type="Int32" />
+    <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Table_Type" Relationship="DatBanOnLineModel.FK_Image_TableType_Table_Type" FromRole="Image_TableType" ToRole="Table_Type" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="IdMenu" />
+    </Key>
+    <Property Name="IdMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Image_Menu" Relationship="DatBanOnLineModel.FK_Image_Menu_Menu" FromRole="Menu" ToRole="Image_Menu" />
+    <NavigationProperty Name="Order_Menu" Relationship="DatBanOnLineModel.FK_Order_Menu_Menu" FromRole="Menu" ToRole="Order_Menu" />
+  </EntityType>
+  <EntityType Name="Order_Menu">
+    <Key>
+      <PropertyRef Name="Id_Order_Menu" />
+    </Key>
+    <Property Name="Id_Order_Menu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdOrder" Type="Int32" Nullable="false" />
+    <Property Name="IdMenu" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Total" Type="Decimal" Precision="12" Scale="2" />
+    <NavigationProperty Name="Menu" Relationship="DatBanOnLineModel.FK_Order_Menu_Menu" FromRole="Order_Menu" ToRole="Menu" />
+    <NavigationProperty Name="Order" Relationship="DatBanOnLineModel.FK_Order_Menu_Orders" FromRole="Order_Menu" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Order_Table">
+    <Key>
+      <PropertyRef Name="Id_Order_Table" />
+    </Key>
+    <Property Name="Id_Order_Table" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdOrder" Type="Int32" />
+    <Property Name="IdTable" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Order" Relationship="DatBanOnLineModel.FK_Order_Table_Orders" FromRole="Order_Table" ToRole="Order" />
+    <NavigationProperty Name="RestaurantTable" Relationship="DatBanOnLineModel.FK_Order_Table_RestaurantTable" FromRole="Order_Table" ToRole="RestaurantTable" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="IdOrder" />
+    </Key>
+    <Property Name="IdOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCustomer" Type="Int32" />
+    <Property Name="IdEmployee_Verify" Type="Int32" />
+    <Property Name="NumberOfTable" Type="Int32" />
+    <Property Name="NumberOfCustomer" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <Property Name="OrderStatus" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="DatBanOnLineModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
+    <NavigationProperty Name="Deposits" Relationship="DatBanOnLineModel.FK_Deposit_Orders" FromRole="Order" ToRole="Deposit" />
+    <NavigationProperty Name="Employee" Relationship="DatBanOnLineModel.FK_Orders_Employee" FromRole="Order" ToRole="Employee" />
+    <NavigationProperty Name="Order_Menu" Relationship="DatBanOnLineModel.FK_Order_Menu_Orders" FromRole="Order" ToRole="Order_Menu" />
+    <NavigationProperty Name="Order_Table" Relationship="DatBanOnLineModel.FK_Order_Table_Orders" FromRole="Order" ToRole="Order_Table" />
+    <Property Name="IdBranch" Type="Int32" />
+    <Property Name="BeginTime" Type="DateTime" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK__Orders__IdBranch__66603565" FromRole="Order" ToRole="RestaurantBranch" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="IdPermission" />
+    </Key>
+    <Property Name="IdPermission" Type="Int32" Nullable="false" />
+    <Property Name="IdRole" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Role" Relationship="DatBanOnLineModel.FK_Permission_Roles" FromRole="Permission" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="RestaurantBranch">
+    <Key>
+      <PropertyRef Name="IdBranch" />
+    </Key>
+    <Property Name="IdBranch" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Branch_Manager" Relationship="DatBanOnLineModel.FK_Branch_Manager_RestaurantBranch" FromRole="RestaurantBranch" ToRole="Branch_Manager" />
+    <NavigationProperty Name="Employees" Relationship="DatBanOnLineModel.FK_Employee_RestaurantBranch" FromRole="RestaurantBranch" ToRole="Employee" />
+    <NavigationProperty Name="RestaurantTables" Relationship="DatBanOnLineModel.FK_RestaurantTable_RestaurantBranch" FromRole="RestaurantBranch" ToRole="RestaurantTable" />
+    <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK__Orders__IdBranch__66603565" FromRole="RestaurantBranch" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="RestaurantTable">
+    <Key>
+      <PropertyRef Name="IdTable" />
+    </Key>
+    <Property Name="IdTable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RestaurantId" Type="Int32" Nullable="false" />
+    <Property Name="TableNumber" Type="Int32" />
+    <Property Name="IdTableType" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Order_Table" Relationship="DatBanOnLineModel.FK_Order_Table_RestaurantTable" FromRole="RestaurantTable" ToRole="Order_Table" />
+    <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK_RestaurantTable_RestaurantBranch" FromRole="RestaurantTable" ToRole="RestaurantBranch" />
+    <NavigationProperty Name="Table_Type" Relationship="DatBanOnLineModel.FK_RestaurantTable_Table_Type" FromRole="RestaurantTable" ToRole="Table_Type" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="IdRole" />
+    </Key>
+    <Property Name="IdRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Permissions" Relationship="DatBanOnLineModel.FK_Permission_Roles" FromRole="Role" ToRole="Permission" />
+    <NavigationProperty Name="Employees" Relationship="DatBanOnLineModel.Employee_Roles" FromRole="Role" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Table_Type">
+    <Key>
+      <PropertyRef Name="Id_Table_Type" />
+    </Key>
+    <Property Name="Id_Table_Type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TableCapacity" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Image_TableType" Relationship="DatBanOnLineModel.FK_Image_TableType_Table_Type" FromRole="Table_Type" ToRole="Image_TableType" />
+    <NavigationProperty Name="RestaurantTables" Relationship="DatBanOnLineModel.FK_RestaurantTable_Table_Type" FromRole="Table_Type" ToRole="RestaurantTable" />
+  </EntityType>
+  <Association Name="FK_Branch_Manager_Employee">
+    <End Type="DatBanOnLineModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="DatBanOnLineModel.Branch_Manager" Role="Branch_Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="IdEmployee" />
+      </Principal>
+      <Dependent Role="Branch_Manager">
+        <PropertyRef Name="IdEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Manager_RestaurantBranch">
+    <End Type="DatBanOnLineModel.RestaurantBranch" Role="RestaurantBranch" Multiplicity="1" />
+    <End Type="DatBanOnLineModel.Branch_Manager" Role="Branch_Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantBranch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="Branch_Manager">
+        <PropertyRef Name="IdBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Customer">
+    <End Type="DatBanOnLineModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="IdCustomer" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="IdCustomer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Deposit_Orders">
+    <End Type="DatBanOnLineModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="DatBanOnLineModel.Deposit" Role="Deposit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="IdOrder" />
+      </Principal>
+      <Dependent Role="Deposit">
+        <PropertyRef Name="IdOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_RestaurantBranch">
+    <End Type="DatBanOnLineModel.RestaurantBranch" Role="RestaurantBranch" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantBranch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="IdBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Employee">
+    <End Type="DatBanOnLineModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="IdEmployee" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="IdEmployee_Verify" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Image_Menu_Menu">
+    <End Type="DatBanOnLineModel.Menu" Role="Menu" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.Image_Menu" Role="Image_Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="IdMenu" />
+      </Principal>
+      <Dependent Role="Image_Menu">
+        <PropertyRef Name="IdMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Image_TableType_Table_Type">
+    <End Type="DatBanOnLineModel.Table_Type" Role="Table_Type" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.Image_TableType" Role="Image_TableType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Type">
+        <PropertyRef Name="Id_Table_Type" />
+      </Principal>
+      <Dependent Role="Image_TableType">
+        <PropertyRef Name="Id_Table_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Menu_Menu">
+    <End Type="DatBanOnLineModel.Menu" Role="Menu" Multiplicity="1" />
+    <End Type="DatBanOnLineModel.Order_Menu" Role="Order_Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="IdMenu" />
+      </Principal>
+      <Dependent Role="Order_Menu">
+        <PropertyRef Name="IdMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Menu_Orders">
+    <End Type="DatBanOnLineModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="DatBanOnLineModel.Order_Menu" Role="Order_Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="IdOrder" />
+      </Principal>
+      <Dependent Role="Order_Menu">
+        <PropertyRef Name="IdOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Table_Orders">
+    <End Type="DatBanOnLineModel.Order" Role="Order" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.Order_Table" Role="Order_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="IdOrder" />
+      </Principal>
+      <Dependent Role="Order_Table">
+        <PropertyRef Name="IdOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Table_RestaurantTable">
+    <End Type="DatBanOnLineModel.RestaurantTable" Role="RestaurantTable" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.Order_Table" Role="Order_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantTable">
+        <PropertyRef Name="IdTable" />
+      </Principal>
+      <Dependent Role="Order_Table">
+        <PropertyRef Name="IdTable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Permission_Roles">
+    <End Type="DatBanOnLineModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.Permission" Role="Permission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="IdRole" />
+      </Principal>
+      <Dependent Role="Permission">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestaurantTable_RestaurantBranch">
+    <End Type="DatBanOnLineModel.RestaurantBranch" Role="RestaurantBranch" Multiplicity="1" />
+    <End Type="DatBanOnLineModel.RestaurantTable" Role="RestaurantTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantBranch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="RestaurantTable">
+        <PropertyRef Name="RestaurantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestaurantTable_Table_Type">
+    <End Type="DatBanOnLineModel.Table_Type" Role="Table_Type" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.RestaurantTable" Role="RestaurantTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Type">
+        <PropertyRef Name="Id_Table_Type" />
+      </Principal>
+      <Dependent Role="RestaurantTable">
+        <PropertyRef Name="IdTableType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Employee_Roles">
+    <End Type="DatBanOnLineModel.Employee" Role="Employee" Multiplicity="*" />
+    <End Type="DatBanOnLineModel.Role" Role="Role" Multiplicity="*" />
+  </Association>
+  <ComplexType Name="Get_List_RestaurantBranch_All_Result">
+    <Property Type="Int32" Name="IdBranch" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="Get_RestaurantBranch_By_Id_Result">
+    <Property Type="Int32" Name="IdBranch" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="Get_List_Table_By_Restaurant_Id_Result">
+    <Property Type="Int32" Name="IdTable" Nullable="false" />
+    <Property Type="Int32" Name="RestaurantId" Nullable="false" />
+    <Property Type="Int32" Name="TableNumber" Nullable="true" />
+    <Property Type="Int32" Name="IdTableType" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="Get_List_Table_Available_Result">
+    <Property Type="Int32" Name="IdTable" Nullable="false" />
+    <Property Type="Int32" Name="RestaurantId" Nullable="false" />
+    <Property Type="Int32" Name="TableNumber" Nullable="true" />
+    <Property Type="Int32" Name="IdTableType" Nullable="true" />
+  </ComplexType>
+  <Association Name="FK__Orders__IdBranch__66603565">
+    <End Type="DatBanOnLineModel.RestaurantBranch" Role="RestaurantBranch" Multiplicity="0..1" />
+    <End Type="DatBanOnLineModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RestaurantBranch">
+        <PropertyRef Name="IdBranch" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="IdBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="Get_List_TableType_Result">
+    <Property Type="Int32" Name="Id_Table_Type" Nullable="false" />
+    <Property Type="Int32" Name="TableCapacity" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="Get_Customer_By_Login_Result">
+    <Property Type="Int32" Name="IdCustomer" Nullable="false" />
+    <Property Type="String" Name="CMND" Nullable="false" MaxLength="12" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+    <Property Type="DateTime" Name="SignUpDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="24" />
+  </ComplexType>
+  <ComplexType Name="Get_Employee_By_Login_Result">
+    <Property Type="Int32" Name="IdEmployee" Nullable="false" />
+    <Property Type="String" Name="StaffId" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="IdBranch" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+    <Property Type="DateTime" Name="EnterDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="24" />
+  </ComplexType>
+  <ComplexType Name="Insert_Order_Result">
+    <Property Type="Int32" Name="IdOrder" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Insert_Customer_Result">
+    <Property Type="Int32" Name="IdCustomer" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Get_List_Order_Table_Result">
+    <Property Type="Int32" Name="Id_Order_Table" Nullable="false" />
+    <Property Type="Int32" Name="IdOrder" Nullable="true" />
+    <Property Type="Int32" Name="IdTable" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="Get_Order_Result">
+    <Property Type="Int32" Name="IdOrder" Nullable="false" />
+    <Property Type="Int32" Name="IdCustomer" Nullable="true" />
+    <Property Type="Int32" Name="IdEmployee_Verify" Nullable="true" />
+    <Property Type="Int32" Name="NumberOfTable" Nullable="true" />
+    <Property Type="Int32" Name="NumberOfCustomer" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="LastUpdate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="OrderStatus" Nullable="true" />
+    <Property Type="Int32" Name="IdBranch" Nullable="true" />
+    <Property Type="DateTime" Name="BeginTime" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="Get_All_Table_Result">
+    <Property Type="Int32" Name="IdTable" Nullable="false" />
+    <Property Type="Int32" Name="RestaurantId" Nullable="false" />
+    <Property Type="Int32" Name="TableNumber" Nullable="true" />
+    <Property Type="Int32" Name="IdTableType" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="Get_List_Order_All_Result">
+    <Property Type="Int32" Name="IdOrder" Nullable="false" />
+    <Property Type="Int32" Name="IdCustomer" Nullable="true" />
+    <Property Type="Int32" Name="IdEmployee_Verify" Nullable="true" />
+    <Property Type="Int32" Name="NumberOfTable" Nullable="true" />
+    <Property Type="Int32" Name="NumberOfCustomer" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="LastUpdate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="OrderStatus" Nullable="true" />
+    <Property Type="Int32" Name="IdBranch" Nullable="true" />
+    <Property Type="DateTime" Name="BeginTime" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="Get_List_Order_By_Status_Result">
+    <Property Type="Int32" Name="IdOrder" Nullable="false" />
+    <Property Type="Int32" Name="IdCustomer" Nullable="true" />
+    <Property Type="Int32" Name="IdEmployee_Verify" Nullable="true" />
+    <Property Type="Int32" Name="NumberOfTable" Nullable="true" />
+    <Property Type="Int32" Name="NumberOfCustomer" Nullable="true" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="LastUpdate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="OrderStatus" Nullable="true" />
+    <Property Type="Int32" Name="IdBranch" Nullable="true" />
+    <Property Type="DateTime" Name="BeginTime" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+</Schema>
