@@ -57,6 +57,7 @@
     <Compile Include="Models\Table.cs" />
     <Compile Include="Models\TableType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BookingDetailsViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
   </ItemGroup>
   <ItemGroup />

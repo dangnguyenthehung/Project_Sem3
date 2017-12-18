@@ -53,6 +53,8 @@ namespace Helpers_Constants.Constants
             public string Insert = $"{BaseUrl}/insert";
             public string Get_By_Id = $"{BaseUrl}/get_by_id/";
             public string Get_List_Order_Table = $"{BaseUrl}/get_list_order_table/";
+            public string Get_List_Order_By_Status = $"{BaseUrl}/get_list_order_by_status/";
+            public string Get_All = $"{BaseUrl}/get_all/";
         }
 
 

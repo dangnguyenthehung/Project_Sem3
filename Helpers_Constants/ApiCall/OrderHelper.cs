@@ -15,12 +15,23 @@ namespace Helpers_Constants.ApiCall
             return _Get_By_Id<Orders>(apiUrl, id);
         }
 
+        public List<Orders> GetAll(string apiUrl)
+        {
+            return _Get_All<Orders>(apiUrl);
+        }
+
+        public List<Orders> GetByOrderStatus(string apiUrl, int orderStatus)
+        {
+            return _Get_By_Id<List<Orders>>(apiUrl, orderStatus);
+        }
+
+
+        //order table
         public List<Order_Table> GetListOrderTable(string apiUrl, int id)
         {
             return _Get_By_Id<List<Order_Table>>(apiUrl, id);
         }
 
-        //order table
         public int Insert(string apiUrl, OrderDTO order)
         {
             return _Insert(apiUrl,order);

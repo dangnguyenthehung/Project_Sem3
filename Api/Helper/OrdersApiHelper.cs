@@ -7,6 +7,7 @@ using System.Web;
 using Context.Database;
 using Model.Functions;
 using Model.Models;
+using Model.ViewModels;
 
 namespace Api.Helper
 {
@@ -61,7 +62,7 @@ namespace Api.Helper
                 return false;
             }
         }
-
+        
         public Orders GetById(int id)
         {
             using (var context = new DatBanOnlineEntities())
@@ -99,6 +100,42 @@ namespace Api.Helper
                     
                     
                     return null;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+        
+        public List<Orders> GetAll()
+        {
+            using (var context = new DatBanOnlineEntities())
+            {
+                try
+                {
+                    var result = context.Get_List_Order_All().ToList();
+
+                    return result.Select(o => o.Cast<Orders>()).ToList();
+                    
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public List<Orders> Get_List_Order_By_Status(int orderStatus)
+        {
+            using (var context = new DatBanOnlineEntities())
+            {
+                try
+                {
+                    var result = context.Get_List_Order_By_Status(orderStatus).ToList();
+
+                    return result.Select(o => o.Cast<Orders>()).ToList();
+
                 }
                 catch (Exception ex)
                 {

@@ -53,5 +53,14 @@ namespace Web.SingleTon
 
             return _listBranchs?.Where(r => r.IdBranch == id).Select(r => r.Address).SingleOrDefault();
         }
+        public static string GetDescription(int id)
+        {
+            if (_listBranchs == null)
+            {
+                GetData();
+            }
+
+            return _listBranchs?.Where(r => r.IdBranch == id).Select(r => r.Description).SingleOrDefault();
+        }
     }
 }

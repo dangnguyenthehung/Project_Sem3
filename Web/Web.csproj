@@ -263,6 +263,8 @@
     <Content Include="Areas\Admin\Views\Booking\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_PartialSidebar.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_PartialMobileNavigator.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Update.cshtml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
