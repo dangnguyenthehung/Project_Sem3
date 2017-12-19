@@ -14,7 +14,7 @@ namespace Api.Controllers
     {
         private static readonly CustomerApiHelper Helper = new CustomerApiHelper();
 
-        [Route("getbyid/{id}")]
+        [Route("get_by_id/{id}")]
         public HttpResponseMessage GetById(int id)
         {
             var response = new HttpResponseMessage();

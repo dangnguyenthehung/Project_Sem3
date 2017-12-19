@@ -15,7 +15,7 @@ namespace Web.Models
 
         public static Customer GetById(int id)
         {
-            var url = ApiUrl.GetById;
+            var url = ApiUrl.Get_By_Id;
 
             return Helper.GetById(url, id);
         }
