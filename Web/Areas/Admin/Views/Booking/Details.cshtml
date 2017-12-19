@@ -1,5 +1,5 @@
 ﻿@using Web.SingleTon
-@model Model.Models.Orders
+@model Model.ViewModels.BookingDetailsViewModel
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header" data-background-color="purple">
                     <h4 class="title">Booking Details</h4>
-                    <p class="category">Order ID: @Model.IdOrder</p>
+                    <p class="category">Order ID: @Model.Order.IdOrder</p>
                 </div>
                 <div class="card-content">
 
@@ -19,16 +19,16 @@
                             <div class="form-group label-floating">
                                 <label class="control-label">Branch</label>
                                 @*<input type="text" class="form-control" disabled>*@
-                                @BranchSingleTon.GetAddress(Model.IdBranch)
+                                @BranchSingleTon.GetAddress(Model.Order.IdBranch)
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <a href="@Url.Action("Update", "Booking", new {id = Model.IdOrder})">
+                            <a href="@Url.Action("Update", "Booking", new {id = Model.Order.IdOrder})">
                                 <div class="btn btn-warning pull-right">
                                     Update
                                 </div>
                             </a>
-                            <a href="@Url.Action("Update", "Booking", new {id = Model.IdOrder})">
+                            <a href="@Url.Action("Update", "Booking", new {id = Model.Order.IdOrder})">
                                 <div class="btn btn-success pull-right">
                                     Verify
                                 </div>
@@ -39,13 +39,13 @@
                         <div class="col-md-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Begin Time</label>
-                                @Html.TextBoxFor(b => b.BeginTime, new { @class = "form-control" })
+                                @Html.TextBoxFor(b => b.Order.BeginTime, new { @class = "form-control", @readonly = true })
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">End Time</label>
-                                @Html.TextBoxFor(b => b.EndTime, new { @class = "form-control" })
+                                @Html.TextBoxFor(b => b.Order.EndTime, new { @class = "form-control", @readonly = true })
                             </div>
                         </div>
                     </div>
@@ -53,19 +53,19 @@
                         <div class="col-md-4">
                             <div class="form-group label-floating">
                                 <label class="control-label">Number Of Customer</label>
-                                @Html.TextBoxFor(b => b.NumberOfCustomer, new { @class = "form-control" })
+                                @Html.TextBoxFor(b => b.Order.NumberOfCustomer, new { @class = "form-control", @readonly = true })
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group label-floating">
                                 <label class="control-label">Number Of Table</label>
-                                @Html.TextBoxFor(b => b.NumberOfTable, new { @class = "form-control" })
+                                @Html.TextBoxFor(b => b.Order.NumberOfTable, new { @class = "form-control", @readonly = true })
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group label-floating">
                                 <label class="control-label">Deposit</label>
-                                @Html.TextBoxFor(b => b.Deposit, new { @class = "form-control" })
+                                @Html.TextBoxFor(b => b.Order.Deposit, new { @class = "form-control", @readonly = true })
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                             <div class="form-group">
                                 <label>Description</label>
                                 <div class="form-group label-floating">
-                                    @Html.TextAreaFor(b => b.Description, new { @class = "form-control", @rows = 5 })
+                                    @Html.TextAreaFor(b => b.Order.Description, new { @class = "form-control", @rows = 5, @readonly = true })
                                 </div>
                             </div>
                         </div>
@@ -94,11 +94,16 @@
                 </div>
                 <div class="content">
                     <h6 class="category text-gray">CEO / Co-Founder</h6>
-                    <h4 class="card-title">Alec Thompson</h4>
+                    <h4 class="card-title">@Model.Customer.FullName</h4>
                     <p class="card-content">
-                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        CMND: @Model.Customer.CMND
                     </p>
-                    <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
+                    <p class="card-content">
+                        CMND: @Model.Customer.Phone
+                    </p>
+                    <p class="card-content">
+                        CMND: @Model.Customer.Address
+                    </p>
                 </div>
             </div>
         </div>

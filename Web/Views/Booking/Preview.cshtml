@@ -5,36 +5,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Preview</h2>
-<div class="text-center" style="color: white">
-    @if (Model?.Order != null)
-    {
-        <p>
-            @BranchSingleTon.GetAddress(Model.Order.IdBranch)
-        </p>
-        <p>
-            @Model.Order.BeginTime
-        </p>
-        <p>
-            @Model.Order.EndTime
-        </p>
-        <h3>Cac ban dat:</h3>
-        foreach (var item in Model.ListIdTable)
+
+<div class="w3-card-4" style="width: 100%; background-color: rgba(231, 76, 60, 0.8)">
+    <h2 style="color: antiquewhite; padding-top: 15px;" class="text-center">Preview</h2>
+
+    <div style="color: white">
+        @if (Model?.Order != null)
         {
-            <p>
-                Bàn số: @TableSingleTon.GetTableNumber(item)
-            </p>
+            <div class="w3-row-padding w3-padding-16 w3-center">
+                <div class="w3-half text-center">
+                    <p>
+                        @BranchSingleTon.GetAddress(Model.Order.IdBranch)
+                    </p>
+                    <p>
+                        @Model.Order.BeginTime
+                    </p>
+                    <p>
+                        @Model.Order.EndTime
+                    </p>
+                </div>
+                <div class="w3-half text-center">
+                    <h3>Tables</h3>
+                    @foreach (var item in Model.ListIdTable)
+                    {
+                        <p>
+                            Table: @TableSingleTon.GetTableNumber(item)
+                        </p>
+                    }
+                </div>
+            </div>
+            <div class="w3-row-padding w3-padding-16 w3-center">
+                <div class="w3-quarter w3-right">
+                    @using (Html.BeginForm("Finish", "Booking", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(m => m.Order.IdBranch)
+                        @Html.HiddenFor(m => m.Order.IdCustomer)
+                        @Html.HiddenFor(m => m.Order.BeginTime)
+                        @Html.HiddenFor(m => m.Order.EndTime)
+
+                        <input type="submit" class="btn btn-success btn-round" value="It's ok, book now" />
+                    }
+                </div>
+            </div>
+
+
+
         }
 
-        using (Html.BeginForm("Finish", "Booking", FormMethod.Post))
-        {
-            @Html.HiddenFor(m => m.Order.IdBranch)
-            @Html.HiddenFor(m => m.Order.IdCustomer)
-            @Html.HiddenFor(m => m.Order.BeginTime)
 
-            <input type="submit" class="btn btn-success" value="It's ok, book now"/>
-        }
-    }
-
-
+    </div>
 </div>
+

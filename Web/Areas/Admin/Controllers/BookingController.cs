@@ -20,16 +20,38 @@ namespace Web.Areas.Admin.Controllers
 
         public ActionResult Details(int id)
         {
-            var model = OrderModel.GetById(id);
+            if (id > 0)
+            {
+                var order = OrderModel.GetById(id);
+                if (order.IdCustomer > 0)
+                {
+                    var customer = CustomerModel.GetById(order.IdCustomer);
 
-            return View(model);
+                    var viewModel = new BookingDetailsViewModel()
+                    {
+                        Order = order,
+                        Customer = customer
+                    };
+
+                    return View(viewModel);
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Update(int id)
         {
-            var model = OrderModel.GetById(id);
+            var order = OrderModel.GetById(id);
+            var customer = CustomerModel.GetById(order.IdCustomer);
 
-            return View(model);
+            var viewModel = new BookingDetailsViewModel()
+            {
+                Order = order,
+                Customer = customer
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
