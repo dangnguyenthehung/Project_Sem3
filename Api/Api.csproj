@@ -156,6 +156,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginApiController.cs" />
+    <Compile Include="Controllers\CustomerApiController.cs" />
     <Compile Include="Controllers\RestaurantBranchApiController.cs" />
     <Compile Include="Controllers\SecurityApiController.cs" />
     <Compile Include="Controllers\OrderApiController.cs" />
@@ -164,6 +165,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\OrdersApiHelper.cs" />
+    <Compile Include="Helper\CustomerApiHelper.cs" />
     <Compile Include="Helper\RestaurantBranchApiHelper.cs" />
     <Compile Include="Helper\LoginApiHelper.cs" />
     <Compile Include="Helper\SecurityApiHelper.cs" />

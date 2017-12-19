@@ -1,4 +1,4 @@
-@using Web.SingleTon
+﻿@using Web.SingleTon
 @model Model.ViewModels.OrderViewModel
 @{
     ViewBag.Title = "Step2";
@@ -57,121 +57,82 @@
 }
 
 <div class="container" style="color:aliceblue; font-family: Arial">
-    <h1 style="color:antiquewhite">BOOKING TABLE</h1>
+    <h2 style="color:antiquewhite" class="text-center">Booking Table</h2>
 
-    <div class="w3-card-4" style="width:100%;background-color: rgba(231, 76, 60,0.8)">
-        <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-            <div class="w3-quarter">
-                <div id="inputs" >
-                    <div class="col-sm-12" >
-                        <h6 style="float:left">Number of people</h6>
-                        <div class="form-group">
-                            @Html.TextBoxFor(m => m.Order.NumberOfCustomer, new { @class = "form-control", @id = "BeginTime", @style = "padding-left: 19px" })
+    <div class="w3-card-4" style="width: 100%; background-color: rgba(231, 76, 60, 0.8)">
+        @using (Html.BeginForm("Step2", "Booking", FormMethod.Post))
+        {
+            <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+                <div class="w3-quarter">
+                    <div id="inputs">
+                        <div class="col-sm-12">
+                            <h6 style="float: left">Number of people</h6>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Order.NumberOfCustomer, new { @class = "form-control", @id = "BeginTime", @style = "padding-left: 19px" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <h6 style="float:left">Time in</h6>
-                        <div class="form-group">
-                            @Html.DropDownList("BeginTime", ListGio, new { @class = "form-control", @id = "BeginTime", @style = "padding-left: 15px; padding-top: 8px" })                        
+                        <div class="col-sm-12">
+                            <h6 style="float: left">Time in</h6>
+                            <div class="form-group">
+                                @Html.DropDownList("BeginTime", ListGio, new { @class = "form-control", @id = "BeginTime", @style = "padding-left: 15px; padding-top: 8px" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <h6 style="float:left">Time out</h6>
-                        <div class="form-group">
-                            @Html.DropDownList("EndTime", ListGio, new { @class = "form-control", @id = "EndTime", @style = "padding-left: 15px; padding-top: 8px" })                       
+                        <div class="col-sm-12">
+                            <h6 style="float: left">Time out</h6>
+                            <div class="form-group">
+                                @Html.DropDownList("EndTime", ListGio, new { @class = "form-control", @id = "EndTime", @style = "padding-left: 15px; padding-top: 8px" })
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <h6 style="float:left">Description</h6>
-                        <div class="form-group">
-                            @Html.TextAreaFor(m => m.Order.Description, new { @class = "form-control", @rows = 5, @style = "padding-left: 5px; border-radius: 10%" })
+                        <div class="col-sm-12">
+                            <h6 style="float: left">Description</h6>
+                            <div class="form-group">
+                                @Html.TextAreaFor(m => m.Order.Description, new { @class = "form-control", @rows = 5, @style = "padding-left: 5px; border-radius: 10%" })
+                            </div>
                         </div>
                     </div>
                 </div>
+                @foreach (var group in tableType)
+                {
+                    var capacity = TableTypeSingleTon.GetCapacity(group.First().IdTableType);
+                    <div class="w3-quarter">
+                        <img src="~/Content/assets/image/table2.jpg" alt="Steak">
+                        <h3>TABLE FOR @capacity</h3>
+                        <h6>Table available (@group.Count):</h6>
+                        <div class="col-sm-12 col-lg-12">
+                            @foreach (var item in group)
+                            {
+                                var tableId = "table" + item.IdTable;
+                                <div class="checkbox">
+                                    <input name="ListIdTable" type="checkbox" id="@tableId" value="@item.IdTable" />
+                                    <label for="@tableId">
+                                        Table @item.TableNumber
+                                    </label>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                }
+
+                <div style="clear: both;"></div>
             </div>
-            <div class="w3-quarter">
-                <img src="~/Content/assets/image/table2.jpg" alt="Steak" >
-                <h3>TABLE FOR 2</h3>
-                <h6>Table available:</h6>
-                <div class="col-sm-12 col-lg-12">
-                    <div class="checkbox">
-                        <input id="checkbox1" type="checkbox">
-                        <label for="checkbox1">
-                            Table 1
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <input id="checkbox2" type="checkbox" checked="">
-                        <label for="checkbox2">
-                            Table 2
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <input id="checkbox3" type="checkbox" checked="">
-                        <label for="checkbox3">
-                            Table 3
-                        </label>
-                    </div>
+
+            <div class="w3-row-padding w3-padding-16 w3-center">
+                <div class="w3-quarter w3-right">
+                    <button type="submit" class="btn btn-success btn-round">Submit</button>
                 </div>
             </div>
-            <div class="w3-quarter">
-                <img src="~/Content/assets/image/table4.jpg" alt="Cherries" >
-                <h3>TABLE FOR 4</h3>
-                <h6>Table available:</h6>
-                <div class="col-sm-12 col-lg-12">
-                    <div class="checkbox">
-                        <input id="checkbox1" type="checkbox">
-                        <label for="checkbox1">
-                            Table 1
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <input id="checkbox2" type="checkbox" checked="">
-                        <label for="checkbox2">
-                            Table 2
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <input id="checkbox3" type="checkbox" checked="">
-                        <label for="checkbox3">
-                            Table 3
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="w3-quarter">
-                <img src="~/Content/assets/image/table2.jpg" alt="Pasta and Wine" >
-                <h3>TABLE FOR 6</h3>
-                <h6>Table available:</h6>
-                <div class="col-sm-12 col-lg-12">
-                    <div class="checkbox">
-                        <input id="checkbox1" type="checkbox">
-                        <label for="checkbox1">
-                            Table 1
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <input id="checkbox2" type="checkbox" checked="">
-                        <label for="checkbox2">
-                            Table 2
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <input id="checkbox3" type="checkbox" checked="">
-                        <label for="checkbox3">
-                            Table 3
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="food" class="w3-row-padding w3-padding-16 w3-center">
+        }
+        
+
+        <div id="table" class="w3-row-padding w3-padding-16 w3-center">
             <div class="col-lg-12">
                 <h2>Table map of restaurant</h2>
                 <img src="~/Content/assets/image/layout_table.png"/>
             </div>
-              
+
         </div>
+
     </div>
 </div>
    

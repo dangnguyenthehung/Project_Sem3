@@ -57,6 +57,13 @@ namespace Helpers_Constants.Constants
             public string Get_All = $"{BaseUrl}/get_all/";
         }
 
+        public class Customer
+        {
+            private static readonly string BaseUrl = $"{_apiUrl}/customer";
+
+            public string GetById = $"{BaseUrl}/getbyid";
+            
+        }
 
         public class Security
         {

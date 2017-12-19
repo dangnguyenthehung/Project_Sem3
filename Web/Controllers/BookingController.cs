@@ -82,6 +82,12 @@ namespace Web.Controllers
             {
                 if (SessionPersister.OrderInfomation != null)
                 {
+                    viewModel.Order.IdCustomer = SessionPersister.OrderInfomation.Order.IdCustomer;
+                    viewModel.Order.IdBranch = SessionPersister.OrderInfomation.Order.IdBranch;
+                    viewModel.Order.BeginTime = SessionPersister.OrderInfomation.Order.BeginTime;
+                    viewModel.ListAvailableTables = SessionPersister.OrderInfomation.ListAvailableTables;
+
+
                     var begin = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute, 0);
 
                     var end = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
