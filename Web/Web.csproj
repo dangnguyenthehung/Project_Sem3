@@ -145,8 +145,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\BookingController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\ClientBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -186,6 +188,7 @@
     <Content Include="Content\admin\img\sidebar-3.jpg" />
     <Content Include="Content\admin\img\sidebar-4.jpg" />
     <Content Include="Content\admin\img\tim_80x80.png" />
+    <Content Include="Content\admin\img\user.png" />
     <Content Include="Content\assets\css\customStyle.css" />
     <Content Include="Content\assets\css\main.css" />
     <Content Include="Content\assets\css\now-ui-kit.css" />
@@ -266,6 +269,7 @@
     <Content Include="Areas\Admin\Views\Shared\_PartialMobileNavigator.cshtml" />
     <Content Include="Areas\Admin\Views\Booking\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Booking\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -308,6 +312,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\AdminBase\" />
     <Folder Include="Content\assets\img\presentation-page\" />
     <Folder Include="Views\ClientBase\" />
   </ItemGroup>

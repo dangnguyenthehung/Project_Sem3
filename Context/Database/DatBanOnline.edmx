@@ -459,6 +459,11 @@
           <Parameter Name="Address" Type="nvarchar" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="Update_Verify_Order_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdOrder" Type="int" Mode="In" />
+          <Parameter Name="IdEmployee" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DatBanOnLineModelStoreContainer">
           <EntitySet Name="Branch_Manager" EntityType="Self.Branch_Manager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -708,7 +713,12 @@
           <Parameter Name="OrderStatus" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Get_Customer_By_Id" ReturnType="Collection(DatBanOnLineModel.Get_Customer_By_Id_Result)">
-            <Parameter Name="IdCustomer" Mode="In" Type="Int32" />
+          <Parameter Name="IdCustomer" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Verify_Order_By_Id">
+            <Parameter Name="IdOrder" Mode="In" Type="Int32" />
+            <Parameter Name="IdEmployee" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
@@ -1595,6 +1605,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Update_Verify_Order_By_Id" FunctionName="DatBanOnLineModel.Store.Update_Verify_Order_By_Id" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -89,6 +89,26 @@ namespace Api.Controllers
             return response;
         }
 
+        [Route("verify")]
+        [HttpPut]
+        public HttpResponseMessage Verify([FromBody] Orders order)
+        {
+            var response = new HttpResponseMessage();
+
+            var result = Helper.Verify(order);
+
+            if (result)
+            {
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                return response;
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+
         [Route("get_list_order_by_status/{id}")]
         [HttpGet]
         public HttpResponseMessage Get_List_Order_By_Status(int id)

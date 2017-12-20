@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Model.Enum;
+using Model.Models;
 using Model.ViewModels;
 using Web.Models;
+using Web.Security;
 
 namespace Web.Areas.Admin.Controllers
 {
-    public class BookingController : Controller
+    public class BookingController : AdminBaseController
     {
         // GET: Admin/Booking
         public ActionResult Index()
@@ -58,6 +61,29 @@ namespace Web.Areas.Admin.Controllers
         public ActionResult Update(BookingDetailsViewModel viewModel)
         {
             return View(viewModel);
+        }
+
+        public ActionResult Verify(int id)
+        {
+            if (SessionPersister.EmployeeAccount != null)
+            {
+                var order = new Orders()
+                {
+                    IdOrder = id,
+                    OrderStatus = (int)Enums.OrderStatus.Verified,
+                    IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee
+                };
+
+                var result = OrderModel.Verify(order);
+
+                if (result)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+
+            return RedirectToAction("Index");
         }
     }
 }
