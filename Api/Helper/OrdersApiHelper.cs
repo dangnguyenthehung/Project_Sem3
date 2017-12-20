@@ -37,6 +37,29 @@ namespace Api.Helper
             }
         }
 
+        public bool Verify(Orders order)
+        {
+            using (var context = new DatBanOnlineEntities())
+            {
+                try
+                {
+                    var result = context.Update_Verify_Order_By_Id(order.IdOrder, order.IdEmployee_Verify, order.OrderStatus);
+
+                    if (result != -1)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+
+            }
+        }
+
         public bool Insert_Order_Table(DataTable table)
         {
             try

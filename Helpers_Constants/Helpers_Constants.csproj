@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiCall\BaseHelper.cs" />
+    <Compile Include="ApiCall\EmployeeHelper.cs" />
     <Compile Include="ApiCall\LoginHelper.cs" />
     <Compile Include="ApiCall\CustomerHelper.cs" />
     <Compile Include="ApiCall\RestaurantBranchHelper.cs" />

@@ -51,6 +51,7 @@ namespace Helpers_Constants.Constants
             private static readonly string BaseUrl = $"{_apiUrl}/order";
 
             public string Insert = $"{BaseUrl}/insert";
+            public string Verify = $"{BaseUrl}/verify";
             public string Get_By_Id = $"{BaseUrl}/get_by_id/";
             public string Get_List_Order_Table = $"{BaseUrl}/get_list_order_table/";
             public string Get_List_Order_By_Status = $"{BaseUrl}/get_list_order_by_status/";
@@ -63,6 +64,14 @@ namespace Helpers_Constants.Constants
 
             public string Get_By_Id = $"{BaseUrl}/get_by_id/";
             
+        }
+
+        public class Employee
+        {
+            private static readonly string BaseUrl = $"{_apiUrl}/employee";
+
+            public string Login = $"{BaseUrl}/login/";
+
         }
 
         public class Security

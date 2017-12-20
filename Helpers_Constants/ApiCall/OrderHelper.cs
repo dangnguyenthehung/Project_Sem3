@@ -24,7 +24,11 @@ namespace Helpers_Constants.ApiCall
         {
             return _Get_By_Id<List<Orders>>(apiUrl, orderStatus);
         }
-
+        
+        public bool Verify(string apiUrl, Orders order)
+        {
+            return _Update(apiUrl, order);
+        }
 
         //order table
         public List<Order_Table> GetListOrderTable(string apiUrl, int id)

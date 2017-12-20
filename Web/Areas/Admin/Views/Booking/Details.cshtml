@@ -28,7 +28,7 @@
                                     Update
                                 </div>
                             </a>
-                            <a href="@Url.Action("Update", "Booking", new {id = Model.Order.IdOrder})">
+                            <a href="@Url.Action("Verify", "Booking", new {id = Model.Order.IdOrder})">
                                 <div class="btn btn-success pull-right">
                                     Verify
                                 </div>
@@ -89,11 +89,11 @@
             <div class="card card-profile">
                 <div class="card-avatar">
                     <a href="#pablo">
-                        <img class="img" src="~/Content/admin/img/faces/marc.jpg" />
+                        <img class="img" src="~/Content/admin/img/user.png" />
                     </a>
                 </div>
                 <div class="content">
-                    <h6 class="category text-gray">CEO / Co-Founder</h6>
+                    @*<h6 class="category text-gray">CEO / Co-Founder</h6>*@
                     <h4 class="card-title">@Model.Customer.FullName</h4>
                     <p class="card-content">
                         CMND: @Model.Customer.CMND

@@ -48,5 +48,12 @@ namespace Web.Models
 
             return Helper.Insert(url, order);
         }
+
+        public static bool Verify(Orders order)
+        {
+            var url = ApiUrl.Verify;
+
+            return Helper.Verify(url, order);
+        }
     }
 }
