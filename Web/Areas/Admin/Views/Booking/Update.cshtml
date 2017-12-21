@@ -17,6 +17,9 @@
                 <div class="card-content">
                     @using (Html.BeginForm("Update", "Booking", FormMethod.Post))
                     {
+                        @Html.HiddenFor(m => m.Order.IdOrder)
+                        @Html.HiddenFor(m => m.Order.IdCustomer)
+                        @Html.HiddenFor(m => m.Order.IdBranch)
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group label-floating">
@@ -87,11 +90,10 @@
             <div class="card card-profile">
                 <div class="card-avatar">
                     <a href="#pablo">
-                        <img class="img" src="~/Content/admin/img/faces/marc.jpg" />
+                        <img class="img" src="~/Content/admin/img/user.png" />
                     </a>
                 </div>
                 <div class="content">
-                    <h6 class="category text-gray">CEO / Co-Founder</h6>
                     <h4 class="card-title">@Model.Customer.FullName</h4>
                     <p class="card-content">
                         CMND: @Model.Customer.CMND

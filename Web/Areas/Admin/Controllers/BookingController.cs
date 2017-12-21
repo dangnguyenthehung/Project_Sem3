@@ -16,7 +16,7 @@ namespace Web.Areas.Admin.Controllers
         // GET: Admin/Booking
         public ActionResult Index()
         {
-            var model = OrderModel.GetAll();
+            var model = OrderModel.GetByOrderStatus((int)Enums.OrderStatus.New);
 
             return View(model);
         }
@@ -60,30 +60,53 @@ namespace Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Update(BookingDetailsViewModel viewModel)
         {
-            return View(viewModel);
-        }
-
-        public ActionResult Verify(int id)
-        {
-            if (SessionPersister.EmployeeAccount != null)
+            if (ModelState.IsValid)
             {
-                var order = new Orders()
+                if (SessionPersister.EmployeeAccount != null)
                 {
-                    IdOrder = id,
-                    OrderStatus = (int)Enums.OrderStatus.Verified,
-                    IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee
-                };
+                    viewModel.Order.IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee;
 
-                var result = OrderModel.Verify(order);
+                    var result = OrderModel.Update(viewModel.Order);
 
-                if (result)
-                {
-                    return RedirectToAction("Index");
+                    if (result)
+                    {
+                        return RedirectToAction("Details", "Booking", new {id = viewModel.Order.IdOrder});
+                    }
                 }
+
+
+                var order = OrderModel.GetById(viewModel.Order.IdOrder);
+                var customer = CustomerModel.GetById(order.IdCustomer);
+
+
+                viewModel.Order = order;
+                viewModel.Customer = customer;
             }
 
+            return View(viewModel);
+            }
 
-            return RedirectToAction("Index");
+            public ActionResult Verify(int id)
+            {
+                if (SessionPersister.EmployeeAccount != null)
+                {
+                    var order = new Orders()
+                    {
+                        IdOrder = id,
+                        OrderStatus = (int)Enums.OrderStatus.Verified,
+                        IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee
+                    };
+
+                    var result = OrderModel.Verify(order);
+
+                    if (result)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+
+
+                return RedirectToAction("Index");
+            }
         }
     }
-}

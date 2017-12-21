@@ -1,8 +1,11 @@
-﻿@using Web.SingleTon
+﻿@using Model.Models
+@using Web.SingleTon
 @model Model.ViewModels.OrderViewModel
 @{
     ViewBag.Title = "Preview";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var customer = (Customer) ViewBag.Customer;
 }
 
 
@@ -13,16 +16,23 @@
         @if (Model?.Order != null)
         {
             <div class="w3-row-padding w3-padding-16 w3-center">
-                <div class="w3-half text-center">
+                <div class="w3-half text-left" style="padding-left: 150px">
                     <p>
-                        @BranchSingleTon.GetAddress(Model.Order.IdBranch)
+                        Customer: @customer.FullName
                     </p>
                     <p>
-                        @Model.Order.BeginTime
+                        Phone: @customer.Phone
                     </p>
                     <p>
-                        @Model.Order.EndTime
+                        Branch: @BranchSingleTon.GetAddress(Model.Order.IdBranch)
                     </p>
+                    <p>
+                        From: @Model.Order.BeginTime
+                    </p>
+                    <p>
+                        To: @Model.Order.EndTime
+                    </p>
+
                 </div>
                 <div class="w3-half text-center">
                     <h3>Tables</h3>

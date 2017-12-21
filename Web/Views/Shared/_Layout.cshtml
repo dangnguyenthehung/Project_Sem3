@@ -1,5 +1,6 @@
 ﻿@using Model.Models
 @using Web.Models
+@using Web.Security
 
 @*@Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")*@
@@ -48,8 +49,15 @@
     <!-- end content -->
     <!-- Footer -->
     @Html.Partial("_PartialLayoutFooter")
-    <!-- end footer -->
-    @Html.Partial("_PartialBookingPopup")
+<!-- end footer -->
+    @if (SessionPersister.CustomerAccount != null)
+    {   
+        @Html.Partial("_PartialBookingPopup")
+    }
+    else
+    {   
+        @Html.Partial("_PartialLoginPopup")
+    }
 
 
     <script src="~/Content/assets/js/core/popper.min.js" type="text/javascript"></script>

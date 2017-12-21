@@ -59,6 +59,25 @@ namespace Api.Helper
 
             }
         }
+        
+        public bool Update(Orders order)
+        {
+            using (var context = new DatBanOnlineEntities())
+            {
+                try
+                {
+                    var result = context.Update_Order_By_Id(order.IdOrder, order.IdEmployee_Verify, order.NumberOfTable, order.NumberOfCustomer, order.BeginTime, order.EndTime, order.Description);
+
+                    return true; 
+
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+
+            }
+        }
 
         public bool Insert_Order_Table(DataTable table)
         {
