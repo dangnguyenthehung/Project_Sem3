@@ -109,6 +109,26 @@ namespace Api.Controllers
             return response;
         }
 
+        [Route("update")]
+        [HttpPut]
+        public HttpResponseMessage Update([FromBody] Orders order)
+        {
+            var response = new HttpResponseMessage();
+
+            var result = Helper.Update(order);
+
+            if (result)
+            {
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                return response;
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+
         [Route("get_list_order_by_status/{id}")]
         [HttpGet]
         public HttpResponseMessage Get_List_Order_By_Status(int id)

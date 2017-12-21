@@ -301,5 +301,38 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Verify_Order_By_Id", idOrderParameter, idEmployeeParameter, statusParameter);
         }
+    
+        public virtual int Update_Order_By_Id(Nullable<int> idOrder, Nullable<int> idEmployee, Nullable<int> numberOfTable, Nullable<int> numberCustomer, Nullable<System.DateTime> beginTime, Nullable<System.DateTime> endTime, string description)
+        {
+            var idOrderParameter = idOrder.HasValue ?
+                new ObjectParameter("IdOrder", idOrder) :
+                new ObjectParameter("IdOrder", typeof(int));
+    
+            var idEmployeeParameter = idEmployee.HasValue ?
+                new ObjectParameter("IdEmployee", idEmployee) :
+                new ObjectParameter("IdEmployee", typeof(int));
+    
+            var numberOfTableParameter = numberOfTable.HasValue ?
+                new ObjectParameter("NumberOfTable", numberOfTable) :
+                new ObjectParameter("NumberOfTable", typeof(int));
+    
+            var numberCustomerParameter = numberCustomer.HasValue ?
+                new ObjectParameter("NumberCustomer", numberCustomer) :
+                new ObjectParameter("NumberCustomer", typeof(int));
+    
+            var beginTimeParameter = beginTime.HasValue ?
+                new ObjectParameter("BeginTime", beginTime) :
+                new ObjectParameter("BeginTime", typeof(System.DateTime));
+    
+            var endTimeParameter = endTime.HasValue ?
+                new ObjectParameter("EndTime", endTime) :
+                new ObjectParameter("EndTime", typeof(System.DateTime));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Order_By_Id", idOrderParameter, idEmployeeParameter, numberOfTableParameter, numberCustomerParameter, beginTimeParameter, endTimeParameter, descriptionParameter);
+        }
     }
 }

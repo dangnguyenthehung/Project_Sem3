@@ -28,11 +28,14 @@ namespace Web.Controllers
             var viewModel = new OrderViewModel();
             if (ModelState.IsValid)
             {
-                model.IdCustomer = 4;
-                viewModel.Order = model;
-                SessionPersister.OrderInfomation = viewModel;
+                if (SessionPersister.CustomerAccount != null)
+                {
+                    model.IdCustomer = SessionPersister.CustomerAccount.IdCustomer;
+                    viewModel.Order = model;
+                    SessionPersister.OrderInfomation = viewModel;
 
-                return RedirectToAction("Step2", "Booking");
+                    return RedirectToAction("Step2", "Booking");
+                }
             }
 
             return View(viewModel);
@@ -123,7 +126,9 @@ namespace Web.Controllers
             if (SessionPersister.OrderInfomation != null)
             {
                 var viewModel = SessionPersister.OrderInfomation;
-                
+
+                ViewBag.Customer = CustomerModel.GetById(viewModel.Order.IdCustomer);
+
                 return View(viewModel);
             }
 

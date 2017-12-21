@@ -30,6 +30,11 @@ namespace Helpers_Constants.ApiCall
             return _Update(apiUrl, order);
         }
 
+        public bool Update(string apiUrl, Orders order)
+        {
+            return _Update(apiUrl, order);
+        }
+
         //order table
         public List<Order_Table> GetListOrderTable(string apiUrl, int id)
         {
