@@ -1,11 +1,13 @@
-﻿@using Model.Models
+﻿@using System.Configuration
+@using System.Web.Configuration
+@using Model.Models
 @using Web.SingleTon
 @model Model.ViewModels.OrderViewModel
 @{
     ViewBag.Title = "Preview";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var customer = (Customer) ViewBag.Customer;
+    var customer = (Customer)ViewBag.Customer;
 }
 
 
@@ -66,3 +68,73 @@
     </div>
 </div>
 
+@*
+    <form method="post" action="@ConfigurationManager.AppSettings["PayPalSubmitUrl"]">
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Photo
+                </th>
+                <th>
+                    Sub total
+                </th>
+
+                <th></th>
+            </tr>
+            @{
+                var index = 1;
+            }
+            @foreach (var item in listItem)
+            {
+                <tr>
+                    <td>
+                        @item.Product.name
+                    </td>
+                    <td>
+                        @item.Product.price
+                    </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                    <td>
+                        <img src="~/Content/Images/@item.Product.photo" width="120" height="60" />
+                        <input type="hidden" name="item_number_@index" value="@item.Product.id" />
+                        <input type="hidden" name="item_name_@index" value="@item.Product.name" />
+                        <input type="hidden" name="amount_@index" value="@item.Product.price.Value.ToString("0.##")" />
+                        <input type="hidden" name="quantity_@index" value="@item.Quantity" />
+                    </td>
+                    <td>
+                        @(item.Quantity * item.Product.price)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Buy", "Buy", new { controller = "Cart", id = item.Product.id })
+                    </td>
+                </tr>
+                index++;
+            }
+            <tr>
+                <td colspan="4" style="font-weight: bold">Total</td>
+                <td>@listItem.Sum(p => p.Product.price * p.Quantity)</td>
+            </tr>
+        </table>
+        <!-- Thong tin thanh toan
+    <input type="hidden" name="upload" value="1" />
+    <input type="hidden" name="cmd" value="_cart" />
+    <input type="hidden" name="business" value="@WebConfigurationManager.AppSettings["PayPalUserName"]" />
+    <input type="hidden" name="return" value="@WebConfigurationManager.AppSettings["ReturnUrl"]" />
+
+    <div style="float: right">
+        <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" onclick="form.submit()" />
+    </div>
+    </form>
+*@
