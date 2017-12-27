@@ -8,44 +8,68 @@
     var customer = (Customer) ViewBag.Customer;
 }
 
+ <div class="container">
+     <div class="wrapper" style="background-color:rgba(211, 84, 0,0.8); color:white">
+         <div class="row" style="text-align: center">
+             <div class="col-lg-12">
+                 <h2>Booking Infomation</h2>
+             </div>
+         </div>
+         <div class="row">
+            <div class="col-lg-6">
+                 <h5 style="margin-left: 2%">Customer infomation</h5>
+                 <div class="col-lg-3"><h6>Full Name</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">                            
+                        <div class="form-group">
+                            <input type="text" style="width:343px;" value="@customer.FullName" placeholder="Regular" class="form-control" readonly />
+                        </div>                                                  
+                     </div>
+                 </div>
+                 <div class="col-lg-3"><h6>Number</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">
+                         <div class="form-group">
+                             <input type="text" style="width:343px;" value="@customer.Phone" placeholder="Regular" class="form-control" readonly />
+                         </div>
+                     </div>
+                 </div>
 
-<div class="w3-card-4" style="width: 100%; background-color: rgba(231, 76, 60, 0.8)">
-    <h2 style="color: antiquewhite; padding-top: 15px;" class="text-center">Preview</h2>
-
-    <div style="color: white">
-        @if (Model?.Order != null)
-        {
-            <div class="w3-row-padding w3-padding-16 w3-center">
-                <div class="w3-half text-left" style="padding-left: 150px">
-                    <p>
-                        Customer: @customer.FullName
-                    </p>
-                    <p>
-                        Phone: @customer.Phone
-                    </p>
-                    <p>
-                        Branch: @BranchSingleTon.GetAddress(Model.Order.IdBranch)
-                    </p>
-                    <p>
-                        From: @Model.Order.BeginTime
-                    </p>
-                    <p>
-                        To: @Model.Order.EndTime
-                    </p>
-
-                </div>
-                <div class="w3-half text-center">
-                    <h3>Tables</h3>
+                 <h5 style="margin-left: 2%">Booking infomation</h5>
+                 <div class="col-lg-3"><h6>Branch</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">
+                         <div class="form-group">
+                             <input type="text" style="width:343px;" value="@BranchSingleTon.GetAddress(Model.Order.IdBranch)" placeholder="Regular" class="form-control" readonly />
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-lg-3"><h6>From</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">
+                         <div class="form-group">
+                             <input type="text" style="width:343px;" value="@Model.Order.BeginTime" placeholder="Regular" class="form-control" readonly />
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-lg-3"><h6>To</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">
+                         <div class="form-group">
+                             <input type="text" style="width:343px;" value="@Model.Order.EndTime" placeholder="Regular" class="form-control" readonly />
+                         </div>
+                     </div>
+                 </div>
+             </div>
+            <div class="col-lg-6">
+                <h5>Tables selection</h5>
+                <ul class="list-group" style="width: 80%">
                     @foreach (var item in Model.ListIdTable)
                     {
-                        <p>
-                            Table: @TableSingleTon.GetTableNumber(item)
-                        </p>
+                        <a href="#" class="list-group-item list-group-item-action">Table number: <strong>@TableSingleTon.GetTableNumber(item)</strong></a>
                     }
-                </div>
-            </div>
-            <div class="w3-row-padding w3-padding-16 w3-center">
-                <div class="w3-quarter w3-right">
+                </ul>
+                <div class="col-lg-6" style="float:right">
                     @using (Html.BeginForm("Finish", "Booking", FormMethod.Post))
                     {
                         @Html.HiddenFor(m => m.Order.IdBranch)
@@ -53,16 +77,15 @@
                         @Html.HiddenFor(m => m.Order.BeginTime)
                         @Html.HiddenFor(m => m.Order.EndTime)
 
-                        <input type="submit" class="btn btn-success btn-round" value="It's ok, book now" />
+                        <input type="submit" class="btn btn-default" value="It's ok, book now" />
                     }
                 </div>
+              
             </div>
+         </div>
+        
+     </div>   
+ </div>
+    
 
-
-
-        }
-
-
-    </div>
-</div>
 

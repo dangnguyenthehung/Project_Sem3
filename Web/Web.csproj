@@ -216,8 +216,12 @@
     <Content Include="Content\assets\porfolio\Championdash_820.png" />
     <Content Include="Content\assets\porfolio\CharacterDesign_820.png" />
     <Content Include="Content\assets\porfolio\Degitalart_820.png" />
+    <Content Include="Content\assets\porfolio\five-spice-orange-beef-broccoli-ck-x-400x400.jpg" />
+    <Content Include="Content\assets\porfolio\jalapeno-dressing-salad-400x395.jpg" />
+    <Content Include="Content\assets\porfolio\potato-chorizo-burritos-ck-x-400x400.jpg" />
     <Content Include="Content\assets\porfolio\Readytowork_820.png" />
     <Content Include="Content\assets\porfolio\Robinword_820.png" />
+    <Content Include="Content\assets\porfolio\spice-beef-12-400x400.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
