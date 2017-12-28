@@ -21,5 +21,7 @@ namespace Model.ViewModels
         public DateTime EndTime { get; set; }
         
         public List<int> ListIdTable { get; set; }
+
+        public string DepositToken { get; set; }
     }
 }

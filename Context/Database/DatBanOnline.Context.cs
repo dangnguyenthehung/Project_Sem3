@@ -29,7 +29,6 @@ namespace Context.Database
     
         public virtual DbSet<Branch_Manager> Branch_Manager { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Deposit> Deposits { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Image_Menu> Image_Menu { get; set; }
         public virtual DbSet<Image_TableType> Image_TableType { get; set; }
@@ -179,7 +178,7 @@ namespace Context.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Insert_Customer_Result>("Insert_Customer", cMNDParameter, fullNameParameter, phoneParameter, addressParameter, passwordParameter);
         }
     
-        public virtual ObjectResult<Insert_Order_Result> Insert_Order(Nullable<int> idCustomer, Nullable<int> numberOfTable, Nullable<int> numberOfCustomer, Nullable<int> idBranch, Nullable<System.DateTime> beginTime, Nullable<System.DateTime> endTime, Nullable<int> orderStatus, string description)
+        public virtual ObjectResult<Insert_Order_Result> Insert_Order(Nullable<int> idCustomer, Nullable<int> numberOfTable, Nullable<int> numberOfCustomer, Nullable<int> idBranch, Nullable<System.DateTime> beginTime, Nullable<System.DateTime> endTime, Nullable<int> orderStatus, string description, Nullable<decimal> deposit)
         {
             var idCustomerParameter = idCustomer.HasValue ?
                 new ObjectParameter("IdCustomer", idCustomer) :
@@ -213,7 +212,11 @@ namespace Context.Database
                 new ObjectParameter("Description", description) :
                 new ObjectParameter("Description", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Insert_Order_Result>("Insert_Order", idCustomerParameter, numberOfTableParameter, numberOfCustomerParameter, idBranchParameter, beginTimeParameter, endTimeParameter, orderStatusParameter, descriptionParameter);
+            var depositParameter = deposit.HasValue ?
+                new ObjectParameter("Deposit", deposit) :
+                new ObjectParameter("Deposit", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Insert_Order_Result>("Insert_Order", idCustomerParameter, numberOfTableParameter, numberOfCustomerParameter, idBranchParameter, beginTimeParameter, endTimeParameter, orderStatusParameter, descriptionParameter, depositParameter);
         }
     
         public virtual int Insert_Order_Table()

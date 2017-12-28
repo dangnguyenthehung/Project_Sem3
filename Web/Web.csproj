@@ -161,11 +161,12 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\PDTHolder.cs" />
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Models\RestaurantBranchModel.cs" />
     <Compile Include="Models\SecurityModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RolesSingleTon.cs" />
+    <Compile Include="SingleTon\RolesSingleTon.cs" />
     <Compile Include="Security\CustomAuthorize.cs" />
     <Compile Include="Security\MyPrincipal.cs" />
     <Compile Include="Security\SessionPersister.cs" />

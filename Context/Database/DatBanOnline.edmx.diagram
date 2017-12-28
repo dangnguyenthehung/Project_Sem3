@@ -7,7 +7,6 @@
       <Diagram DiagramId="45273e8661f248d6a960907a644b950a" Name="Diagram1" ZoomLevel="108" >
         <EntityTypeShape EntityType="DatBanOnLineModel.Branch_Manager" Width="1.5" PointX="5.25" PointY="8.125" />
         <EntityTypeShape EntityType="DatBanOnLineModel.Customer" Width="1.5" PointX="3" PointY="16.25" />
-        <EntityTypeShape EntityType="DatBanOnLineModel.Deposit" Width="1.5" PointX="7.5" PointY="20.75" />
         <EntityTypeShape EntityType="DatBanOnLineModel.Employee" Width="1.5" PointX="3" PointY="11.625" />
         <EntityTypeShape EntityType="DatBanOnLineModel.Image_Menu" Width="1.5" PointX="7.5" PointY="4.625" />
         <EntityTypeShape EntityType="DatBanOnLineModel.Image_TableType" Width="1.5" PointX="3" PointY="5.25" />
@@ -24,7 +23,6 @@
         <AssociationConnector Association="DatBanOnLineModel.FK_Branch_Manager_Employee" />
         <AssociationConnector Association="DatBanOnLineModel.FK_Branch_Manager_RestaurantBranch" />
         <AssociationConnector Association="DatBanOnLineModel.FK_Orders_Customer" />
-        <AssociationConnector Association="DatBanOnLineModel.FK_Deposit_Orders" />
         <AssociationConnector Association="DatBanOnLineModel.FK_Employee_RestaurantBranch" />
         <AssociationConnector Association="DatBanOnLineModel.FK_Orders_Employee" />
         <AssociationConnector Association="DatBanOnLineModel.FK_Image_Menu_Menu" />

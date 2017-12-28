@@ -63,5 +63,25 @@ namespace Web.SingleTon
 
             return _listTables?.Where(r => r.IdTable== id).Select(r => r.TableNumber).SingleOrDefault() ?? 0;
         }
+
+        public static decimal GetTableDepositFee(int id)
+        {
+            if (_listTables == null)
+            {
+                GetData();
+            }
+            var table = GetById(id);
+            return TableTypeSingleTon.GetDepositFee(table.IdTableType);
+        }
+
+        public static decimal GetTableCapacity(int id)
+        {
+            if (_listTables == null)
+            {
+                GetData();
+            }
+            var table = GetById(id);
+            return TableTypeSingleTon.GetCapacity(table.IdTableType);
+        }
     }
 }

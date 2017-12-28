@@ -20,7 +20,7 @@ namespace Api.Helper
                 try
                 {
                     var result = context.Insert_Order(order.IdCustomer, order.NumberOfTable, order.NumberOfCustomer,
-                        order.IdBranch, order.BeginTime, order.EndTime, order.OrderStatus, order.Description).SingleOrDefault();
+                        order.IdBranch, order.BeginTime, order.EndTime, order.OrderStatus, order.Description, order.Deposit).SingleOrDefault();
 
                     if (result != null)
                     {

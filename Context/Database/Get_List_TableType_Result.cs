@@ -16,5 +16,6 @@ namespace Context.Database
         public int Id_Table_Type { get; set; }
         public Nullable<int> TableCapacity { get; set; }
         public string Description { get; set; }
+        public Nullable<decimal> DepositFee { get; set; }
     }
 }
