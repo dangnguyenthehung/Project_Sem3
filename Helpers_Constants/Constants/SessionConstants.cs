@@ -14,5 +14,7 @@ namespace Helpers_Constants.Constants
         //public static string AdminAccount = "AdminAccount";
 
         public static string Order = "Order";
+        public static string DepositToken = "CheckoutToken";
+
     }
 }

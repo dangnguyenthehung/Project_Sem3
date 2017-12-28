@@ -26,15 +26,6 @@
           <Property Name="SignUpDate" Type="datetime" />
           <Property Name="Password" Type="varchar" MaxLength="24" />
         </EntityType>
-        <EntityType Name="Deposit">
-          <Key>
-            <PropertyRef Name="Id_Deposit" />
-          </Key>
-          <Property Name="Id_Deposit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdOrder" Type="int" Nullable="false" />
-          <Property Name="Value" Type="decimal" Precision="12" Scale="2" />
-          <Property Name="CreateDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="IdEmployee" />
@@ -120,6 +111,7 @@
           <Property Name="BeginTime" Type="datetime" />
           <Property Name="EndTime" Type="datetime" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="Deposit" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -171,6 +163,7 @@
           <Property Name="Id_Table_Type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TableCapacity" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="DepositFee" Type="decimal" Precision="6" Scale="2" />
         </EntityType>
         <Association Name="FK__Orders__IdBranch__66603565">
           <End Role="RestaurantBranch" Type="Self.RestaurantBranch" Multiplicity="0..1" />
@@ -205,18 +198,6 @@
             </Principal>
             <Dependent Role="Branch_Manager">
               <PropertyRef Name="IdBranch" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Deposit_Orders">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="Deposit" Type="Self.Deposit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="IdOrder" />
-            </Principal>
-            <Dependent Role="Deposit">
-              <PropertyRef Name="IdOrder" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -448,6 +429,7 @@
           <Parameter Name="EndTime" Type="datetime" Mode="In" />
           <Parameter Name="OrderStatus" Type="int" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
+          <Parameter Name="Deposit" Type="decimal" Mode="In" />
         </Function>
         <Function Name="Insert_Order_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Insert_RestaurantBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -476,7 +458,6 @@
         <EntityContainer Name="DatBanOnLineModelStoreContainer">
           <EntitySet Name="Branch_Manager" EntityType="Self.Branch_Manager" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Deposit" EntityType="Self.Deposit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee_Roles" EntityType="Self.Employee_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Image_Menu" EntityType="Self.Image_Menu" Schema="dbo" store:Type="Tables" />
@@ -502,10 +483,6 @@
           <AssociationSet Name="FK_Branch_Manager_RestaurantBranch" Association="Self.FK_Branch_Manager_RestaurantBranch">
             <End Role="RestaurantBranch" EntitySet="RestaurantBranch" />
             <End Role="Branch_Manager" EntitySet="Branch_Manager" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Deposit_Orders" Association="Self.FK_Deposit_Orders">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="Deposit" EntitySet="Deposit" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_RestaurantBranch" Association="Self.FK_Employee_RestaurantBranch">
             <End Role="RestaurantBranch" EntitySet="RestaurantBranch" />
@@ -571,7 +548,6 @@
         <EntityContainer Name="DatBanOnlineEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Branch_Manager" EntityType="DatBanOnLineModel.Branch_Manager" />
           <EntitySet Name="Customers" EntityType="DatBanOnLineModel.Customer" />
-          <EntitySet Name="Deposits" EntityType="DatBanOnLineModel.Deposit" />
           <EntitySet Name="Employees" EntityType="DatBanOnLineModel.Employee" />
           <EntitySet Name="Image_Menu" EntityType="DatBanOnLineModel.Image_Menu" />
           <EntitySet Name="Image_TableType" EntityType="DatBanOnLineModel.Image_TableType" />
@@ -596,10 +572,6 @@
           <AssociationSet Name="FK_Orders_Customer" Association="DatBanOnLineModel.FK_Orders_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Deposit_Orders" Association="DatBanOnLineModel.FK_Deposit_Orders">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="Deposit" EntitySet="Deposits" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_RestaurantBranch" Association="DatBanOnLineModel.FK_Employee_RestaurantBranch">
             <End Role="RestaurantBranch" EntitySet="RestaurantBranches" />
@@ -702,6 +674,7 @@
             <Parameter Name="EndTime" Mode="In" Type="DateTime" />
             <Parameter Name="OrderStatus" Mode="In" Type="Int32" />
             <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Deposit" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="Insert_Order_Table" />
           <FunctionImport Name="Get_List_Order_Table" ReturnType="Collection(DatBanOnLineModel.Get_List_Order_Table_Result)">
@@ -762,16 +735,6 @@
           <Property Name="SignUpDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK_Orders_Customer" FromRole="Customer" ToRole="Order" />
           <Property Name="Password" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Deposit">
-          <Key>
-            <PropertyRef Name="Id_Deposit" />
-          </Key>
-          <Property Name="Id_Deposit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdOrder" Type="Int32" Nullable="false" />
-          <Property Name="Value" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Order" Relationship="DatBanOnLineModel.FK_Deposit_Orders" FromRole="Deposit" ToRole="Order" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -859,7 +822,6 @@
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="OrderStatus" Type="Int32" />
           <NavigationProperty Name="Customer" Relationship="DatBanOnLineModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
-          <NavigationProperty Name="Deposits" Relationship="DatBanOnLineModel.FK_Deposit_Orders" FromRole="Order" ToRole="Deposit" />
           <NavigationProperty Name="Employee" Relationship="DatBanOnLineModel.FK_Orders_Employee" FromRole="Order" ToRole="Employee" />
           <NavigationProperty Name="Order_Menu" Relationship="DatBanOnLineModel.FK_Order_Menu_Orders" FromRole="Order" ToRole="Order_Menu" />
           <NavigationProperty Name="Order_Table" Relationship="DatBanOnLineModel.FK_Order_Table_Orders" FromRole="Order" ToRole="Order_Table" />
@@ -868,6 +830,7 @@
           <Property Name="EndTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK__Orders__IdBranch__66603565" FromRole="Order" ToRole="RestaurantBranch" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Deposit" Type="Decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -931,6 +894,7 @@
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Image_TableType" Relationship="DatBanOnLineModel.FK_Image_TableType_Table_Type" FromRole="Table_Type" ToRole="Image_TableType" />
           <NavigationProperty Name="RestaurantTables" Relationship="DatBanOnLineModel.FK_RestaurantTable_Table_Type" FromRole="Table_Type" ToRole="RestaurantTable" />
+          <Property Name="DepositFee" Type="Decimal" Precision="6" Scale="2" />
         </EntityType>
         <Association Name="FK_Branch_Manager_Employee">
           <End Type="DatBanOnLineModel.Employee" Role="Employee" Multiplicity="1" />
@@ -965,18 +929,6 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="IdCustomer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Deposit_Orders">
-          <End Type="DatBanOnLineModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="DatBanOnLineModel.Deposit" Role="Deposit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="IdOrder" />
-            </Principal>
-            <Dependent Role="Deposit">
-              <PropertyRef Name="IdOrder" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1155,6 +1107,7 @@
           <Property Type="Int32" Name="Id_Table_Type" Nullable="false" />
           <Property Type="Int32" Name="TableCapacity" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="Decimal" Name="DepositFee" Nullable="true" Precision="6" Scale="2" />
         </ComplexType>
         <ComplexType Name="Get_Customer_By_Login_Result">
           <Property Type="Int32" Name="IdCustomer" Nullable="false" />
@@ -1203,6 +1156,7 @@
           <Property Type="DateTime" Name="BeginTime" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="Decimal" Name="Deposit" Nullable="true" Precision="12" Scale="2" />
         </ComplexType>
         <ComplexType Name="Get_All_Table_Result">
           <Property Type="Int32" Name="IdTable" Nullable="false" />
@@ -1224,6 +1178,7 @@
           <Property Type="DateTime" Name="BeginTime" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="Decimal" Name="Deposit" Nullable="true" Precision="12" Scale="2" />
         </ComplexType>
         <ComplexType Name="Get_List_Order_By_Status_Result">
           <Property Type="Int32" Name="IdOrder" Nullable="false" />
@@ -1238,6 +1193,7 @@
           <Property Type="DateTime" Name="BeginTime" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="Decimal" Name="Deposit" Nullable="true" Precision="12" Scale="2" />
         </ComplexType>
         <ComplexType Name="Get_Customer_By_Id_Result">
           <Property Type="Int32" Name="IdCustomer" Nullable="false" />
@@ -1274,16 +1230,6 @@
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="CMND" ColumnName="CMND" />
                 <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Deposits">
-            <EntityTypeMapping TypeName="DatBanOnLineModel.Deposit">
-              <MappingFragment StoreEntitySet="Deposit">
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
-                <ScalarProperty Name="Id_Deposit" ColumnName="Id_Deposit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1357,6 +1303,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DatBanOnLineModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
@@ -1423,6 +1370,7 @@
           <EntitySetMapping Name="Table_Type">
             <EntityTypeMapping TypeName="DatBanOnLineModel.Table_Type">
               <MappingFragment StoreEntitySet="Table_Type">
+                <ScalarProperty Name="DepositFee" ColumnName="DepositFee" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="TableCapacity" ColumnName="TableCapacity" />
                 <ScalarProperty Name="Id_Table_Type" ColumnName="Id_Table_Type" />
@@ -1485,6 +1433,7 @@
                 <ScalarProperty Name="Id_Table_Type" ColumnName="Id_Table_Type" />
                 <ScalarProperty Name="TableCapacity" ColumnName="TableCapacity" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DepositFee" ColumnName="DepositFee" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1558,6 +1507,7 @@
                 <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1589,6 +1539,7 @@
                 <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1607,6 +1558,7 @@
                 <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Deposit" ColumnName="Deposit" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -7,6 +7,7 @@ using Helpers_Constants.Constants;
 using Model.DTO;
 using Model.Enum;
 using Model.Models;
+using Model.Security;
 using Model.ViewModels;
 using Web.Models;
 using Web.Security;
@@ -127,6 +128,9 @@ namespace Web.Controllers
             {
                 var viewModel = SessionPersister.OrderInfomation;
 
+                GetDepositValue(ref viewModel);
+                GetDepositToken(ref viewModel);
+
                 ViewBag.Customer = CustomerModel.GetById(viewModel.Order.IdCustomer);
 
                 return View(viewModel);
@@ -140,6 +144,7 @@ namespace Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
 
         [HttpPost]
         public ActionResult Finish(OrderViewModel submitData)
@@ -182,6 +187,64 @@ namespace Web.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+
+        public ActionResult Deposit(string token)
+        {
+            if (!string.IsNullOrEmpty(token) && token == SessionPersister.DepositToken)
+            {
+                if (SessionPersister.OrderInfomation != null)
+                {
+
+                    var viewModel = SessionPersister.OrderInfomation;
+                    
+                    viewModel.Order.OrderStatus = (int)Enums.OrderStatus.New;
+
+                    var data = new OrderDTO()
+                    {
+                        Order = viewModel.Order,
+                        ListIdTable = viewModel.ListIdTable
+                    };
+
+                    var result = OrderModel.Insert(data);
+
+                    //Message
+                    var message = MessageConstants.OrderFail;
+                    if (result > 0)
+                    {
+                        message = MessageConstants.OrderSuccess;
+
+                        return RedirectToAction("Index", "Message", new { message });
+                    }
+
+                    message = MessageConstants.OrderFail;
+                    return RedirectToAction("Index", "Message", new { message });
+                }
+            }
+            
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        private void GetDepositValue(ref OrderViewModel viewModel)
+        {
+            viewModel.Order.Deposit = 0;
+            var listTable = viewModel.ListIdTable;
+            foreach (var item in listTable)
+            {
+                var value = TableSingleTon.GetTableDepositFee(item);
+                viewModel.Order.Deposit += value;
+            }
+        }
+
+        private void GetDepositToken(ref OrderViewModel viewModel)
+        {
+            var baseStr = viewModel.Order.IdBranch + viewModel.Order.IdCustomer + viewModel.Order.BeginTime.ToLongDateString() + viewModel.Order.EndTime.ToLongDateString();
+            viewModel.DepositToken = Encryptor.EncryptSHA1(baseStr);
+
+            SessionPersister.DepositToken = viewModel.DepositToken;
         }
     }
 }

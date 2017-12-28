@@ -1,6 +1,7 @@
 ﻿@using System.Configuration
 @using System.Web.Configuration
 @using Model.Models
+@using Web.Security
 @using Web.SingleTon
 @model Model.ViewModels.OrderViewModel
 @{
@@ -8,6 +9,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var customer = (Customer)ViewBag.Customer;
+    var token = SessionPersister.DepositToken;
+    var returnUrl = $"{WebConfigurationManager.AppSettings["ReturnUrl"]}/?token={token}";
 }
 
 
@@ -37,26 +40,90 @@
 
                 </div>
                 <div class="w3-half text-center">
-                    <h3>Tables</h3>
-                    @foreach (var item in Model.ListIdTable)
-                    {
-                        <p>
-                            Table: @TableSingleTon.GetTableNumber(item)
-                        </p>
-                    }
+                    <h3>Notes</h3>
+                    <p>
+                        @Model.Order.Description
+                    </p>
                 </div>
             </div>
             <div class="w3-row-padding w3-padding-16 w3-center">
-                <div class="w3-quarter w3-right">
-                    @using (Html.BeginForm("Finish", "Booking", FormMethod.Post))
-                    {
-                        @Html.HiddenFor(m => m.Order.IdBranch)
-                        @Html.HiddenFor(m => m.Order.IdCustomer)
-                        @Html.HiddenFor(m => m.Order.BeginTime)
-                        @Html.HiddenFor(m => m.Order.EndTime)
+                <div class="">
+                    @*@using (Html.BeginForm("Finish", "Booking", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(m => m.Order.IdBranch)
+                            @Html.HiddenFor(m => m.Order.IdCustomer)
+                            @Html.HiddenFor(m => m.Order.BeginTime)
+                            @Html.HiddenFor(m => m.Order.EndTime)
 
-                        <input type="submit" class="btn btn-success btn-round" value="It's ok, book now" />
-                    }
+                            <input type="submit" class="btn btn-success btn-round" value="It's ok, book now" />
+                        }*@
+                    <form method="post" action="@ConfigurationManager.AppSettings["PayPalSubmitUrl"]">
+                        <table class="table table-bordered">
+                            <tr class="text-center">
+                                <th>
+                                    Photo
+                                </th>
+                                <th>
+                                    Table
+                                </th>
+                                <th>
+                                    Table Capacity
+                                </th>
+                                <th>
+                                    Deposit
+                                </th>
+                                <th>
+                                    Quantity
+                                </th>
+
+                            </tr>
+                            @{
+                                var index = 1;
+                            }
+                            @foreach (var item in Model.ListIdTable)
+                            {
+                                var itemName = $"Table_Number_{TableSingleTon.GetTableNumber(item)} ({TableSingleTon.GetTableCapacity(item)}  persons)";
+
+                            <tr>
+                                <td>
+                                    <img src="~/Content/assets/image/table2.jpg" width="120" height="60" />
+                                    <input type="hidden" name="item_number_@index" value="@item" />
+                                    <input type="hidden" name="item_name_@index" value="@itemName" />
+                                    <input type="hidden" name="amount_@index" value="@TableSingleTon.GetTableDepositFee(item).ToString("0.##")" />
+                                    <input type="hidden" name="quantity_@index" value="1" />
+                                </td>
+                                <td>
+                                    Table Number @TableSingleTon.GetTableNumber(item)
+                                </td>
+                                <td>
+                                    @TableSingleTon.GetTableCapacity(item)
+                                </td>
+                                <td>
+                                    $@TableSingleTon.GetTableDepositFee(item)
+                                </td>
+                                <td>
+                                    1
+                                </td>
+
+                            </tr>
+                                index++;
+                            }
+                            <tr class="text-center">
+                                <td colspan="4" style="font-weight: bold">Total</td>
+                                <td>$@(Model?.Order?.Deposit)</td>
+                            </tr>
+                        </table>
+
+                        <!-- Thong tin thanh toan -->
+                        <input type="hidden" name="upload" value="1" />
+                        <input type="hidden" name="cmd" value="_cart" />
+                        <input type="hidden" name="business" value="@WebConfigurationManager.AppSettings["PayPalUserName"]" />
+                        <input type="hidden" name="return" value="@returnUrl" />
+
+                        <div style="float: right;">
+                            <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" onclick="form.submit()" style="cursor: pointer;"/>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -64,77 +131,6 @@
 
         }
 
-
     </div>
 </div>
 
-@*
-    <form method="post" action="@ConfigurationManager.AppSettings["PayPalSubmitUrl"]">
-        <table class="table">
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Photo
-                </th>
-                <th>
-                    Sub total
-                </th>
-
-                <th></th>
-            </tr>
-            @{
-                var index = 1;
-            }
-            @foreach (var item in listItem)
-            {
-                <tr>
-                    <td>
-                        @item.Product.name
-                    </td>
-                    <td>
-                        @item.Product.price
-                    </td>
-                    <td>
-                        @item.Quantity
-                    </td>
-                    <td>
-                        <img src="~/Content/Images/@item.Product.photo" width="120" height="60" />
-                        <input type="hidden" name="item_number_@index" value="@item.Product.id" />
-                        <input type="hidden" name="item_name_@index" value="@item.Product.name" />
-                        <input type="hidden" name="amount_@index" value="@item.Product.price.Value.ToString("0.##")" />
-                        <input type="hidden" name="quantity_@index" value="@item.Quantity" />
-                    </td>
-                    <td>
-                        @(item.Quantity * item.Product.price)
-                    </td>
-
-                    <td>
-                        @Html.ActionLink("Buy", "Buy", new { controller = "Cart", id = item.Product.id })
-                    </td>
-                </tr>
-                index++;
-            }
-            <tr>
-                <td colspan="4" style="font-weight: bold">Total</td>
-                <td>@listItem.Sum(p => p.Product.price * p.Quantity)</td>
-            </tr>
-        </table>
-        <!-- Thong tin thanh toan
-    <input type="hidden" name="upload" value="1" />
-    <input type="hidden" name="cmd" value="_cart" />
-    <input type="hidden" name="business" value="@WebConfigurationManager.AppSettings["PayPalUserName"]" />
-    <input type="hidden" name="return" value="@WebConfigurationManager.AppSettings["ReturnUrl"]" />
-
-    <div style="float: right">
-        <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" onclick="form.submit()" />
-    </div>
-    </form>
-*@
