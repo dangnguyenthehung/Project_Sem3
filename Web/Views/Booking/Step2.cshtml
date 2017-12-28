@@ -6,22 +6,53 @@
 
     var tableType = Model.ListAvailableTables.GroupBy(t => t.IdTableType).Select(gr => gr.ToList()).ToList();
 
-    var GioHienTai = DateTime.Now.TimeOfDay.Hours;
-    var GioDefault = "9:00";
-
-    GioHienTai = GioHienTai + 2;
-    if (GioHienTai > 22)
+    var gioHienTai = DateTime.Now.TimeOfDay.Hours;
+    var gioDefaultBegin = "8:00";
+    var gioDefaultEnd = "9:00";
+    
+    if (gioHienTai > 22)
     {
-        GioDefault = "9:00";
+        gioDefaultBegin = "8:00";
+        gioDefaultEnd = "9:00";
     }
     else
     {
-        GioDefault = GioHienTai.ToString() + ":00";
+        gioDefaultBegin = gioHienTai + 2 + ":00";
+        gioDefaultEnd = gioHienTai + 3 + ":00";
     }
-    var ListGio = new SelectList(new List<SelectListItem>
+    var listGioBegin = new SelectList(new List<SelectListItem>
     {
-        new SelectListItem { Text = "8:00", Value = "8:00" },
-        new SelectListItem { Text = "8:30", Value = "8:30" },
+        new SelectListItem { Text = "10:00", Value = "10:00" },
+        new SelectListItem { Text = "10:30", Value = "10:30" },
+        new SelectListItem { Text = "11:00", Value = "11:00" },
+        new SelectListItem { Text = "11:30", Value = "11:30" },
+        new SelectListItem { Text = "12:00", Value = "12:00" },
+        new SelectListItem { Text = "12:30", Value = "12:30" },
+        new SelectListItem { Text = "13:00", Value = "13:00" },
+        new SelectListItem { Text = "13:30", Value = "13:30" },
+        new SelectListItem { Text = "14:00", Value = "14:00" },
+        new SelectListItem { Text = "14:30", Value = "14:30" },
+        new SelectListItem { Text = "15:00", Value = "15:00" },
+        new SelectListItem { Text = "15:30", Value = "15:30" },
+        new SelectListItem { Text = "16:00", Value = "16:00" },
+        new SelectListItem { Text = "16:30", Value = "16:30" },
+        new SelectListItem { Text = "17:00", Value = "17:00" },
+        new SelectListItem { Text = "17:30", Value = "17:30" },
+        new SelectListItem { Text = "18:00", Value = "18:00" },
+        new SelectListItem { Text = "18:30", Value = "18:30" },
+        new SelectListItem { Text = "19:00", Value = "19:00" },
+        new SelectListItem { Text = "19:30", Value = "19:30" },
+        new SelectListItem { Text = "20:00", Value = "20:00" },
+        new SelectListItem { Text = "20:30", Value = "20:30" },
+        new SelectListItem { Text = "21:00", Value = "21:00" },
+        new SelectListItem { Text = "21:30", Value = "21:30" },
+        new SelectListItem { Text = "22:00", Value = "22:00" },
+        new SelectListItem { Text = "22:30", Value = "22:30" },
+        new SelectListItem { Text = "23:00", Value = "23:00" }
+    }, "Value", "Text", gioDefaultBegin.ToString());
+
+    var listGioEnd = new SelectList(new List<SelectListItem>
+    {
         new SelectListItem { Text = "9:00", Value = "9:00"},
         new SelectListItem { Text = "9:30", Value = "9:30" },
         new SelectListItem { Text = "10:00", Value = "10:00" },
@@ -48,8 +79,12 @@
         new SelectListItem { Text = "20:30", Value = "20:30" },
         new SelectListItem { Text = "21:00", Value = "21:00" },
         new SelectListItem { Text = "21:30", Value = "21:30" },
-        new SelectListItem { Text = "22:00", Value = "22:00" }
-    }, "Value", "Text", GioDefault.ToString());
+        new SelectListItem { Text = "22:00", Value = "22:00" },
+        new SelectListItem { Text = "22:30", Value = "22:30" },
+        new SelectListItem { Text = "23:00", Value = "23:00" }
+    }, "Value", "Text", gioDefaultEnd.ToString());
+
+    var index = 1;
 }
 
 <div class="container" style="color:aliceblue; font-family: Arial">
@@ -58,6 +93,10 @@
         @using (Html.BeginForm("Step2", "Booking", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(b => b.Order.IdBranch)
+            @Html.HiddenFor(b => b.Order.BeginTime)
+
             <div class="w3-row-padding w3-padding-16 w3-center">
                 <div class="col-xs-12">
                     @Html.ValidationSummary(true, null, new {@class = "text-danger booking-error"})    
@@ -71,19 +110,19 @@
                         <div class="col-sm-12">
                             <h6 style="float: left">Number of people</h6>
                             <div class="form-group">
-                                @Html.TextBoxFor(m => m.Order.NumberOfCustomer, new {@class = "form-control", @id = "BeginTime", @style = "padding-left: 19px", @type = "number"})
+                                @Html.TextBoxFor(m => m.Order.NumberOfCustomer, new {@class = "form-control", @style = "padding-left: 19px", @type = "number"})
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <h6 style="float: left">Time in</h6>
                             <div class="form-group">
-                                @Html.DropDownList("BeginTime", ListGio, new {@class = "form-control", @id = "BeginTime", @style = "padding-left: 15px; padding-top: 8px"})
+                                @Html.DropDownList("BeginTime", listGioBegin, new {@class = "form-control", @id = "BeginTime", @style = "padding-left: 15px; padding-top: 8px"})
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <h6 style="float: left">Time out</h6>
                             <div class="form-group">
-                                @Html.DropDownList("EndTime", ListGio, new {@class = "form-control", @id = "EndTime", @style = "padding-left: 15px; padding-top: 8px"})
+                                @Html.DropDownList("End", listGioEnd, new {@class = "form-control", @id = "EndTime", @style = "padding-left: 15px; padding-top: 8px"})
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -100,8 +139,8 @@
                     <div class="w3-quarter">
                         <img src="~/Content/assets/image/table2.jpg" alt="Steak">
                         <h3>TABLE FOR @capacity</h3>
-                        <h6>Table available (@group.Count):</h6>
-                        <div class="col-sm-12 col-lg-12">
+                        <h6 id="count_group_@index">Table available (@group.Count):</h6>
+                        <div class="col-sm-12 col-lg-12" id="group_@index">
                             @foreach (var item in group)
                             {
                                 var tableId = "table" + item.IdTable;
@@ -115,6 +154,8 @@
                             }
                         </div>
                     </div>
+
+                    index++;
                 }
 
                 <div style="clear: both;"></div>

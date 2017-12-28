@@ -261,9 +261,9 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
     $('#background').css('background-image', "url('../assets/background_no_animation.jpg')");
   });
 } else {
-    sf = new Phaser.Game($('#background').innerWidth(), $('#background').innerHeight(), Phaser.AUTO, 'effect', null, true);
-    sf.state.add('intro', intro);
-    sf.state.start('intro');
+    //sf = new Phaser.Game($('#background').innerWidth(), $('#background').innerHeight(), Phaser.AUTO, 'effect', null, true);
+    //sf.state.add('intro', intro);
+    //sf.state.start('intro');
 }
 
 

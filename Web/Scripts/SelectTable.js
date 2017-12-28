@@ -44,4 +44,72 @@ $(document).ready(function () {
         });
 
     });
+
+    $("#BeginTime").change(function () {
+        var url = APICall.GetEndTime;
+        var begin = $("#BeginTime").val();
+
+        $.get(
+            url,
+            { beginTime: begin },
+            function (data) {
+
+                $("#EndTime").html();
+                var listOption = "";
+
+                $.each(data,
+                    function (key, value) {
+                        listOption += "<option value=" + value + ">" + value + "</option>";
+                    });
+
+                $("#EndTime").html(listOption);
+                getTableAvailable();
+            }
+        );
+    });
+
+    $("#EndTime").change(function () {
+        getTableAvailable();
+    });
+
+    function getTableAvailable() {
+        var url = APICall.GetTableAvailable;
+
+        var begin = $("#BeginTime").val();
+        var end = $("#EndTime").val();
+
+        $.get(
+            url,
+            { beginTime: begin, endTime: end },
+            function (data) {
+
+                var listOption = "";
+                var index = 1;
+                $.each(data,
+                    function (key, value) {
+                        var countId = "count_group_" + index;
+                        var containerId = "group_" + index;
+                        var count = value.length;
+
+                        $("#" + countId).html("Table available (" + count + ")");
+                        $("#" + containerId).html("");
+
+                        var content = "";
+
+                        $.each(value,
+                            function (subkey, subvalue) {
+                                content += "<div class='checkbox'><input name= 'ListIdTable' type= 'checkbox' id= " +
+                                    subvalue.IdTable + "value= " + subvalue.IdTable + " /><label for=" +
+                                    subvalue.IdTable + ">Table " + subvalue.TableNumber + "</label></div>";
+
+                                
+                            });
+
+                        $("#" + containerId).html(content);
+                        index++;
+                    });
+            }
+        );
+    };
+
 });

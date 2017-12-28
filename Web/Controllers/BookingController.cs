@@ -9,6 +9,7 @@ using Model.Enum;
 using Model.Models;
 using Model.Security;
 using Model.ViewModels;
+using Newtonsoft.Json;
 using Web.Models;
 using Web.Security;
 using Web.SingleTon;
@@ -80,10 +81,12 @@ namespace Web.Controllers
                         viewModel.Order.BeginTime = SessionPersister.OrderInfomation.Order.BeginTime;
                         viewModel.ListAvailableTables = SessionPersister.OrderInfomation.ListAvailableTables;
 
+                        var beginStr = viewModel.BeginTime.Split(':');
+                        var endStr = viewModel.EndTime.Split(':');
 
-                        var begin = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute, 0);
+                        var begin = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, int.Parse(beginStr[0]), int.Parse(beginStr[1]), 0);
 
-                        var end = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
+                        var end = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, int.Parse(endStr[0]), int.Parse(endStr[1]), 0);
 
 
                         viewModel.Order.BeginTime = begin;
@@ -277,5 +280,70 @@ namespace Web.Controllers
             SessionPersister.DepositToken = viewModel.DepositToken;
         }
 
+        public JsonResult GetEndTime(string beginTime)
+        {
+            var listGioEnd = new List<string>()
+            {
+                "10:00",
+                "10:30",
+                "11:00",
+                "11:30",
+                "12:00",
+                "12:30",
+                "13:00",
+                "13:30",
+                "14:00",
+                "14:30",
+                "15:00",
+                "15:30",
+                "16:00",
+                "16:30",
+                "17:00",
+                "17:30",
+                "18:00",
+                "18:30",
+                "19:00",
+                "19:30",
+                "20:00",
+                "20:30",
+                "21:00",
+                "21:30",
+                "22:00",
+                "22:30",
+                "23:00",
+                "23:30",
+                "24:00"
+            };
+            var beginIndex = listGioEnd.IndexOf(beginTime) + 2;
+            listGioEnd.RemoveRange(0, beginIndex);
+            return Json(listGioEnd, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult GetTableAvailable(string beginTime, string endTime)
+        {
+            var viewModel = SessionPersister.OrderInfomation;
+
+            var beginStr = beginTime.Split(':');
+            var endStr = endTime.Split(':');
+
+            var begin = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, int.Parse(beginStr[0]), int.Parse(beginStr[1]), 0);
+
+            var end = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, int.Parse(endStr[0]), int.Parse(endStr[1]), 0);
+
+            var tableFilter = new TableFilterDTO()
+            {
+                IdBranch = viewModel.Order.IdBranch,
+                BranchAddress = BranchSingleTon.GetAddress(viewModel.Order.IdBranch),
+                BeginTime = begin,
+                EndTime = end
+            };
+
+            var table = TableModel.GetTableAvailable(tableFilter);
+
+            var result = table.GroupBy(t => t.IdTableType).ToList();
+            
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
