@@ -21,53 +21,107 @@
              </div>
          </div>
          <div class="row">
-            <div class="col-lg-6">
-                 <h5 style="margin-left: 2%">Customer infomation</h5>
-                 <div class="col-lg-3"><h6>Full Name</h6></div>
-                 <div class="col-lg-9">
-                     <div id="inputs">                            
-                        <div class="form-group">
-                            <input type="text" style="width:343px;" value="@customer.FullName" placeholder="Regular" class="form-control" readonly />
-                        </div>                                                  
-                     </div>
-                 </div>
-                 <div class="col-lg-3"><h6>Phone</h6></div>
-                 <div class="col-lg-9">
-                     <div id="inputs">
-                         <div class="form-group">
-                             <input type="text" style="width:343px;" value="@customer.Phone" placeholder="Regular" class="form-control" readonly />
+             <div class="col-lg-12">
+                 <div class="row">
+                     <div class="col-xs-12 col-md-5">
+                         <h5 style="margin-left: 15px">Customer infomation</h5>
+                         <div class="row">
+                             <div class="col-xs-12">
+                                 <div class="col-lg-4"><h6>Full Name</h6>
+                                 </div>
+                                 <div class="col-lg-8">
+                                     <div id="inputs">
+                                         <div class="form-group">
+                                             <input type="text" style="width: 100%;" value="@customer.FullName" placeholder="Regular" class="form-control" readonly/>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             
+                         </div>
+                         <div class="row">
+                             <div class="col-xs-12">
+                                 <div class="col-lg-4"><h6>Phone</h6>
+                                 </div>
+                                 <div class="col-lg-8">
+                                     <div id="inputs">
+                                         <div class="form-group">
+                                             <input type="text" style="width: 100%;" value="@customer.Phone" placeholder="Regular" class="form-control" readonly/>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
                          </div>
                      </div>
+                     <div class="col-xs-12 col-md-7">
+                         <h5 style="margin-left: 15px">Booking infomation</h5>
+                         <div class="row">
+                             <div class="col-xs-12">
+                                 <div class="col-lg-4">
+                                     <h6>Branch</h6>
+                                 </div>
+                                 <div class="col-lg-8">
+                                     <div id="inputs">
+                                         <div class="form-group">
+                                             <input type="text" style="width: 100%;" value="@BranchSingleTon.GetAddress(Model.Order.IdBranch)" placeholder="Regular" class="form-control" readonly />
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-xs-12">
+                                 <div class="col-lg-4">
+                                     <h6>From</h6>
+                                 </div>
+                                 <div class="col-lg-8">
+                                     <div id="inputs">
+                                         <div class="form-group">
+                                             <input type="text" style="width: 100%;" value="@Model.Order.BeginTime" placeholder="Regular" class="form-control" readonly />
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-xs-12">
+                                 <div class="col-lg-4">
+                                     <h6>To</h6>
+                                 </div>
+                                 <div class="col-lg-8">
+                                     <div id="inputs">
+                                         <div class="form-group">
+                                             <input type="text" style="width: 100%;" value="@Model.Order.EndTime" placeholder="Regular" class="form-control" readonly />
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-xs-12">
+                                 <div class="col-lg-4">
+                                     <h6>Notes</h6>
+                                 </div>
+                                 <div class="col-lg-8">
+                                     <div id="inputs">
+                                         <div class="form-group">
+                                             <input type="text" style="width: 100%;" value="@Model.Order.Description" placeholder="Regular" class="form-control" readonly />
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         
+                         
+                         
+                     </div>
+                     </div>
                  </div>
+                 
 
-                 <h5 style="margin-left: 2%">Booking infomation</h5>
-                 <div class="col-lg-3"><h6>Branch</h6></div>
-                 <div class="col-lg-9">
-                     <div id="inputs">
-                         <div class="form-group">
-                             <input type="text" style="width:343px;" value="@BranchSingleTon.GetAddress(Model.Order.IdBranch)" placeholder="Regular" class="form-control" readonly />
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-lg-3"><h6>From</h6></div>
-                 <div class="col-lg-9">
-                     <div id="inputs">
-                         <div class="form-group">
-                             <input type="text" style="width:343px;" value="@Model.Order.BeginTime" placeholder="Regular" class="form-control" readonly />
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-lg-3"><h6>To</h6></div>
-                 <div class="col-lg-9">
-                     <div id="inputs">
-                         <div class="form-group">
-                             <input type="text" style="width:343px;" value="@Model.Order.EndTime" placeholder="Regular" class="form-control" readonly />
-                         </div>
-                     </div>
-                 </div>
-             </div>
-            <div class="col-lg-6">
-                <h5>Tables selection</h5>
+                 
+            <div class="col-xs-12">
+                <h5 style="margin-left: 15px">Tables selection</h5>
                 
                 <div class="col-lg-12" style="float:right">
                     <form method="post" action="@ConfigurationManager.AppSettings["PayPalSubmitUrl"]">
@@ -80,7 +134,7 @@
                                     Table
                                 </th>
                                 <th>
-                                    Table Capacity
+                                    Maximum Capacity
                                 </th>
                                 <th>
                                     Deposit
@@ -97,9 +151,9 @@
                             {
                                 var itemName = $"Table_Number_{TableSingleTon.GetTableNumber(item)} ({TableSingleTon.GetTableCapacity(item)}  persons)";
 
-                            <tr>
-                                <td>
-                                    <img src="~/Content/assets/image/table2.jpg" width="120" height="60" />
+                            <tr class="text-center">
+                                <td style="padding-bottom: 10px">
+                                    <img src="~/Content/assets/image/table2.jpg" width="70" height="70" style="border-radius: 50%; border: solid 1px #fff" />
                                     <input type="hidden" name="item_number_@index" value="@item" />
                                     <input type="hidden" name="item_name_@index" value="@itemName" />
                                     <input type="hidden" name="amount_@index" value="@TableSingleTon.GetTableDepositFee(item).ToString("0.##")" />
@@ -109,7 +163,7 @@
                                     Table Number @TableSingleTon.GetTableNumber(item)
                                 </td>
                                 <td>
-                                    @TableSingleTon.GetTableCapacity(item)
+                                    @TableSingleTon.GetTableCapacity(item) People
                                 </td>
                                 <td>
                                     $@TableSingleTon.GetTableDepositFee(item)

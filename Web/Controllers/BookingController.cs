@@ -50,66 +50,75 @@ namespace Web.Controllers
             {
                 var viewModel = SessionPersister.OrderInfomation;
 
-                var order = viewModel.Order;
-
-                var tableFilter = new TableFilterDTO()
-                {
-                    IdBranch = order.IdBranch,
-                    BranchAddress = BranchSingleTon.GetAddress(order.IdBranch),
-                    BeginTime = order.BeginTime,
-                    EndTime = order.BeginTime.AddDays(1)
-                };
-
-                var table = TableModel.GetTableAvailable(tableFilter);
-                
-                //update info to viewModel
-                viewModel.ListAvailableTables = table;
-
-                SessionPersister.OrderInfomation = viewModel;
+                GetStep2Data(ref viewModel);
 
                 return View(viewModel);
             }
             
-            var url = HttpContext.Request.UrlReferrer;
-            if (url != null)
-            {
-                return Redirect(url.ToString());
-            }
+            //var url = HttpContext.Request.UrlReferrer;
+            //if (url != null)
+            //{
+            //    return Redirect(url.ToString());
+            //}
 
             return RedirectToAction("Index", "Home");
         }
 
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Step2(OrderViewModel viewModel)
         {
-            if (viewModel.ListIdTable.Any())
+            if (SessionPersister.OrderInfomation != null)
             {
-                if (SessionPersister.OrderInfomation != null)
+                if (viewModel.ListIdTable != null && viewModel.ListIdTable.Any())
                 {
-                    viewModel.Order.IdCustomer = SessionPersister.OrderInfomation.Order.IdCustomer;
-                    viewModel.Order.IdBranch = SessionPersister.OrderInfomation.Order.IdBranch;
-                    viewModel.Order.BeginTime = SessionPersister.OrderInfomation.Order.BeginTime;
-                    viewModel.ListAvailableTables = SessionPersister.OrderInfomation.ListAvailableTables;
+                    if (viewModel.Order.NumberOfCustomer <= 20)
+                    {
+                        viewModel.Order.IdCustomer = SessionPersister.OrderInfomation.Order.IdCustomer;
+                        viewModel.Order.IdBranch = SessionPersister.OrderInfomation.Order.IdBranch;
+                        viewModel.Order.BeginTime = SessionPersister.OrderInfomation.Order.BeginTime;
+                        viewModel.ListAvailableTables = SessionPersister.OrderInfomation.ListAvailableTables;
 
 
-                    var begin = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute, 0);
+                        var begin = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.BeginTime.Hour, viewModel.BeginTime.Minute, 0);
 
-                    var end = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
-
-                    
-                    viewModel.Order.BeginTime = begin;
-                    viewModel.Order.EndTime = end;
-                    viewModel.Order.NumberOfTable = viewModel.ListIdTable.Count;
-
-                    //update info to viewModel
-
-                    SessionPersister.OrderInfomation = viewModel;
+                        var end = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, viewModel.EndTime.Hour, viewModel.EndTime.Minute, 0);
 
 
-                    return RedirectToAction("Preview");
+                        viewModel.Order.BeginTime = begin;
+                        viewModel.Order.EndTime = end;
+                        viewModel.Order.NumberOfTable = viewModel.ListIdTable.Count;
+
+                        //update info to viewModel
+
+                        SessionPersister.OrderInfomation = viewModel;
+
+
+                        return RedirectToAction("Preview");
+                    }
+                    else
+                    {
+                        viewModel.Order = SessionPersister.OrderInfomation.Order;
+
+                        GetStep2Data(ref viewModel);
+
+                        ModelState.AddModelError("", MessageConstants.OverMaximumCustomer);
+
+                        return View(viewModel);
+                    }
+                }
+                else
+                {
+                    viewModel.Order = SessionPersister.OrderInfomation.Order;
+
+                    GetStep2Data(ref viewModel);
+
+                    ModelState.AddModelError("", MessageConstants.NoneSelectTable);
+
+                    return View(viewModel);
                 }
             }
-            
 
             var url = HttpContext.Request.UrlReferrer;
 
@@ -227,6 +236,27 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // 
+
+        private void GetStep2Data(ref OrderViewModel viewModel)
+        {
+            var order = viewModel.Order;
+
+            var tableFilter = new TableFilterDTO()
+            {
+                IdBranch = order.IdBranch,
+                BranchAddress = BranchSingleTon.GetAddress(order.IdBranch),
+                BeginTime = order.BeginTime,
+                EndTime = order.BeginTime.AddDays(1)
+            };
+
+            var table = TableModel.GetTableAvailable(tableFilter);
+
+            //update info to viewModel
+            viewModel.ListAvailableTables = table;
+
+            SessionPersister.OrderInfomation = viewModel;
+        }
 
         private void GetDepositValue(ref OrderViewModel viewModel)
         {
@@ -246,5 +276,6 @@ namespace Web.Controllers
 
             SessionPersister.DepositToken = viewModel.DepositToken;
         }
+
     }
 }
