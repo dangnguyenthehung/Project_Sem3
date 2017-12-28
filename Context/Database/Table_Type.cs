@@ -24,6 +24,7 @@ namespace Context.Database
         public int Id_Table_Type { get; set; }
         public Nullable<int> TableCapacity { get; set; }
         public string Description { get; set; }
+        public Nullable<decimal> DepositFee { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image_TableType> Image_TableType { get; set; }

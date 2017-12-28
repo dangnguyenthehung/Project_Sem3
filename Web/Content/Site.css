@@ -36,3 +36,6 @@ textarea {
     padding-top: 60px;
     padding-bottom: 50px;
 }
+.text-center th {
+    text-align: center !important;
+}

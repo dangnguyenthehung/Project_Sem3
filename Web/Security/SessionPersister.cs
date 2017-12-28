@@ -63,5 +63,24 @@ namespace Web.Security
                 HttpContext.Current.Session[SessionConstants.Order] = value;
             }
         }
+
+
+        public static string DepositToken
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    return null;
+                }
+
+                var session = HttpContext.Current.Session[SessionConstants.DepositToken] as string;
+                return session;
+            }
+            set
+            {
+                HttpContext.Current.Session[SessionConstants.DepositToken] = value;
+            }
+        }
     }
 }

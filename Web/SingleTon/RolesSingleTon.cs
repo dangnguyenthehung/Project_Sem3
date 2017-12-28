@@ -5,7 +5,7 @@ using System.Web;
 using Model.DTO;
 using Web.Models;
 
-namespace Web
+namespace Web.SingleTon
 {
     public class RolesSingleTon
     {

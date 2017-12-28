@@ -70,9 +70,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatBanOnline.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Database\Deposit.cs">
-      <DependentUpon>DatBanOnline.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\Employee.cs">
       <DependentUpon>DatBanOnline.tt</DependentUpon>
     </Compile>

@@ -25,5 +25,6 @@ namespace Context.Database
         public Nullable<System.DateTime> BeginTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
         public string Description { get; set; }
+        public Nullable<decimal> Deposit { get; set; }
     }
 }

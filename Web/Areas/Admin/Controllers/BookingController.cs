@@ -70,7 +70,7 @@ namespace Web.Areas.Admin.Controllers
 
                     if (result)
                     {
-                        return RedirectToAction("Details", "Booking", new {id = viewModel.Order.IdOrder});
+                        return RedirectToAction("Details", "Booking", new { id = viewModel.Order.IdOrder });
                     }
                 }
 
@@ -84,29 +84,29 @@ namespace Web.Areas.Admin.Controllers
             }
 
             return View(viewModel);
-            }
+        }
 
-            public ActionResult Verify(int id)
+        public ActionResult Verify(int id)
+        {
+            if (SessionPersister.EmployeeAccount != null)
             {
-                if (SessionPersister.EmployeeAccount != null)
+                var order = new Orders()
                 {
-                    var order = new Orders()
-                    {
-                        IdOrder = id,
-                        OrderStatus = (int)Enums.OrderStatus.Verified,
-                        IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee
-                    };
+                    IdOrder = id,
+                    OrderStatus = (int)Enums.OrderStatus.Verified,
+                    IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee
+                };
 
-                    var result = OrderModel.Verify(order);
+                var result = OrderModel.Verify(order);
 
-                    if (result)
-                    {
-                        return RedirectToAction("Index");
-                    }
+                if (result)
+                {
+                    return RedirectToAction("Index");
                 }
-
-
-                return RedirectToAction("Index");
             }
+
+
+            return RedirectToAction("Index");
         }
     }
+}

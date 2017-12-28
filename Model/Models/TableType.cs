@@ -16,5 +16,7 @@ namespace Model.Models
 
         [DisplayName("Mô tả")]
         public string Description { get; set; }
+
+        public decimal DepositFee { get; set; }
     }
 }
