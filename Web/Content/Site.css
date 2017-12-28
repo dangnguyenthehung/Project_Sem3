@@ -39,3 +39,13 @@ textarea {
 .text-center th {
     text-align: center !important;
 }
+.booking-error {
+    list-style: none;
+    background: white;
+    padding-left: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.booking-error ul {
+    margin-bottom: 0px;
+}
