@@ -1,4 +1,4 @@
-﻿@using System.Configuration
+@using System.Configuration
 @using System.Web.Configuration
 @using Model.Models
 @using Web.Security
@@ -13,50 +13,63 @@
     var returnUrl = $"{WebConfigurationManager.AppSettings["ReturnUrl"]}/?token={token}";
 }
 
+ <div class="container">
+     <div class="wrapper" style="background-color:rgba(211, 84, 0,0.8); color:white">
+         <div class="row" style="text-align: center">
+             <div class="col-lg-12">
+                 <h2>Booking Infomation</h2>
+             </div>
+         </div>
+         <div class="row">
+            <div class="col-lg-6">
+                 <h5 style="margin-left: 2%">Customer infomation</h5>
+                 <div class="col-lg-3"><h6>Full Name</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">                            
+                        <div class="form-group">
+                            <input type="text" style="width:343px;" value="@customer.FullName" placeholder="Regular" class="form-control" readonly />
+                        </div>                                                  
+                     </div>
+                 </div>
+                 <div class="col-lg-3"><h6>Phone</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">
+                         <div class="form-group">
+                             <input type="text" style="width:343px;" value="@customer.Phone" placeholder="Regular" class="form-control" readonly />
+                         </div>
+                     </div>
+                 </div>
 
-<div class="w3-card-4" style="width: 100%; background-color: rgba(231, 76, 60, 0.8)">
-    <h2 style="color: antiquewhite; padding-top: 15px;" class="text-center">Preview</h2>
-
-    <div style="color: white">
-        @if (Model?.Order != null)
-        {
-            <div class="w3-row-padding w3-padding-16 w3-center">
-                <div class="w3-half text-left" style="padding-left: 150px">
-                    <p>
-                        Customer: @customer.FullName
-                    </p>
-                    <p>
-                        Phone: @customer.Phone
-                    </p>
-                    <p>
-                        Branch: @BranchSingleTon.GetAddress(Model.Order.IdBranch)
-                    </p>
-                    <p>
-                        From: @Model.Order.BeginTime
-                    </p>
-                    <p>
-                        To: @Model.Order.EndTime
-                    </p>
-
-                </div>
-                <div class="w3-half text-center">
-                    <h3>Notes</h3>
-                    <p>
-                        @Model.Order.Description
-                    </p>
-                </div>
-            </div>
-            <div class="w3-row-padding w3-padding-16 w3-center">
-                <div class="">
-                    @*@using (Html.BeginForm("Finish", "Booking", FormMethod.Post))
-                        {
-                            @Html.HiddenFor(m => m.Order.IdBranch)
-                            @Html.HiddenFor(m => m.Order.IdCustomer)
-                            @Html.HiddenFor(m => m.Order.BeginTime)
-                            @Html.HiddenFor(m => m.Order.EndTime)
-
-                            <input type="submit" class="btn btn-success btn-round" value="It's ok, book now" />
-                        }*@
+                 <h5 style="margin-left: 2%">Booking infomation</h5>
+                 <div class="col-lg-3"><h6>Branch</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">
+                         <div class="form-group">
+                             <input type="text" style="width:343px;" value="@BranchSingleTon.GetAddress(Model.Order.IdBranch)" placeholder="Regular" class="form-control" readonly />
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-lg-3"><h6>From</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">
+                         <div class="form-group">
+                             <input type="text" style="width:343px;" value="@Model.Order.BeginTime" placeholder="Regular" class="form-control" readonly />
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-lg-3"><h6>To</h6></div>
+                 <div class="col-lg-9">
+                     <div id="inputs">
+                         <div class="form-group">
+                             <input type="text" style="width:343px;" value="@Model.Order.EndTime" placeholder="Regular" class="form-control" readonly />
+                         </div>
+                     </div>
+                 </div>
+             </div>
+            <div class="col-lg-6">
+                <h5>Tables selection</h5>
+                
+                <div class="col-lg-12" style="float:right">
                     <form method="post" action="@ConfigurationManager.AppSettings["PayPalSubmitUrl"]">
                         <table class="table table-bordered">
                             <tr class="text-center">
@@ -125,12 +138,10 @@
                         </div>
                     </form>
                 </div>
+              
             </div>
-
-
-
-        }
-
-    </div>
-</div>
-
+         </div>
+        
+     </div>   
+ </div>
+    
