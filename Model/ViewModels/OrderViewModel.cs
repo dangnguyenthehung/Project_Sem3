@@ -16,9 +16,9 @@ namespace Model.ViewModels
 
         public DateTime OrderDate { get; set; }
 
-        public DateTime BeginTime { get; set; }
+        public string BeginTime { get; set; }
 
-        public DateTime EndTime { get; set; }
+        public string EndTime { get; set; }
         
         public List<int> ListIdTable { get; set; }
 
