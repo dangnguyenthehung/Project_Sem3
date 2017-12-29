@@ -190,6 +190,7 @@
     <Content Include="Content\admin\img\sidebar-4.jpg" />
     <Content Include="Content\admin\img\tim_80x80.png" />
     <Content Include="Content\admin\img\user.png" />
+    <Content Include="Content\assets\css\animate.css" />
     <Content Include="Content\assets\css\customStyle.css" />
     <Content Include="Content\assets\css\main.css" />
     <Content Include="Content\assets\css\now-ui-kit.css" />
@@ -214,6 +215,7 @@
     <Content Include="Content\assets\js\plugins\bootstrap-switch.js" />
     <Content Include="Content\assets\js\plugins\jquery.sharrre.js" />
     <Content Include="Content\assets\js\plugins\nouislider.min.js" />
+    <Content Include="Content\assets\js\wow.min.js" />
     <Content Include="Content\assets\porfolio\Championdash_820.png" />
     <Content Include="Content\assets\porfolio\CharacterDesign_820.png" />
     <Content Include="Content\assets\porfolio\Degitalart_820.png" />
