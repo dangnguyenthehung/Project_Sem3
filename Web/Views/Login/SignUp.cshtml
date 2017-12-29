@@ -1,0 +1,95 @@
+﻿@model Model.Models.Customer
+@{
+    ViewBag.Title = "Sign Up";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <section class="col-xs-12" style="background-color: rgba(231, 76, 60, 0.8); padding: 10px;color:antiquewhite">
+            <article class="col-xs-12 col-md-4 col-md-offset-4">
+                <h2 class="text-center">Sign Up</h2>
+                <fieldset>
+                    @using (Html.BeginForm("SignUp", "Login", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <p class="text-danger">@ViewBag.error</p>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.LabelFor(a => a.CMND)
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.ValidationMessageFor(model => model.CMND, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.TextBoxFor(a => a.CMND, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.LabelFor(a => a.FullName)
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.TextBoxFor(a => a.FullName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.LabelFor(a => a.Phone)
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.TextBoxFor(a => a.Phone, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.LabelFor(a => a.Address)
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.TextBoxFor(a => a.Address, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    @Html.LabelFor(a => a.Password)
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-xs-12">
+                                    @Html.PasswordFor(a => a.Password, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success col-xs-12" value="SignUp" />
+                        </div>
+                    }
+                </fieldset>
+            </article>
+        </section>
+    </div>
+</div>
+
+

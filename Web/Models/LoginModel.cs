@@ -39,7 +39,7 @@ namespace Web.Models
 
             return result;
         }
-
+        
         public static Employee EmployeeLogin(Login accLogin)
         {
             if (accLogin == null)

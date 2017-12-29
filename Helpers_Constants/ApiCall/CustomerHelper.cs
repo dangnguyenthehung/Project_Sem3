@@ -13,5 +13,10 @@ namespace Helpers_Constants.ApiCall
         {
             return _Get_By_Id<Customer>(apiUrl, id);
         }
+
+        public int Insert(string apiUrl, Customer model)
+        {
+            return _Insert(apiUrl, model);
+        }
     }
 }

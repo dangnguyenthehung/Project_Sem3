@@ -4,12 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <section class="col-xs-12">
-        <article class="col-xs-12 col-md-4 col-md-offset-4">
-            <h2 class="text-center">Đăng nhập</h2>
-            <fieldset>
-                @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+<div class="container">
+    <div class="row">
+        <section class="col-xs-12" style="background-color: rgba(231, 76, 60, 0.8); padding: 10px;color:antiquewhite">
+            <article class="col-xs-12 col-md-4 col-md-offset-4">
+                <h2 class="text-center">Login</h2>
+                <fieldset>
+                    @using (Html.BeginForm("Index", "Login", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
 
@@ -46,8 +47,10 @@
                         <input type="submit" class="btn btn-success col-xs-12" value="Login" />
                     </div>
 
-                }
-            </fieldset>
-        </article>
-    </section>
+            }
+                </fieldset>
+            </article>
+        </section>
+    </div>
 </div>
+

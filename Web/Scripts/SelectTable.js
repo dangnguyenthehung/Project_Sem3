@@ -98,9 +98,9 @@ $(document).ready(function () {
 
                         $.each(value,
                             function (subkey, subvalue) {
-                                content += "<div class='checkbox'><input name= 'ListIdTable' type= 'checkbox' id= " +
-                                    subvalue.IdTable + "value= " + subvalue.IdTable + " /><label for=" +
-                                    subvalue.IdTable + ">Table " + subvalue.TableNumber + "</label></div>";
+                                content += "<div class='checkbox'><input name= 'ListIdTable' type= 'checkbox' id= '" +
+                                    subvalue.IdTable + "' value= '" + subvalue.IdTable + "' /><label for='" +
+                                    subvalue.IdTable + "'>Table " + subvalue.TableNumber + "</label></div>";
 
                                 
                             });

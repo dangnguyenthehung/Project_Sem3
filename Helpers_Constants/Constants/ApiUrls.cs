@@ -64,7 +64,8 @@ namespace Helpers_Constants.Constants
             private static readonly string BaseUrl = $"{_apiUrl}/customer";
 
             public string Get_By_Id = $"{BaseUrl}/get_by_id/";
-            
+            public string Insert = $"{BaseUrl}/insert/";
+
         }
 
         public class Employee
