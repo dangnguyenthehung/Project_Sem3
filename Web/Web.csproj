@@ -316,6 +316,7 @@
     <Content Include="Views\Booking\Finish.cshtml" />
     <Content Include="Views\Booking\Preview.cshtml" />
     <Content Include="Views\Shared\_PartialLoginPopup.cshtml" />
+    <Content Include="Views\Login\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

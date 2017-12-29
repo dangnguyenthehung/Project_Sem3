@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Api.Helper;
+using Model.Models;
 using Newtonsoft.Json;
 
 namespace Api.Controllers
@@ -28,6 +29,26 @@ namespace Api.Controllers
                 return response;
             }
             
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+
+
+        [Route("insert")]
+        [HttpPost]
+        public HttpResponseMessage Insert([FromBody] Customer model)
+        {
+            var response = new HttpResponseMessage();
+
+            var data = Helper.Insert(model);
+
+            if (data > 0)
+            {
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(JsonConvert.SerializeObject(data));
+                return response;
+            }
+
             response.StatusCode = HttpStatusCode.BadRequest;
             return response;
         }

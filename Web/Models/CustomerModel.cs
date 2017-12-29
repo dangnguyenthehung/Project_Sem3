@@ -19,5 +19,12 @@ namespace Web.Models
 
             return Helper.GetById(url, id);
         }
+
+        public static int Insert(Customer model)
+        {
+            var url = ApiUrl.Insert;
+
+            return Helper.Insert(url, model);
+        }
     }
 }
