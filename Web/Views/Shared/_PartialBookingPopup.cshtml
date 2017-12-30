@@ -10,58 +10,61 @@
         <div class="modal-dialog" role="document">
 
             <div class="row">
-                <div class="card card-signup" data-background-color="orange">
-                    <fieldset>
-                        @using (Html.BeginForm("Index", "Booking", FormMethod.Post))
-                        {
-                            <div class="col-xs-12">
-                                <div class="header text-center">
-                                    <h4 class="title title-up">Infomation</h4>
-                                </div>
-                                <div class="card-body">
-
-                                    <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon">
-                                            <i class="now-ui-icons ui-1_calendar-60"></i>
-                                        </span>
-                                        @Html.TextBox("BeginTime", System.DateTime.Today, new { @class = "form-control date-picker" })
+                <div class="col-lg-12" style="margin-top:10%">
+                    <div class="card card-signup" data-background-color="orange">
+                        <fieldset>
+                            @using (Html.BeginForm("Index", "Booking", FormMethod.Post))
+                            {
+                                <div class="col-xs-12">
+                                    <div class="header text-center">
+                                        <h4 class="title title-up">Infomation</h4>
                                     </div>
-                                    <div>
-                                        <p class="text-center">Select Branch</p>
-                                        @if (list.Any())
-                                        {
-                                            foreach (var item in list)
+                                    <div class="card-body">
+
+                                        <div class="input-group form-group-no-border wow fadeInLeft">
+                                            <span class="input-group-addon">
+                                                <i class="now-ui-icons ui-1_calendar-60"></i>
+                                            </span>
+                                            @Html.TextBox("BeginTime", System.DateTime.Today, new { @class = "form-control date-picker" })
+                                        </div>
+                                        <div>
+                                            <p class="text-center wow fadeInRight"><strong>Select Branch</strong></p>
+                                            @if (list.Any())
                                             {
-                                                var inputId = $"branch{item.IdBranch}";
+                                                foreach (var item in list)
+                                                {
+                                                    var inputId = $"branch{item.IdBranch}";
 
-                                                <div class="radio">
+                                                    <div class="radio wow fadeInRight">
 
-                                                    @Html.RadioButton("IdBranch", item.IdBranch, new { @class = "", @id = inputId })
+                                                        @Html.RadioButton("IdBranch", item.IdBranch, new { @class = "", @id = inputId })
 
-                                                    <label for="@inputId">
-                                                        @item.Address
-                                                    </label>
-                                                </div>
+                                                        <label for="@inputId">
+                                                            @item.Address
+                                                        </label>
+                                                    </div>
 
+                                                }
                                             }
-                                        }
+                                        </div>
+                                        @*<div class="checkbox">
+                                <input id="checkboxSignup" type="checkbox">
+                                <label for="checkboxSignup">
+                                    Remember Infomation
+                                </label>
+                            </div>*@
                                     </div>
-                                    @*<div class="checkbox">
-                                            <input id="checkboxSignup" type="checkbox">
-                                            <label for="checkboxSignup">
-                                                Remember Infomation
-                                            </label>
-                                        </div>*@
+                                    <div class="footer text-center">
+                                        <button type="submit" class="btn btn-neutral btn-round btn-lg  wow fadeInUp" data-wow-delay="900ms">
+                                            Submit
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="footer text-center">
-                                    <button type="submit" class="btn btn-neutral btn-round btn-lg">
-                                        Submit
-                                    </button>
-                                </div>
-                            </div>
-                        }
-                    </fieldset>
+                            }
+                        </fieldset>
+                    </div>
                 </div>
+             
             </div>
         </div>
     </div>
