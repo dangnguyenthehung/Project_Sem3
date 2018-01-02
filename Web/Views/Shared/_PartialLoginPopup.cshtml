@@ -4,41 +4,48 @@
     <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" style="overflow-y:hidden">
         <div class="modal-dialog" role="document">
             <div class="row">
-                <div class="card card-signup" data-background-color="orange">
-                    <fieldset>
-                        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            <div class="col-xs-12">
-                                <div class="header text-center">
-                                    <h4 class="title title-up">Login</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group form-group-no-border">
-                                        @Html.Label("UserName")
-                                        @Html.TextBox("UserName", null, new {@class = "form-control", @placeholder="User Name"})
+                <div class="col-lg-12" style="margin-top: 10%">
+                    <div class="card card-signup" data-background-color="orange">
+                        <fieldset>
+                            @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="col-xs-12">
+                                    <div class="header text-center">
+                                        <h4 class="title title-up">Login</h4>
                                     </div>
-                                    <div class="form-group form-group-no-border">
-                                        @Html.Label("Password")
-                                        @Html.Password("Password", null, new {@class = "form-control", @placeholder = "Password" })
+                                    <div class="card-body">
+                                        <div class="form-group form-group-no-border wow fadeInLeft">
+                                            @Html.Label("UserName")
+                                            @Html.TextBox("UserName", null, new { @class = "form-control", @placeholder = "User Name" })
+                                        </div>
+                                        <div class="form-group form-group-no-border wow fadeInRight">
+                                            @Html.Label("Password")
+                                            @Html.Password("Password", null, new { @class = "form-control", @placeholder = "Password" })
+                                        </div>
+
+                                        @*<div class="checkbox">
+                                <input id="checkboxSignup" type="checkbox">
+                                <label for="checkboxSignup">
+                                    Remember Infomation
+                                </label>
+                            </div>*@
                                     </div>
-                                    
-                                    @*<div class="checkbox">
-                                            <input id="checkboxSignup" type="checkbox">
-                                            <label for="checkboxSignup">
-                                                Remember Infomation
-                                            </label>
-                                        </div>*@
+                                    <div class="footer text-center">
+                                        <button type="submit" class="btn btn-neutral btn-round btn-lg wow fadeInLeft">
+                                            Login
+                                        </button>
+                                        <button type="submit" class="btn btn-neutral btn-round btn-lg wow fadeInRight">
+                                            Sign Up
+                                        </button>
+                                    </div>
+
                                 </div>
-                                <div class="footer text-center">
-                                    <button type="submit" class="btn btn-neutral btn-round btn-lg">
-                                        Login
-                                    </button>
-                                </div>
-                            </div>
-                        }
-                    </fieldset>
+                            }
+                        </fieldset>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
