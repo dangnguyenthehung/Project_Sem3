@@ -1,0 +1,16 @@
+﻿@using Web.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+    var listBranch = RestaurantBranchModel.GetAll();
+}
+@foreach (var item in listBranch)
+{
+    <div>
+        <a href="@Url.Action("Available","Table", new {id = item.IdBranch})">@item.Address</a>        
+    </div>
+    
+}
+
