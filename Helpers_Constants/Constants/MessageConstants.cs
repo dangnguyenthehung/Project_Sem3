@@ -26,5 +26,7 @@ namespace Helpers_Constants.Constants
 
         public static string OverMaximumCustomer = "Maximum number of customer is 20";
         public static string NoneSelectTable = "You must select at least 1 table";
+
+        public static string AccountExist = "Identity or Phone is already existed";
     }
 }

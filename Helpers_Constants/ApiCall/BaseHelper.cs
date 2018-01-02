@@ -113,8 +113,8 @@ namespace Helpers_Constants.ApiCall
                 return default(T);
             }
         }
-
-        protected internal T _Get_By_Id_Multiple<T>(string apiUrl, int param1, int param2)
+        
+        protected internal T _Get_By_Keyword_Multiple<T>(string apiUrl, string param1, string param2)
         {
             using (var client = new HttpClient())
             {
@@ -134,7 +134,6 @@ namespace Helpers_Constants.ApiCall
                 return default(T);
             }
         }
-
         protected internal T _Get_By_Keyword<T>(string apiUrl, string keyword)
         {
             using (var client = new HttpClient())

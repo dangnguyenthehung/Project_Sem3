@@ -20,6 +20,13 @@ namespace Web.Models
             return Helper.GetById(url, id);
         }
 
+        public static Customer GetByUserName(string cmnd, string phone)
+        {
+            var url = ApiUrl.Get_By_UserName;
+
+            return Helper.GetByUserName(url, cmnd, phone);
+        }
+
         public static int Insert(Customer model)
         {
             var url = ApiUrl.Insert;

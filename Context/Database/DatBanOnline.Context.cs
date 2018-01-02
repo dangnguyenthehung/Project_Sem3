@@ -337,5 +337,27 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Order_By_Id", idOrderParameter, idEmployeeParameter, numberOfTableParameter, numberCustomerParameter, beginTimeParameter, endTimeParameter, descriptionParameter);
         }
+    
+        public virtual ObjectResult<Get_Customer_By_UserName_Result> Get_Customer_By_UserName(string cMND, string phone)
+        {
+            var cMNDParameter = cMND != null ?
+                new ObjectParameter("CMND", cMND) :
+                new ObjectParameter("CMND", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Customer_By_UserName_Result>("Get_Customer_By_UserName", cMNDParameter, phoneParameter);
+        }
+    
+        public virtual ObjectResult<Get_Employee_By_UserName_Result> Get_Employee_By_UserName(string userName)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Employee_By_UserName_Result>("Get_Employee_By_UserName", userNameParameter);
+        }
     }
 }

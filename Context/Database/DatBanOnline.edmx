@@ -24,7 +24,7 @@
           <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="SignUpDate" Type="datetime" />
-          <Property Name="Password" Type="varchar" MaxLength="24" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -39,7 +39,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="EnterDate" Type="datetime" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
-          <Property Name="Password" Type="varchar" MaxLength="24" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Employee_Roles">
           <Key>
@@ -380,9 +380,16 @@
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Get_Customer_By_UserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CMND" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="Get_Employee_By_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Get_Employee_By_UserName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
         </Function>
         <Function Name="Get_Employee_Permission_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEmployee" Type="int" Mode="In" />
@@ -711,6 +718,13 @@
             <Parameter Name="EndTime" Mode="In" Type="DateTime" />
             <Parameter Name="Description" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="Get_Customer_By_UserName" ReturnType="Collection(DatBanOnLineModel.Get_Customer_By_UserName_Result)">
+            <Parameter Name="CMND" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Employee_By_UserName" ReturnType="Collection(DatBanOnLineModel.Get_Employee_By_UserName_Result)">
+          <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
           <Key>
@@ -734,7 +748,7 @@
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="SignUpDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK_Orders_Customer" FromRole="Customer" ToRole="Order" />
-          <Property Name="Password" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -753,7 +767,7 @@
           <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK_Employee_RestaurantBranch" FromRole="Employee" ToRole="RestaurantBranch" />
           <NavigationProperty Name="Orders" Relationship="DatBanOnLineModel.FK_Orders_Employee" FromRole="Employee" ToRole="Order" />
           <NavigationProperty Name="Roles" Relationship="DatBanOnLineModel.Employee_Roles" FromRole="Employee" ToRole="Role" />
-          <Property Name="Password" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Image_Menu">
           <Key>
@@ -1205,6 +1219,27 @@
           <Property Type="DateTime" Name="SignUpDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="Password" Nullable="true" MaxLength="24" />
         </ComplexType>
+        <ComplexType Name="Get_Customer_By_UserName_Result">
+          <Property Type="Int32" Name="IdCustomer" Nullable="false" />
+          <Property Type="String" Name="CMND" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="SignUpDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="Get_Employee_By_UserName_Result">
+          <Property Type="Int32" Name="IdEmployee" Nullable="false" />
+          <Property Type="String" Name="StaffId" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="IdBranch" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="EnterDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1579,6 +1614,35 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Update_Verify_Order_By_Id" FunctionName="DatBanOnLineModel.Store.Update_Verify_Order_By_Id" />
           <FunctionImportMapping FunctionImportName="Update_Order_By_Id" FunctionName="DatBanOnLineModel.Store.Update_Order_By_Id" />
+          <FunctionImportMapping FunctionImportName="Get_Customer_By_UserName" FunctionName="DatBanOnLineModel.Store.Get_Customer_By_UserName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_Customer_By_UserName_Result">
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SignUpDate" ColumnName="SignUpDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Get_Employee_By_UserName" FunctionName="DatBanOnLineModel.Store.Get_Employee_By_UserName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_Employee_By_UserName_Result">
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="IdBranch" ColumnName="IdBranch" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EnterDate" ColumnName="EnterDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
