@@ -15,6 +15,27 @@ namespace Helpers_Constants.ApiCall
             return _Get_By_Id<List<Table>>(apiUrl, id);
         }
 
+        public Table GetTableById(string apiUrl, int id)
+        {
+            return _Get_By_Id<Table>(apiUrl, id);
+        }
+
+        public int InsertTable(string apiUrl, Table model)
+        {
+            return _Insert(apiUrl, model);
+        }
+
+        public bool DeleteTableById(string apiUrl, int id, int idAccount)
+        {
+            return _Delete(apiUrl, id, idAccount);
+        }
+
+        public bool UpdateTableById(string apiUrl, Table model)
+        {
+            return _Update(apiUrl, model);
+        }
+
+
         public List<Table> GetTableAvailable(string apiUrl, TableFilterDTO model)
         {
             return _Get_By_Params_Object<List<Table>, TableFilterDTO>(apiUrl, model);

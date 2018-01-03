@@ -29,8 +29,9 @@
             flag = 1;
             break;
     }
-    <a href="@Url.Action("Available","Table", new {id = item.IdBranch})">
+    <a href="@Url.Action("Selection","Table", new {id = item.IdBranch})">
         <div class="btn @color">
+            <h4>@item.Description</h4>
             @item.Address
         </div>
     </a>

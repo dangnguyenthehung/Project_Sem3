@@ -1,0 +1,20 @@
+﻿@using Web.Models
+@using Web.SingleTon
+
+@{
+    ViewBag.Title = "Selection";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var id = ViewBag.id;
+    var item = BranchSingleTon.GetById(id);
+}
+<a href="@Url.Action("Available","Table", new {id})">
+    <div class="btn btn-success">
+        <h4>Avaitable Table</h4>
+    </div>
+</a>
+
+<a href="@Url.Action("View","Table", new {id})">
+    <div class="btn btn-primary">
+        <h4>View List Table</h4>
+    </div>
+</a>

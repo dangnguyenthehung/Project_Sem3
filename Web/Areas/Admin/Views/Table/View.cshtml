@@ -1,0 +1,54 @@
+﻿@using Web.SingleTon
+@model List<Model.Models.Table>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title">Table List</h4>
+                    <p class="category">@BranchSingleTon.GetDescription(Model.First().RestaurantId)</p>
+                </div>
+                <div class="card-content table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-primary">
+                            <tr>
+                                <th>Table Number</th>
+                                <th>Table Type</th>
+                                <th>Capacity</th>
+                                <th>Deposit</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                            <tr>
+                                <td>Table @item.TableNumber</td>
+                                <td>@TableTypeSingleTon.GetDescription(item.IdTableType)</td>
+                                <td>@TableTypeSingleTon.GetCapacity(item.IdTableType)</td>
+                                <td class="text-primary">$@TableTypeSingleTon.GetDepositFee(item.IdTableType)</td>
+
+                                <td>
+                                    <a href="@Url.Action("Edit","Table", new {idTable = item.IdTable})">Edit</a>
+                                </td>
+                            </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

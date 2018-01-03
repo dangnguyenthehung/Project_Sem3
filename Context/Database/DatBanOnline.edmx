@@ -138,6 +138,7 @@
           <Property Name="TableNumber" Type="int" />
           <Property Name="IdTableType" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="Deactive" Type="bit" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -372,6 +373,9 @@
         <Function Name="Delete_RestaurantBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdBranch" Type="int" Mode="In" />
         </Function>
+        <Function Name="Delete_Table_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="Get_All_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Get_Customer_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdCustomer" Type="int" Mode="In" />
@@ -420,6 +424,9 @@
         <Function Name="Get_RestaurantBranch_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdBranch" Type="int" Mode="In" />
         </Function>
+        <Function Name="Get_Table_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
         <Function Name="Insert_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CMND" Type="varchar" Mode="In" />
           <Parameter Name="FullName" Type="nvarchar" Mode="In" />
@@ -443,6 +450,12 @@
           <Parameter Name="Address" Type="nvarchar" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="Insert_Table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdBranch" Type="int" Mode="In" />
+          <Parameter Name="TableType" Type="int" Mode="In" />
+          <Parameter Name="TableNumber" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="Update_Order_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdOrder" Type="int" Mode="In" />
           <Parameter Name="IdEmployee" Type="int" Mode="In" />
@@ -455,6 +468,12 @@
         <Function Name="Update_RestaurantBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdBranch" Type="int" Mode="In" />
           <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Update_Table_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="TableType" Type="int" Mode="In" />
+          <Parameter Name="TableNumber" Type="int" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="Update_Verify_Order_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -725,6 +744,24 @@
           <FunctionImport Name="Get_Employee_By_UserName" ReturnType="Collection(DatBanOnLineModel.Get_Employee_By_UserName_Result)">
           <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="Delete_Table_By_Id">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Get_Table_By_Id" ReturnType="Collection(DatBanOnLineModel.Get_Table_By_Id_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Table_By_Id">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="TableType" Mode="In" Type="Int32" />
+            <Parameter Name="TableNumber" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Table" ReturnType="Collection(DatBanOnLineModel.Insert_Table_Result)">
+            <Parameter Name="IdBranch" Mode="In" Type="Int32" />
+            <Parameter Name="TableType" Mode="In" Type="Int32" />
+            <Parameter Name="TableNumber" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
           <Key>
@@ -879,6 +916,7 @@
           <NavigationProperty Name="Order_Table" Relationship="DatBanOnLineModel.FK_Order_Table_RestaurantTable" FromRole="RestaurantTable" ToRole="Order_Table" />
           <NavigationProperty Name="RestaurantBranch" Relationship="DatBanOnLineModel.FK_RestaurantTable_RestaurantBranch" FromRole="RestaurantTable" ToRole="RestaurantBranch" />
           <NavigationProperty Name="Table_Type" Relationship="DatBanOnLineModel.FK_RestaurantTable_Table_Type" FromRole="RestaurantTable" ToRole="Table_Type" />
+          <Property Name="Deactive" Type="Boolean" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -1098,6 +1136,7 @@
           <Property Type="Int32" Name="TableNumber" Nullable="true" />
           <Property Type="Int32" Name="IdTableType" Nullable="true" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="Boolean" Name="Deactive" Nullable="true" />
         </ComplexType>
         <ComplexType Name="Get_List_Table_Available_Result">
           <Property Type="Int32" Name="IdTable" Nullable="false" />
@@ -1240,6 +1279,17 @@
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <ComplexType Name="Get_Table_By_Id_Result">
+          <Property Type="Int32" Name="IdTable" Nullable="false" />
+          <Property Type="Int32" Name="RestaurantId" Nullable="false" />
+          <Property Type="Int32" Name="TableNumber" Nullable="true" />
+          <Property Type="Int32" Name="IdTableType" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="Boolean" Name="Deactive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Insert_Table_Result">
+          <Property Type="Int32" Name="IdTable" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1376,6 +1426,7 @@
           <EntitySetMapping Name="RestaurantTables">
             <EntityTypeMapping TypeName="DatBanOnLineModel.RestaurantTable">
               <MappingFragment StoreEntitySet="RestaurantTable">
+                <ScalarProperty Name="Deactive" ColumnName="Deactive" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
                 <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
@@ -1450,6 +1501,7 @@
                 <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
                 <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Deactive" ColumnName="Deactive" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1640,6 +1692,27 @@
                 <ScalarProperty Name="EnterDate" ColumnName="EnterDate" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Delete_Table_By_Id" FunctionName="DatBanOnLineModel.Store.Delete_Table_By_Id" />
+          <FunctionImportMapping FunctionImportName="Get_Table_By_Id" FunctionName="DatBanOnLineModel.Store.Get_Table_By_Id">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Get_Table_By_Id_Result">
+                <ScalarProperty Name="IdTable" ColumnName="IdTable" />
+                <ScalarProperty Name="RestaurantId" ColumnName="RestaurantId" />
+                <ScalarProperty Name="TableNumber" ColumnName="TableNumber" />
+                <ScalarProperty Name="IdTableType" ColumnName="IdTableType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Deactive" ColumnName="Deactive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Update_Table_By_Id" FunctionName="DatBanOnLineModel.Store.Update_Table_By_Id" />
+          <FunctionImportMapping FunctionImportName="Insert_Table" FunctionName="DatBanOnLineModel.Store.Insert_Table" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DatBanOnLineModel.Insert_Table_Result">
+                <ScalarProperty Name="IdTable" ColumnName="IdTable" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

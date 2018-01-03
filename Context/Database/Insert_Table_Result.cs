@@ -11,13 +11,8 @@ namespace Context.Database
 {
     using System;
     
-    public partial class Get_List_Table_By_Restaurant_Id_Result
+    public partial class Insert_Table_Result
     {
         public int IdTable { get; set; }
-        public int RestaurantId { get; set; }
-        public Nullable<int> TableNumber { get; set; }
-        public Nullable<int> IdTableType { get; set; }
-        public string Description { get; set; }
-        public Nullable<bool> Deactive { get; set; }
     }
 }

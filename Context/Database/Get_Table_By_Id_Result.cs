@@ -11,7 +11,7 @@ namespace Context.Database
 {
     using System;
     
-    public partial class Get_List_Table_By_Restaurant_Id_Result
+    public partial class Get_Table_By_Id_Result
     {
         public int IdTable { get; set; }
         public int RestaurantId { get; set; }

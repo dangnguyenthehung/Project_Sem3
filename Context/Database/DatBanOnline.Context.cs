@@ -359,5 +359,65 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Employee_By_UserName_Result>("Get_Employee_By_UserName", userNameParameter);
         }
+    
+        public virtual int Delete_Table_By_Id(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Delete_Table_By_Id", idParameter);
+        }
+    
+        public virtual ObjectResult<Get_Table_By_Id_Result> Get_Table_By_Id(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_Table_By_Id_Result>("Get_Table_By_Id", idParameter);
+        }
+    
+        public virtual int Update_Table_By_Id(Nullable<int> id, Nullable<int> tableType, Nullable<int> tableNumber, string description)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var tableTypeParameter = tableType.HasValue ?
+                new ObjectParameter("TableType", tableType) :
+                new ObjectParameter("TableType", typeof(int));
+    
+            var tableNumberParameter = tableNumber.HasValue ?
+                new ObjectParameter("TableNumber", tableNumber) :
+                new ObjectParameter("TableNumber", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_Table_By_Id", idParameter, tableTypeParameter, tableNumberParameter, descriptionParameter);
+        }
+    
+        public virtual ObjectResult<Insert_Table_Result> Insert_Table(Nullable<int> idBranch, Nullable<int> tableType, Nullable<int> tableNumber, string description)
+        {
+            var idBranchParameter = idBranch.HasValue ?
+                new ObjectParameter("IdBranch", idBranch) :
+                new ObjectParameter("IdBranch", typeof(int));
+    
+            var tableTypeParameter = tableType.HasValue ?
+                new ObjectParameter("TableType", tableType) :
+                new ObjectParameter("TableType", typeof(int));
+    
+            var tableNumberParameter = tableNumber.HasValue ?
+                new ObjectParameter("TableNumber", tableNumber) :
+                new ObjectParameter("TableNumber", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Insert_Table_Result>("Insert_Table", idBranchParameter, tableTypeParameter, tableNumberParameter, descriptionParameter);
+        }
     }
 }

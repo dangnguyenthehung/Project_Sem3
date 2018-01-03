@@ -20,11 +20,18 @@ namespace Web.Areas.Admin.Controllers
             return View();
         }
 
+        public ActionResult Selection(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+
         public ActionResult Available(int id)
         {
             var viewModel = new OrderViewModel()
             {
-                Order = new Orders() { IdBranch = id, BeginTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1)}
+                Order = new Orders() { IdBranch = id, BeginTime = DateTime.Now, EndTime = DateTime.Now.AddHours(1) }
             };
 
             GetTableData(ref viewModel);
@@ -32,6 +39,58 @@ namespace Web.Areas.Admin.Controllers
             return View(viewModel);
         }
 
+        public ActionResult View(int id)
+        {
+            var model = TableModel.GetByIdRestaurant(id);
+
+            return View(model);
+        }
+
+        public ActionResult Edit(int idTable)
+        {
+            var model = TableModel.GetTableById(idTable);
+
+            GetData();
+
+            return View(model);
+        }
+
+        private void GetData()
+        {
+            var listBranch = BranchSingleTon.GetListBranches();
+            var listType = TableTypeSingleTon.GetListTypes();
+
+            //ViewBag.RestaurantId = listBranch.Select(x => new SelectListItem()
+            //{
+            //    Text = x.Description,
+            //    Value = x.IdBranch.ToString()
+            //});
+
+            ViewBag.tableType = listType.Select(x => new SelectListItem()
+            {
+                Text = x.Description,
+                Value = x.Id_Table_Type.ToString()
+            }).ToList();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Table model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = TableModel.UpdateTableById(model);
+                if (result)
+                {
+                    return RedirectToAction("View", "Table", new { id = model.RestaurantId });
+                }
+            }
+
+            GetData();
+
+            return View(model);
+        }
+        //func
         private void GetTableData(ref OrderViewModel viewModel)
         {
             var order = viewModel.Order;
@@ -90,7 +149,6 @@ namespace Web.Areas.Admin.Controllers
             listGioEnd.RemoveRange(0, beginIndex);
             return Json(listGioEnd, JsonRequestBehavior.AllowGet);
         }
-
 
         public JsonResult GetTableAvailable(int idBranch, DateTime date, string beginTime, string endTime)
         {

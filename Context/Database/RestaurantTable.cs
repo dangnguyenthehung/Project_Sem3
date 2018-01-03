@@ -25,6 +25,7 @@ namespace Context.Database
         public Nullable<int> TableNumber { get; set; }
         public Nullable<int> IdTableType { get; set; }
         public string Description { get; set; }
+        public Nullable<bool> Deactive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Table> Order_Table { get; set; }
