@@ -63,3 +63,8 @@
 .tim-row h3 {
     margin-top: 0;
 }
+
+.table-img img {
+    border-radius: 50%;
+    border: solid 2px #ffffff;
+}

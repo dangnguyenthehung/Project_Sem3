@@ -16,10 +16,11 @@
                         {
                             @Html.AntiForgeryToken()
                             
-                            <div class="w3-row-padding w3-padding-16 w3-center">
+                            <div>
                                 <div class="col-xs-12">
                                     @Html.ValidationSummary(false, null, new {@class = "text-danger booking-error"})    
                                 </div>
+                                <div style="clear: both"></div>
                             </div>
 
                             <div class="card-body" style="margin-top: 0px">

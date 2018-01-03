@@ -92,21 +92,19 @@ namespace Web.Areas.Admin.Controllers
         }
 
 
-        public JsonResult GetTableAvailable(string beginTime, string endTime)
+        public JsonResult GetTableAvailable(int idBranch, DateTime date, string beginTime, string endTime)
         {
-            var viewModel = SessionPersister.OrderInfomation;
-
             var beginStr = beginTime.Split(':');
             var endStr = endTime.Split(':');
 
-            var begin = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, int.Parse(beginStr[0]), int.Parse(beginStr[1]), 0);
+            var begin = new DateTime(date.Year, date.Month, date.Day, int.Parse(beginStr[0]), int.Parse(beginStr[1]), 0);
 
-            var end = new DateTime(viewModel.Order.BeginTime.Year, viewModel.Order.BeginTime.Month, viewModel.Order.BeginTime.Day, int.Parse(endStr[0]), int.Parse(endStr[1]), 0);
+            var end = new DateTime(date.Year, date.Month, date.Day, int.Parse(endStr[0]), int.Parse(endStr[1]), 0);
 
             var tableFilter = new TableFilterDTO()
             {
-                IdBranch = viewModel.Order.IdBranch,
-                BranchAddress = BranchSingleTon.GetAddress(viewModel.Order.IdBranch),
+                IdBranch = idBranch,
+                BranchAddress = BranchSingleTon.GetAddress(idBranch),
                 BeginTime = begin,
                 EndTime = end
             };

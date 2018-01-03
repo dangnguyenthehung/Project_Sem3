@@ -11,7 +11,7 @@
     var gioDefaultBegin = "8:00";
     var gioDefaultEnd = "9:00";
 
-    if (gioHienTai > 22)
+    if (gioHienTai >= 21)
     {
         gioDefaultBegin = "8:00";
         gioDefaultEnd = "9:00";
@@ -22,163 +22,174 @@
         gioDefaultEnd = gioHienTai + 3 + ":00";
     }
     var listGioBegin = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Text = "10:00", Value = "10:00" },
-        new SelectListItem { Text = "10:30", Value = "10:30" },
-        new SelectListItem { Text = "11:00", Value = "11:00" },
-        new SelectListItem { Text = "11:30", Value = "11:30" },
-        new SelectListItem { Text = "12:00", Value = "12:00" },
-        new SelectListItem { Text = "12:30", Value = "12:30" },
-        new SelectListItem { Text = "13:00", Value = "13:00" },
-        new SelectListItem { Text = "13:30", Value = "13:30" },
-        new SelectListItem { Text = "14:00", Value = "14:00" },
-        new SelectListItem { Text = "14:30", Value = "14:30" },
-        new SelectListItem { Text = "15:00", Value = "15:00" },
-        new SelectListItem { Text = "15:30", Value = "15:30" },
-        new SelectListItem { Text = "16:00", Value = "16:00" },
-        new SelectListItem { Text = "16:30", Value = "16:30" },
-        new SelectListItem { Text = "17:00", Value = "17:00" },
-        new SelectListItem { Text = "17:30", Value = "17:30" },
-        new SelectListItem { Text = "18:00", Value = "18:00" },
-        new SelectListItem { Text = "18:30", Value = "18:30" },
-        new SelectListItem { Text = "19:00", Value = "19:00" },
-        new SelectListItem { Text = "19:30", Value = "19:30" },
-        new SelectListItem { Text = "20:00", Value = "20:00" },
-        new SelectListItem { Text = "20:30", Value = "20:30" },
-        new SelectListItem { Text = "21:00", Value = "21:00" },
-        new SelectListItem { Text = "21:30", Value = "21:30" },
-        new SelectListItem { Text = "22:00", Value = "22:00" },
-        new SelectListItem { Text = "22:30", Value = "22:30" },
-        new SelectListItem { Text = "23:00", Value = "23:00" }
-    }, "Value", "Text", gioDefaultBegin.ToString());
+{
+new SelectListItem { Text = "10:00", Value = "10:00" },
+new SelectListItem { Text = "10:30", Value = "10:30" },
+new SelectListItem { Text = "11:00", Value = "11:00" },
+new SelectListItem { Text = "11:30", Value = "11:30" },
+new SelectListItem { Text = "12:00", Value = "12:00" },
+new SelectListItem { Text = "12:30", Value = "12:30" },
+new SelectListItem { Text = "13:00", Value = "13:00" },
+new SelectListItem { Text = "13:30", Value = "13:30" },
+new SelectListItem { Text = "14:00", Value = "14:00" },
+new SelectListItem { Text = "14:30", Value = "14:30" },
+new SelectListItem { Text = "15:00", Value = "15:00" },
+new SelectListItem { Text = "15:30", Value = "15:30" },
+new SelectListItem { Text = "16:00", Value = "16:00" },
+new SelectListItem { Text = "16:30", Value = "16:30" },
+new SelectListItem { Text = "17:00", Value = "17:00" },
+new SelectListItem { Text = "17:30", Value = "17:30" },
+new SelectListItem { Text = "18:00", Value = "18:00" },
+new SelectListItem { Text = "18:30", Value = "18:30" },
+new SelectListItem { Text = "19:00", Value = "19:00" },
+new SelectListItem { Text = "19:30", Value = "19:30" },
+new SelectListItem { Text = "20:00", Value = "20:00" },
+new SelectListItem { Text = "20:30", Value = "20:30" },
+new SelectListItem { Text = "21:00", Value = "21:00" },
+new SelectListItem { Text = "21:30", Value = "21:30" },
+new SelectListItem { Text = "22:00", Value = "22:00" },
+new SelectListItem { Text = "22:30", Value = "22:30" },
+new SelectListItem { Text = "23:00", Value = "23:00" }
+}, "Value", "Text", gioDefaultBegin.ToString());
 
     var listGioEnd = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Text = "11:00", Value = "11:00" },
-        new SelectListItem { Text = "11:30", Value = "11:30" },
-        new SelectListItem { Text = "12:00", Value = "12:00" },
-        new SelectListItem { Text = "12:30", Value = "12:30" },
-        new SelectListItem { Text = "13:00", Value = "13:00" },
-        new SelectListItem { Text = "13:30", Value = "13:30" },
-        new SelectListItem { Text = "14:00", Value = "14:00" },
-        new SelectListItem { Text = "14:30", Value = "14:30" },
-        new SelectListItem { Text = "15:00", Value = "15:00" },
-        new SelectListItem { Text = "15:30", Value = "15:30" },
-        new SelectListItem { Text = "16:00", Value = "16:00" },
-        new SelectListItem { Text = "16:30", Value = "16:30" },
-        new SelectListItem { Text = "17:00", Value = "17:00" },
-        new SelectListItem { Text = "17:30", Value = "17:30" },
-        new SelectListItem { Text = "18:00", Value = "18:00" },
-        new SelectListItem { Text = "18:30", Value = "18:30" },
-        new SelectListItem { Text = "19:00", Value = "19:00" },
-        new SelectListItem { Text = "19:30", Value = "19:30" },
-        new SelectListItem { Text = "20:00", Value = "20:00" },
-        new SelectListItem { Text = "20:30", Value = "20:30" },
-        new SelectListItem { Text = "21:00", Value = "21:00" },
-        new SelectListItem { Text = "21:30", Value = "21:30" },
-        new SelectListItem { Text = "22:00", Value = "22:00" },
-        new SelectListItem { Text = "22:30", Value = "22:30" },
-        new SelectListItem { Text = "23:00", Value = "23:00" }
-    }, "Value", "Text", gioDefaultEnd.ToString());
+{
+new SelectListItem { Text = "11:00", Value = "11:00" },
+new SelectListItem { Text = "11:30", Value = "11:30" },
+new SelectListItem { Text = "12:00", Value = "12:00" },
+new SelectListItem { Text = "12:30", Value = "12:30" },
+new SelectListItem { Text = "13:00", Value = "13:00" },
+new SelectListItem { Text = "13:30", Value = "13:30" },
+new SelectListItem { Text = "14:00", Value = "14:00" },
+new SelectListItem { Text = "14:30", Value = "14:30" },
+new SelectListItem { Text = "15:00", Value = "15:00" },
+new SelectListItem { Text = "15:30", Value = "15:30" },
+new SelectListItem { Text = "16:00", Value = "16:00" },
+new SelectListItem { Text = "16:30", Value = "16:30" },
+new SelectListItem { Text = "17:00", Value = "17:00" },
+new SelectListItem { Text = "17:30", Value = "17:30" },
+new SelectListItem { Text = "18:00", Value = "18:00" },
+new SelectListItem { Text = "18:30", Value = "18:30" },
+new SelectListItem { Text = "19:00", Value = "19:00" },
+new SelectListItem { Text = "19:30", Value = "19:30" },
+new SelectListItem { Text = "20:00", Value = "20:00" },
+new SelectListItem { Text = "20:30", Value = "20:30" },
+new SelectListItem { Text = "21:00", Value = "21:00" },
+new SelectListItem { Text = "21:30", Value = "21:30" },
+new SelectListItem { Text = "22:00", Value = "22:00" },
+new SelectListItem { Text = "22:30", Value = "22:30" },
+new SelectListItem { Text = "23:00", Value = "23:00" }
+}, "Value", "Text", gioDefaultEnd.ToString());
 
     var index = 1;
 }
 
-<div class="container" style="color:aliceblue; font-family: Arial">
-    <div class="w3-card-4 wow fadeInUp" style="width: 100%; background-color: rgba(231, 76, 60, 0.8); padding-top: 10px;">
-        <h2 style="color:antiquewhite" class="text-center">Booking Table</h2>
-        @using (Html.BeginForm("Step2", "Booking", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-            @Html.HiddenFor(b => b.Order.IdBranch)
-            @Html.HiddenFor(b => b.Order.BeginTime)
-
-            <div class="w3-row-padding w3-padding-16 w3-center">
-                <div class="col-xs-12">
-                    @Html.ValidationSummary(true, null, new { @class = "text-danger booking-error" })
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title">Table Statistic</h4>
                 </div>
-            </div>
+                <div class="card-content">
 
+                    @Html.HiddenFor(b => b.Order.IdBranch, new {@id = "idBranch"})
+                    @Html.HiddenFor(b => b.Order.BeginTime)
 
-            <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-                <div class="w3-quarter">
-                    <div id="inputs">
-                        <div class="col-sm-12 wow fadeInLeft" data-wow-delay="600ms">
-                            <h6 style="float: left">Number of people</h6>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.Order.NumberOfCustomer, new { @class = "form-control", @style = "padding-left: 19px", @type = "number" })
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Date</label>
+                                <input type="text" class="form-control datepicker" id="datepicker" value="@DateTime.Today.ToString("dd/MM/yyyy")">
                             </div>
                         </div>
-                        <div class="col-sm-12 wow fadeInRight" data-wow-delay="600ms">
-                            <h6 style="float: left">Time in</h6>
-                            <div class="form-group">
-                                @Html.DropDownList("BeginTime", listGioBegin, new { @class = "form-control", @id = "BeginTime", @style = "padding-left: 15px; padding-top: 8px" })
+                        <div class="col-md-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Time in</label>
+                                @Html.DropDownList("BeginTime", listGioBegin, new {@class = "form-control", @id = "BeginTime", @style = "padding-left: 15px; padding-top: 8px"})
                             </div>
                         </div>
-                        <div class="col-sm-12 wow fadeInLeft" data-wow-delay="600ms">
-                            <h6 style="float: left">Time out</h6>
-                            <div class="form-group">
-                                @Html.DropDownList("EndTime", listGioEnd, new { @class = "form-control", @id = "EndTime", @style = "padding-left: 15px; padding-top: 8px" })
-                            </div>
-                        </div>
-                        <div class="col-sm-12 wow fadeInRight" data-wow-delay="600ms">
-                            <h6 style="float: left">Description</h6>
-                            <div class="form-group">
-                                @Html.TextAreaFor(m => m.Order.Description, new { @class = "form-control", @rows = 5, @style = "padding-left: 5px; border-radius: 10%" })
+                        <div class="col-md-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Time out</label>
+                                @Html.DropDownList("EndTime", listGioEnd, new {@class = "form-control", @id = "EndTime", @style = "padding-left: 15px; padding-top: 8px"})
                             </div>
                         </div>
                     </div>
-                </div>
-                @foreach (var group in tableType)
-                {
-                    var capacity = TableTypeSingleTon.GetCapacity(group.First().IdTableType);
-                    <div class="w3-quarter wow fadeInDown" data-wow-delay="900ms">
-                        <img src="~/Content/assets/image/table2.jpg" alt="Steak">
-                        <h3>TABLE FOR @capacity</h3>
-                        <h6 id="count_group_@index">Table available (@group.Count):</h6>
-                        <div class="col-sm-12 col-lg-12" id="group_@index">
-                            @foreach (var item in group)
-                            {
-                                var tableId = "table" + item.IdTable;
-                                <div class="checkbox  wow fadeInLeft" data-wow-delay="1200ms">
-                                    <input name="ListIdTable" type="checkbox" id="@tableId" value="@item.IdTable" />
-                                    <label for="@tableId">
-                                        Table @item.TableNumber
-                                    </label>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    @foreach (var group in tableType)
+                                    {
+                                        var capacity = TableTypeSingleTon.GetCapacity(group.First().IdTableType);
+                                        var imgName = $"table{capacity}.jpg";
+                                        <div class="col-xs-4 text-center">
+                                            <div class="table-img">
+                                                <img src="~/Content/assets/image/@imgName" alt="table">    
+                                            </div>
+                                            <h3>Table for @capacity</h3>
+                                            <h6 id="count_group_@index">Available (@group.Count):</h6>
+                                            <div class="col-sm-12 col-lg-12" id="group_@index">
+                                                @foreach (var item in group)
+                                                {
+                                                    <div>
+                                                        <label>
+                                                            Table @item.TableNumber
+                                                        </label>
+                                                    </div>
+
+                                                }
+                                            </div>
+                                        </div>
+
+                                        index++;
+                                    }
+
+                                    <div style="clear: both;"></div>
                                 </div>
-
-                            }
+                            </div>
                         </div>
                     </div>
 
-                    index++;
-                }
-
-                <div style="clear: both;"></div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
-
-            <div class="footer text-center wow fadeInUp" data-wow-delay="1600ms">
-                <button type="submit" class="btn btn-neutral btn-round btn-lg" style="margin-top: 20px">
-                    Submit
-                </button>
-            </div>
-        }
-
-
-        <div id="table" class="w3-row-padding w3-padding-16 w3-center">
-            <div class="col-lg-12 wow bounceIn">
-                <h2>Table map of restaurant</h2>
-                <img src="~/Content/assets/image/layout_table.png" />
-            </div>
-
         </div>
+        <div class="col-md-4">
+            <div class="card card-profile">
+                <div class="card-avatar">
+                    <a href="#pablo">
+                        <img class="img" src="~/Content/assets/image/Store-512.png" />
+                    </a>
+                </div>
+                <div class="content">
+                    @*<h6 class="category text-gray">CEO / Co-Founder</h6>*@
+                    <h4 class="card-title">@BranchSingleTon.GetDescription(Model.Order.IdBranch)</h4>
+                    <p class="card-content">
+                        @BranchSingleTon.GetAddress(Model.Order.IdBranch)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div id="table" class="">
+                <div class="col-lg-12 card" style="background-color: #999">
+                    <h2 class="text-center" style="color: white">Table map of restaurant</h2>
+                    <img src="~/Content/assets/image/layout_table.png" />
+                </div>
 
+            </div>
+        </div>
     </div>
 </div>
 
+<script src="~/Scripts/SelectTableAdmin.js"></script>
 
-<script src="~/Scripts/SelectTable.js"></script>
-
-
+<script>
+    $('.datepicker').datepicker({
+        dateFormat: 'dd/MM/yy'
+    });
+</script>
 

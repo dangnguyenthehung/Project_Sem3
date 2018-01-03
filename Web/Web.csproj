@@ -202,8 +202,10 @@
     <Content Include="Content\assets\image\khesang.png" />
     <Content Include="Content\assets\image\layout_table.jpg" />
     <Content Include="Content\assets\image\layout_table.png" />
+    <Content Include="Content\assets\image\Store-512.png" />
     <Content Include="Content\assets\image\table2.jpg" />
     <Content Include="Content\assets\image\table4.jpg" />
+    <Content Include="Content\assets\image\table6.jpg" />
     <Content Include="Content\assets\image\window.png" />
     <Content Include="Content\assets\js\bundle.js" />
     <Content Include="Content\assets\js\core\bootstrap.min.js" />
@@ -293,6 +295,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SelectTableAdmin.js" />
     <Content Include="Scripts\SelectTable.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

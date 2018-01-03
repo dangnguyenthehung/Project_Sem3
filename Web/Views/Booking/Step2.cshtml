@@ -10,7 +10,7 @@
     var gioDefaultBegin = "8:00";
     var gioDefaultEnd = "9:00";
     
-    if (gioHienTai > 22)
+    if (gioHienTai >= 21)
     {
         gioDefaultBegin = "8:00";
         gioDefaultEnd = "9:00";
@@ -132,8 +132,10 @@
                 @foreach (var group in tableType)
                 {
                     var capacity = TableTypeSingleTon.GetCapacity(group.First().IdTableType);
+                    var imgName = $"table{capacity}.jpg";
+
                     <div class="w3-quarter wow fadeInDown" data-wow-delay="900ms">
-                        <img src="~/Content/assets/image/table2.jpg" alt="Steak">
+                        <img src="~/Content/assets/image/@imgName" alt="Steak">
                         <h3>TABLE FOR @capacity</h3>
                         <h6 id="count_group_@index">Table available (@group.Count):</h6>
                         <div class="col-sm-12 col-lg-12" id="group_@index">

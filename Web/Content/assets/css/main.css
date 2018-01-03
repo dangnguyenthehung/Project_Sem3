@@ -298,7 +298,7 @@ body a, html a {
 }
 
 #navigation_responsive ul li:hover {
-    cursor: crosshair;
+    cursor: pointer;
     color: #6fc041
 }
 

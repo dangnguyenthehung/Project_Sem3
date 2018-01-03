@@ -5,12 +5,34 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 
     var listBranch = RestaurantBranchModel.GetAll();
+    var flag = 1;
+    var color = "btn-primary";
 }
 @foreach (var item in listBranch)
 {
-    <div>
-        <a href="@Url.Action("Available","Table", new {id = item.IdBranch})">@item.Address</a>        
-    </div>
-    
+    switch (flag)
+    {
+        case 1:
+            color = "btn-success";
+            flag++;
+            break;
+        case 2:
+            color = "btn-info";
+            flag++;
+            break;
+        case 3:
+            color = "btn-primary";
+            flag = 1;
+            break;
+        default:
+            color = "btn-primary";
+            flag = 1;
+            break;
+    }
+    <a href="@Url.Action("Available","Table", new {id = item.IdBranch})">
+        <div class="btn @color">
+            @item.Address
+        </div>
+    </a>
 }
 

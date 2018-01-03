@@ -44,7 +44,11 @@ $(document).ready(function () {
         });
 
     });
-    
+
+    $("#datepicker").change(function() {
+        getTableAvailableAdmin();
+    });
+
     $("#BeginTime").change(function () {
         var url = APICall.GetEndTime;
         var begin = $("#BeginTime").val();
@@ -63,24 +67,26 @@ $(document).ready(function () {
                     });
 
                 $("#EndTime").html(listOption);
-                getTableAvailable();
+                getTableAvailableAdmin();
             }
         );
     });
 
     $("#EndTime").change(function () {
-        getTableAvailable();
+        getTableAvailableAdmin();
     });
-
-    function getTableAvailable() {
-        var url = APICall.GetTableAvailable;
-
+    
+    function getTableAvailableAdmin() {
+        var url = APICall.GetTableAvailableAdmin;
+        
+        var idBranch = $("#idBranch").val();
+        var date = $("#datepicker").val();
         var begin = $("#BeginTime").val();
         var end = $("#EndTime").val();
 
         $.get(
             url,
-            { beginTime: begin, endTime: end },
+            { idBranch: idBranch, date: date,  beginTime: begin, endTime: end },
             function (data) {
 
                 var listOption = "";
@@ -91,18 +97,16 @@ $(document).ready(function () {
                         var containerId = "group_" + index;
                         var count = value.length;
 
-                        $("#" + countId).html("Table available (" + count + ")");
+                        $("#" + countId).html("Available (" + count + ")");
                         $("#" + containerId).html("");
 
                         var content = "";
 
                         $.each(value,
                             function (subkey, subvalue) {
-                                content += "<div class='checkbox'><input name= 'ListIdTable' type= 'checkbox' id= '" +
-                                    subvalue.IdTable + "' value= '" + subvalue.IdTable + "' /><label for='" +
-                                    subvalue.IdTable + "'>Table " + subvalue.TableNumber + "</label></div>";
+                                content += "<div><label>Table " + subvalue.TableNumber + "</label></div>";
 
-                                
+
                             });
 
                         $("#" + containerId).html(content);
@@ -111,5 +115,5 @@ $(document).ready(function () {
             }
         );
     };
-    
+
 });
