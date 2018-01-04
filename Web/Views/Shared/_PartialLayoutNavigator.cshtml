@@ -16,12 +16,18 @@
 <div id="navigation_responsive" style="float:right">
     <ul>
          <div class="col-lg-12" >
-            <ul>
-                <li id="bt_about">ABOUT</li>
-                <li id="bt_service">SERVICES</li>
-                <li id="bt_gallery">GALLERY</li>
-                <li id="page_contact">CONTACT</li>
-            </ul>
+             <ul>
+                 <li id="">
+                     <a href="@Url.Action("Index", "Home")">Home</a>
+                 </li>
+
+                 <li id="bt_service">Services</li>
+                 <li id="bt_gallery">Gallery</li>
+                 <li id="page_contact">Contact</li>
+                 <li style="float: right">
+                     <a href="@Url.Action("SignUp", "Login")">Sign Up</a>
+                 </li>
+             </ul>
         </div>
     </ul>
 </div>

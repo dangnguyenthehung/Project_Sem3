@@ -6,9 +6,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-12" style="margin-top: 10%">
+        <div class="col-lg-12" style="margin-top: 10px">
             <div class="card card-signup wow fadeInUp" data-background-color="orange">
-                <form class="form" method="" action="">
                     <div class="header text-center">
                         <h4 class="title title-up">Sign Up</h4>
                     </div>
@@ -16,43 +15,48 @@
                         @using (Html.BeginForm("SignUp", "Login", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
+                            
+                            <div>
+                                <div class="col-xs-12">
+                                    @Html.ValidationSummary(false, null, new {@class = "text-danger booking-error"})    
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
 
-                            <p class="text-danger">@ViewBag.error</p>
-
-                            <div class="card-body" style="margin-top: -30px">
+                            <div class="card-body" style="margin-top: 0px">
                                 <div class="form-group form-group-no-border">
                                     <div class="col-xs-12">
                                         @Html.LabelFor(a => a.CMND)
-                                        @Html.ValidationMessageFor(model => model.CMND, "", new { @class = "text-danger" })
+                                        @*@Html.ValidationMessageFor(model => model.CMND, "", new { @class = "text-danger" })*@
                                         @Html.TextBoxFor(a => a.CMND, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group form-group-no-border">
                                     <div class="col-xs-12">
                                         @Html.LabelFor(a => a.FullName)
-                                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                                        @*@Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })*@
                                         @Html.TextBoxFor(a => a.FullName, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group form-group-no-border">
                                     <div class="col-xs-12">
                                         @Html.LabelFor(a => a.Phone)
-                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                        @*@Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })*@
                                         @Html.TextBoxFor(a => a.Phone, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group form-group-no-border">
                                     <div class="col-xs-12">
                                         @Html.LabelFor(a => a.Address)
-                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                        @*@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })*@
                                         @Html.TextBoxFor(a => a.Address, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="form-group form-group-no-border">
                                     <div class="col-xs-12">
                                         @Html.LabelFor(a => a.Password)
-                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                        @Html.PasswordFor(a => a.Password, new { @class = "form-control" })
+                                        @*@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
+                                        @Html.PasswordFor(a => a.Password, new { @class = "form-control", @id="signup_pass" })
                                     </div>
                                 </div>
                                 <div class="footer text-center">
@@ -64,9 +68,6 @@
                             </div>
                         }
                     </fieldset>
-
-
-                </form>
             </div>
         </div>
         

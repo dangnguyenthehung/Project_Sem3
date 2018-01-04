@@ -52,6 +52,7 @@
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\Order_Table.cs" />
+    <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\RestaurantBranch.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Table.cs" />

@@ -67,12 +67,20 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var cus = CustomerModel.GetByUserName(model.CMND, model.Phone);
+                if (cus != null)
+                {
+                    ModelState.AddModelError("", MessageConstants.AccountExist);
+                    return View(model);
+                }
+
                 model.Password = Encryptor.EncryptSHA1(model.Password);
                 var accountId = CustomerModel.Insert(model);
                 
                 if (accountId <= 0)
                 {
-                    ViewBag.error = MessageConstants.InsertFail;
+                    ModelState.AddModelError("", MessageConstants.InsertFail);
+                    
                     return View(model);
                 }
                 else

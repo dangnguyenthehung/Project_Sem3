@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Api.Helper;
 using Model.DTO;
+using Model.Models;
 using Newtonsoft.Json;
 
 namespace Api.Controllers
@@ -37,6 +38,98 @@ namespace Api.Controllers
             response.StatusCode = HttpStatusCode.BadRequest;
             return response;
         }
+
+        [Route("get_table_by_id/{id}")]
+        [HttpGet]
+        public HttpResponseMessage Get_Table_By_Id(int id)
+        {
+            var response = new HttpResponseMessage();
+
+            if (id > 0)
+            {
+                var result = Helper.Get_Table_By_Id(id);
+
+                if (result != null)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                    return response;
+                }
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+
+        [Route("insert_table/")]
+        [HttpPost]
+        public HttpResponseMessage Insert_Table([FromBody] Table table)
+        {
+            var response = new HttpResponseMessage();
+
+            if (table != null)
+            {
+                var result = Helper.Insert_Table(table);
+
+                if (result != 0)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                    return response;
+                }
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+        [Route("delete_table_by_id/{id}")]
+        [HttpDelete]
+        public HttpResponseMessage Delete_Table_By_Id(int id)
+        {
+            var response = new HttpResponseMessage();
+
+            if (id > 0)
+            {
+                var result = Helper.Delete_Table_By_Id(id);
+
+                if (result)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                    return response;
+                }
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+        
+        [Route("update_table_by_id/")]
+        [HttpPut]
+        public HttpResponseMessage Update_Table_By_Id([FromBody] Table table)
+        {
+            var response = new HttpResponseMessage();
+
+            if (table != null)
+            {
+                var result = Helper.Update_Table_By_Id(table);
+
+                if (result)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                    return response;
+                }
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+
 
         [Route("get_table_available/")]
         [HttpPost]

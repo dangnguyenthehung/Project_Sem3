@@ -44,7 +44,7 @@ $(document).ready(function () {
         });
 
     });
-
+    
     $("#BeginTime").change(function () {
         var url = APICall.GetEndTime;
         var begin = $("#BeginTime").val();
@@ -111,5 +111,5 @@ $(document).ready(function () {
             }
         );
     };
-
+    
 });

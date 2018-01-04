@@ -40,8 +40,15 @@ namespace Helpers_Constants.Constants
         {
             private static readonly string BaseUrl = $"{_apiUrl}/table";
 
+
             public string Get_All = $"{BaseUrl}/get_list_table_all";
-            public string Get_By_Id_Restaurant = $"{BaseUrl}/get_by_id_restaurant";
+
+            public string Get_Table_By_Id = $"{BaseUrl}/get_table_by_id/";
+            public string Insert_Table = $"{BaseUrl}/insert_table/";
+            public string Delete_Table_By_Id = $"{BaseUrl}/delete_table_by_id/";
+            public string Update_Table_By_Id = $"{BaseUrl}/update_table_by_id/";
+
+            public string Get_By_Id_Restaurant = $"{BaseUrl}/get_by_id_restaurant/";
             public string Get_Table_Available = $"{BaseUrl}/get_table_available/";
             public string Get_List_TableType = $"{BaseUrl}/get_list_tabletype/";
         }
@@ -64,6 +71,7 @@ namespace Helpers_Constants.Constants
             private static readonly string BaseUrl = $"{_apiUrl}/customer";
 
             public string Get_By_Id = $"{BaseUrl}/get_by_id/";
+            public string Get_By_UserName = $"{BaseUrl}/get_by_username/";
             public string Insert = $"{BaseUrl}/insert/";
 
         }

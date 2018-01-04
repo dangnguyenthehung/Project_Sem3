@@ -149,11 +149,13 @@
                             }
                             @foreach (var item in Model.ListIdTable)
                             {
-                                var itemName = $"Table_Number_{TableSingleTon.GetTableNumber(item)} ({TableSingleTon.GetTableCapacity(item)}  persons)";
+                                var capacity = TableSingleTon.GetTableCapacity(item);
+                                var imgName = $"table{capacity}.jpg";
+                                var itemName = $"Table_Number_{TableSingleTon.GetTableNumber(item)} ({capacity}  persons)";
 
                             <tr class="text-center">
                                 <td style="padding-bottom: 10px">
-                                    <img src="~/Content/assets/image/table2.jpg" width="70" height="70" style="border-radius: 50%; border: solid 1px #fff" />
+                                    <img src="~/Content/assets/image/@imgName" width="70" height="70" style="border-radius: 50%; border: solid 1px #fff" />
                                     <input type="hidden" name="item_number_@index" value="@item" />
                                     <input type="hidden" name="item_name_@index" value="@itemName" />
                                     <input type="hidden" name="amount_@index" value="@TableSingleTon.GetTableDepositFee(item).ToString("0.##")" />

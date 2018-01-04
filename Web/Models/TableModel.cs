@@ -21,6 +21,34 @@ namespace Web.Models
             return Helper.GetByIdRestaurant(url, id);
         }
 
+        public static Table GetTableById(int id)
+        {
+            var url = ApiUrl.Get_Table_By_Id;
+
+            return Helper.GetTableById(url, id);
+        }
+
+        public static int InsertTable(Table model)
+        {
+            var url = ApiUrl.Insert_Table;
+
+            return Helper.InsertTable(url, model);
+        }
+
+        public static bool UpdateTableById(Table model)
+        {
+            var url = ApiUrl.Update_Table_By_Id;
+
+            return Helper.UpdateTableById(url, model);
+        }
+        
+        public static bool DeleteTableById(int id, int idAccount)
+        {
+            var url = ApiUrl.Delete_Table_By_Id;
+
+            return Helper.DeleteTableById(url, id, idAccount);
+        }
+
         public static List<Table> GetTableAvailable(TableFilterDTO model)
         {
             var url = ApiUrl.Get_Table_Available;

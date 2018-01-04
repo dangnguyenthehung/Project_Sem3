@@ -33,7 +33,24 @@ namespace Api.Controllers
             return response;
         }
 
+        [Route("get_by_username/{cmnd}/{phone}")]
+        public HttpResponseMessage GetByUserName(string cmnd, string phone)
+        {
+            var response = new HttpResponseMessage();
 
+            var data = Helper.GetByUserName(cmnd, phone);
+
+            if (data != null)
+            {
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new StringContent(JsonConvert.SerializeObject(data));
+                return response;
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
+        
         [Route("insert")]
         [HttpPost]
         public HttpResponseMessage Insert([FromBody] Customer model)

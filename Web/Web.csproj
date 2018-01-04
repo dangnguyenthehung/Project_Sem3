@@ -149,6 +149,7 @@
     <Compile Include="Areas\Admin\Controllers\BookingController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TableController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\ClientBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Security\CustomAuthorize.cs" />
     <Compile Include="Security\MyPrincipal.cs" />
     <Compile Include="Security\SessionPersister.cs" />
+    <Compile Include="SingleTon\TimeSingleTon.cs" />
     <Compile Include="SingleTon\TableSingleTon.cs" />
     <Compile Include="SingleTon\TableTypeSingleTon.cs" />
     <Compile Include="SingleTon\BranchSingleTon.cs" />
@@ -201,8 +203,10 @@
     <Content Include="Content\assets\image\khesang.png" />
     <Content Include="Content\assets\image\layout_table.jpg" />
     <Content Include="Content\assets\image\layout_table.png" />
+    <Content Include="Content\assets\image\Store-512.png" />
     <Content Include="Content\assets\image\table2.jpg" />
     <Content Include="Content\assets\image\table4.jpg" />
+    <Content Include="Content\assets\image\table6.jpg" />
     <Content Include="Content\assets\image\window.png" />
     <Content Include="Content\assets\js\bundle.js" />
     <Content Include="Content\assets\js\core\bootstrap.min.js" />
@@ -277,6 +281,12 @@
     <Content Include="Areas\Admin\Views\Booking\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Booking\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Table\Available.cshtml" />
+    <Content Include="Areas\Admin\Views\Table\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Table\Selection.cshtml" />
+    <Content Include="Areas\Admin\Views\Table\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Table\View.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Status.cshtml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
@@ -290,6 +300,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\SelectTableAdmin.js" />
     <Content Include="Scripts\SelectTable.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

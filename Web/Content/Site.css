@@ -43,9 +43,23 @@ textarea {
     list-style: none;
     background: white;
     padding-left: 25px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    /*padding-top: 5px;
+    padding-bottom: 5px;*/
 }
 .booking-error ul {
     margin-bottom: 0px;
 }
+.booking-error ul li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.card-signup .header {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px 0 10px !important;
+}
+
+    .card-signup .header h4 {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }

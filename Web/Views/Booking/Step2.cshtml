@@ -1,16 +1,18 @@
-﻿@using Web.SingleTon
+﻿@using Model.Models
+@using Web.SingleTon
 @model Model.ViewModels.OrderViewModel
 @{
     ViewBag.Title = "Step2";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var tableType = Model.ListAvailableTables.GroupBy(t => t.IdTableType).Select(gr => gr.ToList()).ToList();
+    var tableAvailable = Model.ListAvailableTables.GroupBy(t => t.IdTableType).Select(gr => gr.ToList()).ToList();
+    var tableType = TableTypeSingleTon.GetListTypes();
 
     var gioHienTai = DateTime.Now.TimeOfDay.Hours;
     var gioDefaultBegin = "8:00";
     var gioDefaultEnd = "9:00";
-    
-    if (gioHienTai > 22)
+
+    if (gioHienTai >= 21)
     {
         gioDefaultBegin = "8:00";
         gioDefaultEnd = "9:00";
@@ -20,65 +22,10 @@
         gioDefaultBegin = gioHienTai + 2 + ":00";
         gioDefaultEnd = gioHienTai + 3 + ":00";
     }
-    var listGioBegin = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Text = "10:00", Value = "10:00" },
-        new SelectListItem { Text = "10:30", Value = "10:30" },
-        new SelectListItem { Text = "11:00", Value = "11:00" },
-        new SelectListItem { Text = "11:30", Value = "11:30" },
-        new SelectListItem { Text = "12:00", Value = "12:00" },
-        new SelectListItem { Text = "12:30", Value = "12:30" },
-        new SelectListItem { Text = "13:00", Value = "13:00" },
-        new SelectListItem { Text = "13:30", Value = "13:30" },
-        new SelectListItem { Text = "14:00", Value = "14:00" },
-        new SelectListItem { Text = "14:30", Value = "14:30" },
-        new SelectListItem { Text = "15:00", Value = "15:00" },
-        new SelectListItem { Text = "15:30", Value = "15:30" },
-        new SelectListItem { Text = "16:00", Value = "16:00" },
-        new SelectListItem { Text = "16:30", Value = "16:30" },
-        new SelectListItem { Text = "17:00", Value = "17:00" },
-        new SelectListItem { Text = "17:30", Value = "17:30" },
-        new SelectListItem { Text = "18:00", Value = "18:00" },
-        new SelectListItem { Text = "18:30", Value = "18:30" },
-        new SelectListItem { Text = "19:00", Value = "19:00" },
-        new SelectListItem { Text = "19:30", Value = "19:30" },
-        new SelectListItem { Text = "20:00", Value = "20:00" },
-        new SelectListItem { Text = "20:30", Value = "20:30" },
-        new SelectListItem { Text = "21:00", Value = "21:00" },
-        new SelectListItem { Text = "21:30", Value = "21:30" },
-        new SelectListItem { Text = "22:00", Value = "22:00" },
-        new SelectListItem { Text = "22:30", Value = "22:30" },
-        new SelectListItem { Text = "23:00", Value = "23:00" }
-    }, "Value", "Text", gioDefaultBegin.ToString());
+    var listGioBegin = TimeSingleTon.GetListBegin(Model.Order.BeginTime);
 
-    var listGioEnd = new SelectList(new List<SelectListItem>
-    {
-        new SelectListItem { Text = "11:00", Value = "11:00" },
-        new SelectListItem { Text = "11:30", Value = "11:30" },
-        new SelectListItem { Text = "12:00", Value = "12:00" },
-        new SelectListItem { Text = "12:30", Value = "12:30" },
-        new SelectListItem { Text = "13:00", Value = "13:00" },
-        new SelectListItem { Text = "13:30", Value = "13:30" },
-        new SelectListItem { Text = "14:00", Value = "14:00" },
-        new SelectListItem { Text = "14:30", Value = "14:30" },
-        new SelectListItem { Text = "15:00", Value = "15:00" },
-        new SelectListItem { Text = "15:30", Value = "15:30" },
-        new SelectListItem { Text = "16:00", Value = "16:00" },
-        new SelectListItem { Text = "16:30", Value = "16:30" },
-        new SelectListItem { Text = "17:00", Value = "17:00" },
-        new SelectListItem { Text = "17:30", Value = "17:30" },
-        new SelectListItem { Text = "18:00", Value = "18:00" },
-        new SelectListItem { Text = "18:30", Value = "18:30" },
-        new SelectListItem { Text = "19:00", Value = "19:00" },
-        new SelectListItem { Text = "19:30", Value = "19:30" },
-        new SelectListItem { Text = "20:00", Value = "20:00" },
-        new SelectListItem { Text = "20:30", Value = "20:30" },
-        new SelectListItem { Text = "21:00", Value = "21:00" },
-        new SelectListItem { Text = "21:30", Value = "21:30" },
-        new SelectListItem { Text = "22:00", Value = "22:00" },
-        new SelectListItem { Text = "22:30", Value = "22:30" },
-        new SelectListItem { Text = "23:00", Value = "23:00" }
-    }, "Value", "Text", gioDefaultEnd.ToString());
+
+    var listGioEnd = TimeSingleTon.GetListEnd(listGioBegin.First().Text);
 
     var index = 1;
 }
@@ -131,16 +78,23 @@
                 </div>
                 @foreach (var group in tableType)
                 {
-                    var capacity = TableTypeSingleTon.GetCapacity(group.First().IdTableType);
-                    <div class="w3-quarter wow fadeInDown" data-wow-delay="900ms">
-                        <img src="~/Content/assets/image/table2.jpg" alt="Steak">
+                    var groupAvailable = tableAvailable.SingleOrDefault(g => g.First().IdTableType == group.Id_Table_Type);
+                    if (groupAvailable == null)
+                    {
+                        groupAvailable = new List<Table>();
+                    }
+                    var capacity = group.TableCapacity;
+                    var imgName = $"table{capacity}.jpg";
+
+                    <div class="w3-quarter wow fadeInDown" data-wow-delay="600ms">
+                        <img src="~/Content/assets/image/@imgName" alt="Steak">
                         <h3>TABLE FOR @capacity</h3>
-                        <h6 id="count_group_@index">Table available (@group.Count):</h6>
+                        <h6 id="count_group_@index">Table available (@groupAvailable.Count):</h6>
                         <div class="col-sm-12 col-lg-12" id="group_@index">
-                            @foreach (var item in group)
+                            @foreach (var item in groupAvailable)
                             {
                                 var tableId = "table" + item.IdTable;
-                                <div class="checkbox  wow fadeInLeft" data-wow-delay="1200ms">
+                                <div class="checkbox  wow fadeInLeft" data-wow-delay="500ms">
                                     <input name="ListIdTable" type="checkbox" id="@tableId" value="@item.IdTable"/>
                                     <label for="@tableId">
                                         Table @item.TableNumber
@@ -157,7 +111,7 @@
                 <div style="clear: both;"></div>
             </div>
 
-            <div class="footer text-center wow fadeInUp" data-wow-delay="1600ms" >
+            <div class="footer text-center wow fadeInUp" data-wow-delay="600ms" >
                 <button type="submit" class="btn btn-neutral btn-round btn-lg" style="margin-top: 20px">
                     Submit
                 </button>

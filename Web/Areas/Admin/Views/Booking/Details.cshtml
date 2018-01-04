@@ -1,4 +1,6 @@
-﻿@using Web.SingleTon
+﻿@using Model.Enum
+@using Web.Security
+@using Web.SingleTon
 @model Model.ViewModels.BookingDetailsViewModel
 @{
     ViewBag.Title = "Details";
@@ -9,8 +11,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header" data-background-color="purple">
-                    <h4 class="title">Booking Details</h4>
+                    <h4 class="title">Booking Details <span style="float: right">Status: @Enum.GetName(typeof(Enums.OrderStatus), Model.Order.OrderStatus)</span></h4>
                     <p class="category">Order ID: @Model.Order.IdOrder</p>
+
                 </div>
                 <div class="card-content">
 
@@ -23,28 +26,62 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <a href="@Url.Action("Update", "Booking", new {id = Model.Order.IdOrder})">
-                                <div class="btn btn-warning pull-right">
-                                    Update
-                                </div>
-                            </a>
-                            <a href="@Url.Action("Verify", "Booking", new {id = Model.Order.IdOrder})">
-                                <div class="btn btn-success pull-right">
-                                    Verify
-                                </div>
-                            </a>
+                            @if (SessionPersister.MenuLayoutVisibility.Order.Update)
+                            {
+                                if (Model.Order.OrderStatus == (int) Enums.OrderStatus.New)
+                                {
+                                    <a href="@Url.Action("Update", "Booking", new {id = Model.Order.IdOrder})">
+                                        <div class="btn btn-warning pull-right">
+                                            Update
+                                        </div>
+                                    </a>
+                                }
+                                if (Model.Order.OrderStatus == (int)Enums.OrderStatus.New)
+                                {
+                                    <a href="@Url.Action("Verify", "Booking", new {id = Model.Order.IdOrder})">
+                                        <div class="btn btn-success pull-right">
+                                            Verify
+                                        </div>
+                                    </a>
+                                }
+
+                                if (Model.Order.OrderStatus == (int)Enums.OrderStatus.Verified)
+                                {
+                                    <a href="@Url.Action("Complete", "Booking", new {id = Model.Order.IdOrder})" onclick="return confirm('This order is completed?');">
+                                        <div class="btn btn-success pull-right">
+                                            Completed
+                                        </div>
+                                    </a>
+                                }
+                                if (Model.Order.OrderStatus == (int)Enums.OrderStatus.New || Model.Order.OrderStatus == (int)Enums.OrderStatus.Verified)
+                                {
+                                    <a href="@Url.Action("Cancel", "Booking", new {id = Model.Order.IdOrder})" onclick="return confirm('Are you sure?');">
+                                        <div class="btn btn-danger pull-right">
+                                            Cancel
+                                        </div>
+                                    </a>
+                                }
+                                if (Model.Order.OrderStatus == (int)Enums.OrderStatus.Cancel)
+                                {
+                                    <a href="@Url.Action("Refund", "Booking", new {id = Model.Order.IdOrder})" onclick="return confirm('Refund to this Order?');">
+                                        <div class="btn btn-default pull-right">
+                                            Refund
+                                        </div>
+                                    </a>
+                                }
+                            }
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Begin Time</label>
+                                <label class="control-label">Time in</label>
                                 @Html.TextBoxFor(b => b.Order.BeginTime, new { @class = "form-control", @readonly = true })
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">End Time</label>
+                                <label class="control-label">Time out</label>
                                 @Html.TextBoxFor(b => b.Order.EndTime, new { @class = "form-control", @readonly = true })
                             </div>
                         </div>

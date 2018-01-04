@@ -18,5 +18,6 @@ namespace Context.Database
         public Nullable<int> TableNumber { get; set; }
         public Nullable<int> IdTableType { get; set; }
         public string Description { get; set; }
+        public Nullable<bool> Deactive { get; set; }
     }
 }

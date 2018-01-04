@@ -33,6 +33,53 @@ namespace Api.Helper
             }
         }
 
+        public Customer GetByUserName(string cmnd, string phone)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(cmnd) || !string.IsNullOrEmpty(phone))
+                {
+                    using (var context = new DatBanOnlineEntities())
+                    {
+                        var response = context.Get_Customer_By_UserName(cmnd, phone).SingleOrDefault();
+
+                        var result = response?.Cast<Model.Models.Customer>();
+
+                        return result;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+        public List<Model.Models.Permission> GetListPermission(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    using (var context = new DatBanOnlineEntities())
+                    {
+                        var response = context.Get_List_Permissions_By_ID_Account(id).ToList();
+
+                        var result = response?.Select(p => p.Cast<Model.Models.Permission>()).ToList();
+
+                        return result;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public int Insert(Customer model)
         {
             try

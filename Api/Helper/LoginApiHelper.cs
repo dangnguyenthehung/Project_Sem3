@@ -72,9 +72,9 @@ namespace Api.Helper
                 try
                 {
                     
-                    var listPermisson = entities.Get_Employee_Permission_By_Id(account.IdEmployee).ToList();
+                    var listPermisson = entities.Get_List_Permissions_By_ID_Account(account.IdEmployee).ToList();
 
-                    account.Permissions = listPermisson.Select(p => p.Cast<int>()).ToList();
+                    account.Permissions = listPermisson.Select(p => p.IdPermission).ToList();
                 }
                 catch (Exception e)
                 {
