@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Helpers_Constants.Constants;
 using Model.Models;
+using Model.Security;
 using Web.Models;
 using Web.Security;
 
@@ -34,6 +35,7 @@ namespace Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Password = Encryptor.EncryptSHA1(model.Password);
                 var employeeAccount = LoginModel.EmployeeLogin(model);
 
                 if (employeeAccount == null)

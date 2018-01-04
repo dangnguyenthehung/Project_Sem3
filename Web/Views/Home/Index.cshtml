@@ -1,8 +1,13 @@
-﻿@using Helpers_Constants.Constants
+﻿@using System.Web.Configuration
+@using Helpers_Constants.Constants
 @using Model.Models
 @using Web.Models
+@using Web.SingleTon
 @{
     ViewBag.Title = "Home Page";
+
+    var email = WebConfigurationManager.AppSettings["Email"];
+    var phone = WebConfigurationManager.AppSettings["Phone"];
 }
 
 @if (TempData[TempDataConstants.Error] != null)
@@ -55,8 +60,8 @@
     
     @*page gallery*@
     <div id="slider_show_gallery">
-        <h1 class="title_container wow fadeInRight" style="background-color: rgba(50,50,50,0.8); width:35%"> PORTFOLIOS </h1>
-        <p class="wow fadeInLeft" style="background-color: rgba(50,50,50,0.8); width:35%">
+        <h1 class="title_container wow fadeInRight" style="background-color: rgba(50,50,50,0.8); width: 35%; margin-bottom: 0px; padding: 25px;"> PORTFOLIOS </h1>
+        <p class="wow fadeInLeft" style="background-color: rgba(50,50,50,0.8); width: 35%;padding: 25px;">
             Whatever your event or celebration, we are here to make your special day a truly memorable one. Rosa’s private dining experts are more than happy to create custom floral arrangements and arrange for guests to meet Chef Moise during the course of their meal. For parties of 8-12 we have the roastery table which is available for private hire.
 
         <p>
@@ -112,7 +117,19 @@
     @*page gallery end here*@
 
     @*page contact*@
-   
+    <div id="contact" class="page_content wow fadeIn" style="width: 60% !important; background-color: rgba(50,50,50,0.8)">
+        <h1>CONTACT</h1>
+        <a href="tel:@phone">Phone: @phone</a><br/>
+        <a href="mailto:@email">Email: @email</a>
+        @{
+            var listBranch = BranchSingleTon.GetListBranches();
+            foreach (var item in listBranch)
+            {
+                <p>@item.Description: @item.Address</p>
+            }
+        }
+        
+    </div>
     @*page contact end here*@
 </div>
 

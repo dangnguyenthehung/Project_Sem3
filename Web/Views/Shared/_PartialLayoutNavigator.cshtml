@@ -1,4 +1,5 @@
-﻿<div class="popup_gallery">
+﻿@using Web.Security
+<div class="popup_gallery">
     <div class="cover_popup"></div>
     <div class="close_button"> X</div>
     <iframe id="video"></iframe>
@@ -24,9 +25,19 @@
                  <li id="bt_service">Services</li>
                  <li id="bt_gallery">Gallery</li>
                  <li id="page_contact">Contact</li>
-                 <li style="float: right">
-                     <a href="@Url.Action("SignUp", "Login")">Sign Up</a>
-                 </li>
+                 @if (SessionPersister.CustomerAccount == null)
+                 {
+                     <li style="float: right">
+                         <a href="@Url.Action("SignUp", "Login")">Sign Up</a>
+                     </li>
+                 }
+                 else
+                 {
+                     <li style="float: right">
+                         <a href="@Url.Action("Logout", "Login")">Log out</a>
+                     </li>
+                 }
+                 
              </ul>
         </div>
     </ul>
