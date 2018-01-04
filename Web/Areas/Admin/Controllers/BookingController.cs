@@ -16,10 +16,18 @@ namespace Web.Areas.Admin.Controllers
         // GET: Admin/Booking
         public ActionResult Index()
         {
-            var model = OrderModel.GetByOrderStatus((int)Enums.OrderStatus.New);
+            return View();
+        }
+
+        public ActionResult Status(int status)
+        {
+            var model = OrderModel.GetByOrderStatus(status);
+
+            ViewBag.Status = Enum.GetName(typeof(Enums.OrderStatus), status);
 
             return View(model);
         }
+        
 
         public ActionResult Details(int id)
         {
@@ -94,6 +102,75 @@ namespace Web.Areas.Admin.Controllers
                 {
                     IdOrder = id,
                     OrderStatus = (int)Enums.OrderStatus.Verified,
+                    IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee
+                };
+
+                var result = OrderModel.Verify(order);
+
+                if (result)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Cancel(int id)
+        {
+            if (SessionPersister.EmployeeAccount != null)
+            {
+                var order = new Orders()
+                {
+                    IdOrder = id,
+                    OrderStatus = (int)Enums.OrderStatus.Cancel,
+                    IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee
+                };
+
+                var result = OrderModel.Verify(order);
+
+                if (result)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Refund(int id)
+        {
+            if (SessionPersister.EmployeeAccount != null)
+            {
+                var order = new Orders()
+                {
+                    IdOrder = id,
+                    OrderStatus = (int)Enums.OrderStatus.Refunded,
+                    IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee
+                };
+
+                var result = OrderModel.Verify(order);
+
+                if (result)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Complete(int id)
+        {
+            if (SessionPersister.EmployeeAccount != null)
+            {
+                var order = new Orders()
+                {
+                    IdOrder = id,
+                    OrderStatus = (int)Enums.OrderStatus.Complete,
                     IdEmployee_Verify = SessionPersister.EmployeeAccount.IdEmployee
                 };
 

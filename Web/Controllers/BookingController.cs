@@ -30,6 +30,16 @@ namespace Web.Controllers
             var viewModel = new OrderViewModel();
             if (ModelState.IsValid)
             {
+                if (model.BeginTime < DateTime.Today)
+                {
+                    TempData[TempDataConstants.Error] = "Begin time must be in the future";
+                    return RedirectToAction("Index","Home");
+                }
+                if (model.BeginTime == DateTime.Today && DateTime.Now.Hour >= 23)
+                {
+                    TempData[TempDataConstants.Error] = "End of today, Please select tomorrow or another next days";
+                    return RedirectToAction("Index", "Home");
+                }
                 if (SessionPersister.CustomerAccount != null)
                 {
                     model.IdCustomer = SessionPersister.CustomerAccount.IdCustomer;

@@ -419,5 +419,14 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Insert_Table_Result>("Insert_Table", idBranchParameter, tableTypeParameter, tableNumberParameter, descriptionParameter);
         }
+    
+        public virtual ObjectResult<Get_List_Permissions_By_ID_Account_Result> Get_List_Permissions_By_ID_Account(Nullable<int> idAccount)
+        {
+            var idAccountParameter = idAccount.HasValue ?
+                new ObjectParameter("IdAccount", idAccount) :
+                new ObjectParameter("IdAccount", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_List_Permissions_By_ID_Account_Result>("Get_List_Permissions_By_ID_Account", idAccountParameter);
+        }
     }
 }

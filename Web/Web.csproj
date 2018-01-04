@@ -171,6 +171,7 @@
     <Compile Include="Security\CustomAuthorize.cs" />
     <Compile Include="Security\MyPrincipal.cs" />
     <Compile Include="Security\SessionPersister.cs" />
+    <Compile Include="SingleTon\TimeSingleTon.cs" />
     <Compile Include="SingleTon\TableSingleTon.cs" />
     <Compile Include="SingleTon\TableTypeSingleTon.cs" />
     <Compile Include="SingleTon\BranchSingleTon.cs" />
@@ -285,6 +286,7 @@
     <Content Include="Areas\Admin\Views\Table\Selection.cshtml" />
     <Content Include="Areas\Admin\Views\Table\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Table\View.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Status.cshtml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />

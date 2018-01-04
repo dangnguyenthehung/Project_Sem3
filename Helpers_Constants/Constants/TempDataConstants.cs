@@ -9,5 +9,6 @@ namespace Helpers_Constants.Constants
     public struct TempDataConstants
     {
         public static string LoginAccountName = "LoginAccountName";
+        public static string Error = "Error";
     }
 }

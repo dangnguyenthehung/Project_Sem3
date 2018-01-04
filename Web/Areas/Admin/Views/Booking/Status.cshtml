@@ -1,0 +1,68 @@
+﻿@using Web.SingleTon
+@model List<Model.Models.Orders>
+@{
+    ViewBag.Title = "Status";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <a href="@Url.Action("Index", "Booking")">
+                <div class="btn btn-default pull-left">
+                    Go Back
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title">Order List - @ViewBag.Status</h4>
+                    @*<p class="category">Here is a subtitle for this table</p>*@
+                </div>
+                <div class="card-content table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-primary">
+                        <tr>
+                            <th>Branch</th>
+                            <th>Customer</th>
+                            <th>Begin time</th>
+                            <th>End time</th>
+                            <th>Guest No.</th>
+                            <th>Table No.</th>
+                            <th>Deposit</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@BranchSingleTon.GetDescription(item.IdBranch)</td>
+                                    <td>@item.CustomerName</td>
+                                    <td>@item.BeginTime</td>
+                                    <td>@item.EndTime</td>
+                                    <td>@item.NumberOfCustomer</td>
+                                    <td>@item.NumberOfTable</td>
+
+                                    <td class="text-primary">$@item.Deposit</td>
+                                    <td>
+                                        <a href="@Url.Action("Details", "Booking", new {id = item.IdOrder})">Details</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

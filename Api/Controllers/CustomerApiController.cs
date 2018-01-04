@@ -50,8 +50,7 @@ namespace Api.Controllers
             response.StatusCode = HttpStatusCode.BadRequest;
             return response;
         }
-
-
+        
         [Route("insert")]
         [HttpPost]
         public HttpResponseMessage Insert([FromBody] Customer model)

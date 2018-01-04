@@ -64,6 +64,26 @@ namespace Web.Security
             }
         }
 
+        public static MenuLayoutVisibilityConstant MenuLayoutVisibility
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    var menuLayoutVisibility = new MenuLayoutVisibilityConstant();
+                    menuLayoutVisibility.CheckMenuVisibilityState(null);
+
+                    HttpContext.Current.Session[SessionConstants.MenuLayoutVisibility] = menuLayoutVisibility;
+                }
+
+                var session = HttpContext.Current.Session[SessionConstants.MenuLayoutVisibility] as MenuLayoutVisibilityConstant;
+                return session;
+            }
+            set
+            {
+                HttpContext.Current.Session[SessionConstants.MenuLayoutVisibility] = value;
+            }
+        }
 
         public static string DepositToken
         {

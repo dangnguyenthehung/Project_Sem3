@@ -13,7 +13,8 @@ namespace Model.Enum
             New = 10,
             Verified = 20,
             Complete = 30,
-            Cancel = 50
+            Cancel = 50,
+            Refunded = 60
         }
     }
 }

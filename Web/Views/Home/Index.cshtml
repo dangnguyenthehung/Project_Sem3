@@ -1,9 +1,18 @@
-﻿@using Model.Models
+﻿@using Helpers_Constants.Constants
+@using Model.Models
 @using Web.Models
 @{
     ViewBag.Title = "Home Page";
 }
 
+@if (TempData[TempDataConstants.Error] != null)
+{
+    string message = (string) TempData[TempDataConstants.Error];
+    <script>
+        var err = "@message"; 
+        alert(err);
+    </script>    
+}
 
 <div id="container">
     @*page title end here*@

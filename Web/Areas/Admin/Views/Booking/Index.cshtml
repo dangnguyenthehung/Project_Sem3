@@ -1,58 +1,54 @@
-﻿@using Web.SingleTon
-@model List<Model.Models.Orders>
+﻿@using Helpers_Constants.Constants
+@using Model.Enum
+@using Web.Security
+@using Web.SingleTon
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+}
+@if (SessionPersister.MenuLayoutVisibility.Order.Get_New)
+{
+    <a href="@Url.Action("Status","Booking", new {status = (int)Enums.OrderStatus.New})">
+        <div class="btn btn-primary">
+            <h4>New Orders</h4>
+        </div>
+    </a>
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header" data-background-color="purple">
-                    <h4 class="title">Booking List</h4>
-                    @*<p class="category">Here is a subtitle for this table</p>*@
-                </div>
-                <div class="card-content table-responsive">
-                    <table class="table table-hover">
-                        <thead class="text-primary">
-                            <tr>
-                                <th>Branch</th>
-                                <th>Customer</th>
-                                <th>Begin time</th>
-                                <th>End time</th>
-                                <th>Guest No.</th>
-                                <th>Table No.</th>
-                                <th>Deposit</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @if (Model != null)
-                        {
-                            foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>@BranchSingleTon.GetDescription(item.IdBranch)</td>
-                                    <td>@item.CustomerName</td>
-                                    <td>@item.BeginTime</td>
-                                    <td>@item.EndTime</td>
-                                    <td>@item.NumberOfCustomer</td>
-                                    <td>@item.NumberOfTable</td>
-                                    
-                                    <td class="text-primary">$@item.Deposit</td>
-                                    <td>
-                                        <a href="@Url.Action("Details","Booking", new {id = item.IdOrder})">Details</a>
-                                    </td>
-                                </tr>
-                            }
-                        }
-                        
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+@if (SessionPersister.MenuLayoutVisibility.Order.Get_Verified)
+{
+    <a href="@Url.Action("Status","Booking", new {status = (int)Enums.OrderStatus.Verified})">
+        <div class="btn btn-success">
+            <h4>Verified Orders</h4>
         </div>
-    </div>
-</div>
+    </a>
+}
 
+@if (SessionPersister.MenuLayoutVisibility.Order.Get_Completed)
+{
+    <a href="@Url.Action("Status","Booking", new {status = (int)Enums.OrderStatus.Complete})">
+        <div class="btn btn-info">
+            <h4>Completed Orders</h4>
+        </div>
+    </a>
+}
+
+@if (SessionPersister.MenuLayoutVisibility.Order.Get_Cancel)
+{
+    <a href="@Url.Action("Status","Booking", new {status = (int)Enums.OrderStatus.Cancel})">
+        <div class="btn btn-danger">
+            <h4>Canceled Orders</h4>
+        </div>
+    </a>
+}
+
+@if (SessionPersister.MenuLayoutVisibility.Order.Get_Refunded)
+{
+    <a href="@Url.Action("Status","Booking", new {status = (int)Enums.OrderStatus.Refunded})">
+        <div class="btn btn-default">
+            <h4>Refunded Orders</h4>
+        </div>
+    </a>
+}

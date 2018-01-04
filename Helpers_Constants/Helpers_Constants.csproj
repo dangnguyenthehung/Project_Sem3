@@ -52,6 +52,7 @@
     <Compile Include="ApiCall\OrderHelper.cs" />
     <Compile Include="ApiCall\TableHelper.cs" />
     <Compile Include="Constants\ApiUrls.cs" />
+    <Compile Include="Constants\MenuLayoutVisibilityConstant.cs" />
     <Compile Include="Constants\PermissionConstants.cs" />
     <Compile Include="Constants\SessionConstants.cs" />
     <Compile Include="Constants\TempDataConstants.cs" />

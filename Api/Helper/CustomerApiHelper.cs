@@ -56,6 +56,30 @@ namespace Api.Helper
             }
         }
 
+
+        public List<Model.Models.Permission> GetListPermission(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    using (var context = new DatBanOnlineEntities())
+                    {
+                        var response = context.Get_List_Permissions_By_ID_Account(id).ToList();
+
+                        var result = response?.Select(p => p.Cast<Model.Models.Permission>()).ToList();
+
+                        return result;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public int Insert(Customer model)
         {
             try

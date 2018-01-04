@@ -168,8 +168,16 @@ namespace Web.Areas.Admin.Controllers
             };
 
             var table = TableModel.GetTableAvailable(tableFilter);
+            var result = new List<List<Table>>();
 
-            var result = table.GroupBy(t => t.IdTableType).ToList();
+            var listType = TableTypeSingleTon.GetListTypes();
+
+            foreach (var type in listType)
+            {
+                var temp = table.Where(t => t.IdTableType == type.Id_Table_Type).ToList();
+
+                result.Add(temp);
+            }
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

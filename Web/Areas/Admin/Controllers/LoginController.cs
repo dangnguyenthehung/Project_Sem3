@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Helpers_Constants.Constants;
 using Model.Models;
 using Web.Models;
 using Web.Security;
@@ -18,6 +19,11 @@ namespace Web.Areas.Admin.Controllers
             {
                 SessionPersister.EmployeeAccount = null;
             }
+            //Check menu visibility
+            var menuLayoutVisibility = new MenuLayoutVisibilityConstant();
+            menuLayoutVisibility.CheckMenuVisibilityState(null);
+
+            SessionPersister.MenuLayoutVisibility = menuLayoutVisibility;
 
             return View();
         }
@@ -39,13 +45,31 @@ namespace Web.Areas.Admin.Controllers
                 {
                     //Save login info to session
                     SessionPersister.EmployeeAccount = employeeAccount;
-                    //Session[SessionConstants.LoginAccountName] = result.HoTen;
 
-                    //DangNhapModel.GetAccountPermissions(ref adminAccount);
+                    //Check menu visibility
+                    var menuLayoutVisibility = new MenuLayoutVisibilityConstant();
+                    menuLayoutVisibility.CheckMenuVisibilityState(employeeAccount);
+
+                    SessionPersister.MenuLayoutVisibility = menuLayoutVisibility;
                 }
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
+        }
+
+        public ActionResult Logout()
+        {
+            if (SessionPersister.EmployeeAccount != null)
+            {
+                SessionPersister.EmployeeAccount = null;
+            }
+            //Check menu visibility
+            var menuLayoutVisibility = new MenuLayoutVisibilityConstant();
+            menuLayoutVisibility.CheckMenuVisibilityState(null);
+
+            SessionPersister.MenuLayoutVisibility = menuLayoutVisibility;
+
+            return RedirectToAction("Index","Login");
         }
     }
 }

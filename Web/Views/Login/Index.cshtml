@@ -14,7 +14,12 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <p class="text-danger">@ViewBag.error</p>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p class="text-danger booking-error">@ViewBag.error</p>
+                        </div>
+                    </div>
+                    
 
                     <div class="form-group">
                         <div class="row">
