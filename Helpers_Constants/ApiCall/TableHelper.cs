@@ -10,46 +10,46 @@ namespace Helpers_Constants.ApiCall
 {
     public class TableHelper : BaseHelper
     {
-        public List<Table> GetByIdRestaurant(string apiUrl, int id)
+        public List<Table> GetByIdRestaurant(string token, string apiUrl, int id)
         {
-            return _Get_By_Id<List<Table>>(apiUrl, id);
+            return _Get_By_Id<List<Table>>(token, apiUrl, id);
         }
 
-        public Table GetTableById(string apiUrl, int id)
+        public Table GetTableById(string token, string apiUrl, int id)
         {
-            return _Get_By_Id<Table>(apiUrl, id);
+            return _Get_By_Id<Table>(token, apiUrl, id);
         }
 
-        public int InsertTable(string apiUrl, Table model)
+        public int InsertTable(string token, string apiUrl, Table model)
         {
-            return _Insert(apiUrl, model);
+            return _Insert(token, apiUrl, model);
         }
 
-        public bool DeleteTableById(string apiUrl, int id, int idAccount)
+        public bool DeleteTableById(string token, string apiUrl, int id, int idAccount)
         {
-            return _Delete(apiUrl, id, idAccount);
+            return _Delete(token, apiUrl, id, idAccount);
         }
 
-        public bool UpdateTableById(string apiUrl, Table model)
+        public bool UpdateTableById(string token, string apiUrl, Table model)
         {
-            return _Update(apiUrl, model);
+            return _Update(token, apiUrl, model);
         }
 
 
-        public List<Table> GetTableAvailable(string apiUrl, TableFilterDTO model)
+        public List<Table> GetTableAvailable(string token, string apiUrl, TableFilterDTO model)
         {
-            return _Get_By_Params_Object<List<Table>, TableFilterDTO>(apiUrl, model);
+            return _Get_By_Params_Object<List<Table>, TableFilterDTO>(token, apiUrl, model);
         }
 
-        public List<Table> GetAllTable(string apiUrl)
+        public List<Table> GetAllTable(string token, string apiUrl)
         {
-            return _Get_All<Table>(apiUrl);
+            return _Get_All<Table>(token, apiUrl);
         }
 
         //table type
-        public List<TableType> GetListTableTypes(string apiUrl)
+        public List<TableType> GetListTableTypes(string token, string apiUrl)
         {
-            return _Get_All<TableType>(apiUrl);
+            return _Get_All<TableType>(token, apiUrl);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Api.Helper;
+using Api.Security;
 using Model.DTO;
 using Model.Models;
 using Newtonsoft.Json;
@@ -12,6 +13,7 @@ using Newtonsoft.Json;
 namespace Api.Controllers
 {
     [RoutePrefix("api/table")]
+    [CustomBasicAuthenticationFilter]
     public class TableApiController : ApiController
     {
         private static readonly TableApiHelper Helper = new TableApiHelper();

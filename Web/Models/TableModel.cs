@@ -6,6 +6,7 @@ using Helpers_Constants.ApiCall;
 using Helpers_Constants.Constants;
 using Model.DTO;
 using Model.Models;
+using Web.Security;
 
 namespace Web.Models
 {
@@ -16,59 +17,67 @@ namespace Web.Models
 
         public static List<Table> GetByIdRestaurant(int id)
         {
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.Get_By_Id_Restaurant;
 
-            return Helper.GetByIdRestaurant(url, id);
+            return Helper.GetByIdRestaurant(token, url, id);
         }
 
         public static Table GetTableById(int id)
         {
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.Get_Table_By_Id;
 
-            return Helper.GetTableById(url, id);
+            return Helper.GetTableById(token, url, id);
         }
 
         public static int InsertTable(Table model)
         {
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.Insert_Table;
 
-            return Helper.InsertTable(url, model);
+            return Helper.InsertTable(token, url, model);
         }
 
         public static bool UpdateTableById(Table model)
         {
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.Update_Table_By_Id;
 
-            return Helper.UpdateTableById(url, model);
+            return Helper.UpdateTableById(token, url, model);
         }
         
         public static bool DeleteTableById(int id, int idAccount)
         {
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.Delete_Table_By_Id;
 
-            return Helper.DeleteTableById(url, id, idAccount);
+            return Helper.DeleteTableById(token, url, id, idAccount);
         }
 
         public static List<Table> GetTableAvailable(TableFilterDTO model)
         {
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.Get_Table_Available;
 
-            return Helper.GetTableAvailable(url, model);
+            return Helper.GetTableAvailable(token, url, model);
         }
 
         public static List<Table> GetListTable()
         {
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.Get_All;
 
-            return Helper.GetAllTable(url);
+            return Helper.GetAllTable(token, url);
         }
 
         //Table type
         public static List<TableType> GetListTableTypes()
         {
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.Get_List_TableType;
 
-            return Helper.GetListTableTypes(url);
+            return Helper.GetListTableTypes(token, url);
         }
     }
 }

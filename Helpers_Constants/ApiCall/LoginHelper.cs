@@ -12,24 +12,24 @@ namespace Helpers_Constants.ApiCall
 {
     public class LoginHelper : BaseHelper
     {
-        public Customer CustomerLogin(string apiUrl, Login account)
+        public Customer CustomerLogin(string token, string apiUrl, Login account)
         {
-            return _Get_By_Params_Object<Customer, Login>(apiUrl, account);
+            return _Get_By_Params_Object<Customer, Login>(token, apiUrl, account);
         }
 
-        public Customer FindCustomer(string apiUrl, string userName)
+        public Customer FindCustomer(string token, string apiUrl, string userName)
         {
-            return _Get_By_Keyword<Customer>(apiUrl, userName);
+            return _Get_By_Keyword<Customer>(token, apiUrl, userName);
         }
 
-        public Employee EmployeeLogin(string apiUrl, Login account)
+        public Employee EmployeeLogin(string token, string apiUrl, Login account)
         {
-            return _Get_By_Params_Object<Employee, Login>(apiUrl, account);
+            return _Get_By_Params_Object<Employee, Login>(token, apiUrl, account);
         }
 
-        public Employee FindEmployee(string apiUrl, string userName)
+        public Employee FindEmployee(string token, string apiUrl, string userName)
         {
-            return _Get_By_Keyword<Employee>(apiUrl, userName);
+            return _Get_By_Keyword<Employee>(token, apiUrl, userName);
         }
 
     }

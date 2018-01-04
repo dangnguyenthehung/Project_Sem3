@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Api.Helper;
+using Api.Security;
 using Model.DTO;
 using Model.Functions;
 using Model.Models;
@@ -14,6 +15,7 @@ using Newtonsoft.Json;
 namespace Api.Controllers
 {
     [RoutePrefix("api/order")]
+    [CustomBasicAuthenticationFilter]
     public class OrderApiController : ApiController
     {
         private static readonly OrdersApiHelper Helper = new OrdersApiHelper();

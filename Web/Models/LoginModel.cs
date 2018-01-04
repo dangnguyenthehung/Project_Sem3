@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using Helpers_Constants.ApiCall;
 using Helpers_Constants.Constants;
+using Helpers_Constants.Utilities;
 using Model.Models;
+using Web.Security;
 
 namespace Web.Models
 {
@@ -20,8 +23,12 @@ namespace Web.Models
                 return null;
             }
             var url = ApiUrl.Customer;
-
-            var result = Helper.CustomerLogin(url, accLogin);
+            var tempToken = Utilities.CreateLoginToken(new Login()
+            {
+                UserName = WebConfigurationManager.AppSettings["ApiUserName"],
+                Password = WebConfigurationManager.AppSettings["ApiPassword"]
+            });
+            var result = Helper.CustomerLogin(tempToken, url, accLogin);
 
             return result;
         }
@@ -32,10 +39,11 @@ namespace Web.Models
             {
                 return null;
             }
-            
+
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.FindCustomer;
 
-            var result = Helper.FindCustomer(url, userName);
+            var result = Helper.FindCustomer(token, url, userName);
 
             return result;
         }
@@ -46,9 +54,11 @@ namespace Web.Models
             {
                 return null;
             }
+
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.Employee;
 
-            var result = Helper.EmployeeLogin(url, accLogin);
+            var result = Helper.EmployeeLogin(token, url, accLogin);
 
             return result;
         }
@@ -60,9 +70,10 @@ namespace Web.Models
                 return null;
             }
 
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.FindEmployee;
 
-            var result = Helper.FindEmployee(url, userName);
+            var result = Helper.FindEmployee(token, url, userName);
 
             return result;
         }

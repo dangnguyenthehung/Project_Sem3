@@ -5,11 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Api.Helper;
+using Api.Security;
 using Newtonsoft.Json;
 
 namespace Api.Controllers
 {
     [RoutePrefix("api/branch")]
+    [CustomBasicAuthenticationFilter]
     public class RestaurantBranchApiController : ApiController
     {
         private static readonly RestaurantBranchApiHelper Helper = new RestaurantBranchApiHelper();

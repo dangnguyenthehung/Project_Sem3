@@ -150,6 +150,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\TableController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UnAuthorizeController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\ClientBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -288,6 +289,7 @@
     <Content Include="Areas\Admin\Views\Table\View.cshtml" />
     <Content Include="Areas\Admin\Views\Booking\Status.cshtml" />
     <Content Include="App_Data\site2.PublishSettings" />
+    <Content Include="Areas\Admin\Views\UnAuthorize\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />

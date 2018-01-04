@@ -10,40 +10,40 @@ namespace Helpers_Constants.ApiCall
 {
     public class OrderHelper : BaseHelper
     {
-        public Orders GetById(string apiUrl, int id)
+        public Orders GetById(string token, string apiUrl, int id)
         {
-            return _Get_By_Id<Orders>(apiUrl, id);
+            return _Get_By_Id<Orders>(token, apiUrl, id);
         }
 
-        public List<Orders> GetAll(string apiUrl)
+        public List<Orders> GetAll(string token, string apiUrl)
         {
-            return _Get_All<Orders>(apiUrl);
+            return _Get_All<Orders>(token, apiUrl);
         }
 
-        public List<Orders> GetByOrderStatus(string apiUrl, int orderStatus)
+        public List<Orders> GetByOrderStatus(string token, string apiUrl, int orderStatus)
         {
-            return _Get_By_Id<List<Orders>>(apiUrl, orderStatus);
+            return _Get_By_Id<List<Orders>>(token, apiUrl, orderStatus);
         }
         
-        public bool Verify(string apiUrl, Orders order)
+        public bool Verify(string token, string apiUrl, Orders order)
         {
-            return _Update(apiUrl, order);
+            return _Update(token, apiUrl, order);
         }
 
-        public bool Update(string apiUrl, Orders order)
+        public bool Update(string token, string apiUrl, Orders order)
         {
-            return _Update(apiUrl, order);
+            return _Update(token, apiUrl, order);
         }
 
         //order table
-        public List<Order_Table> GetListOrderTable(string apiUrl, int id)
+        public List<Order_Table> GetListOrderTable(string token, string apiUrl, int id)
         {
-            return _Get_By_Id<List<Order_Table>>(apiUrl, id);
+            return _Get_By_Id<List<Order_Table>>(token, apiUrl, id);
         }
 
-        public int Insert(string apiUrl, OrderDTO order)
+        public int Insert(string token, string apiUrl, OrderDTO order)
         {
-            return _Insert(apiUrl,order);
+            return _Insert(token, apiUrl,order);
         }
     }
 }

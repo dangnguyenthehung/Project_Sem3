@@ -5,12 +5,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Api.Helper;
+using Api.Security;
 using Model.Models;
 using Newtonsoft.Json;
 
 namespace Api.Controllers
 {
     [RoutePrefix("api/login")]
+    [CustomBasicAuthenticationFilter]
     public class LoginApiController : ApiController
     {
         private static readonly LoginApiHelper Helper = new LoginApiHelper();

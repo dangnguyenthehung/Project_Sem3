@@ -46,6 +46,7 @@
     <Compile Include="DTO\OrderTableTableType.cs" />
     <Compile Include="DTO\RolesMapping.cs" />
     <Compile Include="DTO\TableFilterDTO.cs" />
+    <Compile Include="Enum\ByteArray.cs" />
     <Compile Include="Enum\Enums.cs" />
     <Compile Include="Functions\HelperFunctions.cs" />
     <Compile Include="Models\Customer.cs" />
