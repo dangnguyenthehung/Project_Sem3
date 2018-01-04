@@ -156,59 +156,13 @@ namespace Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-
-        [HttpPost]
-        public ActionResult Finish(OrderViewModel submitData)
-        {
-            if (SessionPersister.OrderInfomation != null)
-            {
-                var message = MessageConstants.OrderFail;
-
-                var viewModel = SessionPersister.OrderInfomation;
-
-                if (submitData.Order.IdBranch == viewModel.Order.IdBranch && submitData.Order.IdCustomer == viewModel.Order.IdCustomer && submitData.Order.BeginTime == viewModel.Order.BeginTime)
-                {
-                    viewModel.Order.OrderStatus = (int)Enums.OrderStatus.New;
-
-                    var data = new OrderDTO()
-                    {
-                        Order = viewModel.Order,
-                        ListIdTable = viewModel.ListIdTable
-                    };
-                    
-                    var result = OrderModel.Insert(data);
-
-                    if (result > 0)
-                    {
-                        message = MessageConstants.OrderSuccess;
-
-                        return RedirectToAction("Index", "Message", new { message });
-                    }
-
-                }
-
-                message = MessageConstants.OrderFail;
-                return RedirectToAction("Index", "Message", new { message });
-            }
-
-            var url = HttpContext.Request.UrlReferrer;
-            if (url != null)
-            {
-                return Redirect(url.ToString());
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
-
-
+        
         public ActionResult Deposit(string token)
         {
             if (!string.IsNullOrEmpty(token) && token == SessionPersister.DepositToken)
             {
                 if (SessionPersister.OrderInfomation != null)
                 {
-
                     var viewModel = SessionPersister.OrderInfomation;
                     
                     viewModel.Order.OrderStatus = (int)Enums.OrderStatus.New;
@@ -221,16 +175,12 @@ namespace Web.Controllers
 
                     var result = OrderModel.Insert(data);
 
-                    //Message
-                    var message = MessageConstants.OrderFail;
                     if (result > 0)
                     {
-                        message = MessageConstants.OrderSuccess;
-
-                        return RedirectToAction("Index", "Message", new { message });
+                        return RedirectToAction("Finish", "Booking");
                     }
 
-                    message = MessageConstants.OrderFail;
+                    var message = MessageConstants.OrderFail;
                     return RedirectToAction("Index", "Message", new { message });
                 }
             }
@@ -239,8 +189,30 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // 
+        public ActionResult Finish()
+        {
+            if (SessionPersister.OrderInfomation != null)
+            {
+                var viewModel = SessionPersister.OrderInfomation;
 
+                GetDepositValue(ref viewModel);
+                GetDepositToken(ref viewModel);
+
+                ViewBag.Customer = CustomerModel.GetById(viewModel.Order.IdCustomer);
+
+                return View(viewModel);
+            }
+
+            var url = HttpContext.Request.UrlReferrer;
+            if (url != null)
+            {
+                return Redirect(url.ToString());
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        // Function
         private void GetStep2Data(ref OrderViewModel viewModel)
         {
             var order = viewModel.Order;
@@ -340,8 +312,18 @@ namespace Web.Controllers
             };
 
             var table = TableModel.GetTableAvailable(tableFilter);
+            var result = new List<List<Table>>();
 
-            var result = table.GroupBy(t => t.IdTableType).ToList();
+            var listType = TableTypeSingleTon.GetListTypes();
+
+            foreach (var type in listType)
+            {
+                var temp = table.Where(t => t.IdTableType == type.Id_Table_Type).ToList();
+                
+                result.Add(temp);
+            }
+
+            //var result = table.GroupBy(t => t.IdTableType).ToList();
             
             return Json(result, JsonRequestBehavior.AllowGet);
         }
