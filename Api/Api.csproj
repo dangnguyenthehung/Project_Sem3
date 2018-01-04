@@ -194,6 +194,8 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="subsite4.PublishSettings" />
+    <None Include="Properties\PublishProfiles\Live - api.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Context\Context.csproj">

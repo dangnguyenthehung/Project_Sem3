@@ -50,6 +50,16 @@ namespace Web.Controllers
             return View(model);
         }
 
+        public ActionResult Logout()
+        {
+            if (SessionPersister.CustomerAccount != null)
+            {
+                SessionPersister.CustomerAccount = null;
+            }
+
+            return RedirectToAction("Index","Home");
+        }
+
         public ActionResult SignUp()
         {
             if (SessionPersister.CustomerAccount != null)
