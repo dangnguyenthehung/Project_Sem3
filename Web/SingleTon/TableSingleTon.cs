@@ -24,6 +24,11 @@ namespace Web.SingleTon
             _listTables = TableModel.GetListTable();
         }
 
+        public static void UpdateData()
+        {
+            GetData();
+        }
+
         public static List<Table> GetListTables()
         {
             if (_listTables == null)

@@ -33,6 +33,26 @@ namespace Web.Models
             return result;
         }
         
+        public static Employee EmployeeLogin(Login accLogin)
+        {
+            if (accLogin == null)
+            {
+                return null;
+            }
+            
+            var tempToken = Utilities.CreateLoginToken(new Login()
+            {
+                UserName = WebConfigurationManager.AppSettings["ApiUserName"],
+                Password = WebConfigurationManager.AppSettings["ApiPassword"]
+            });
+            var url = ApiUrl.Employee;
+
+            var result = Helper.EmployeeLogin(tempToken, url, accLogin);
+
+            return result;
+        }
+
+
         public static Customer FindCustomer(string userName)
         {
             if (string.IsNullOrEmpty(userName))
@@ -47,22 +67,6 @@ namespace Web.Models
 
             return result;
         }
-        
-        public static Employee EmployeeLogin(Login accLogin)
-        {
-            if (accLogin == null)
-            {
-                return null;
-            }
-
-            var token = SessionPersister.ApiToken;
-            var url = ApiUrl.Employee;
-
-            var result = Helper.EmployeeLogin(token, url, accLogin);
-
-            return result;
-        }
-
         public static Employee FindEmployee(string userName)
         {
             if (string.IsNullOrEmpty(userName))

@@ -137,7 +137,7 @@ namespace Api.Helper
                     {
                         var response = context.Get_List_Order_Table(id).ToList();
 
-                        var result = response.Select(p => p.Cast<Model.Models.Order_Table>()).ToList();
+                        return response.Select(p => p.Cast<Model.Models.Order_Table>()).ToList();
                     }
                     
                     

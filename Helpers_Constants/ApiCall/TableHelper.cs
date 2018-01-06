@@ -51,5 +51,10 @@ namespace Helpers_Constants.ApiCall
         {
             return _Get_All<TableType>(token, apiUrl);
         }
+
+        public bool UpdateTableType(string token, string apiUrl, TableType model)
+        {
+            return _Update(token, apiUrl, model);
+        }
     }
 }

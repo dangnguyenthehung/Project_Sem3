@@ -6,73 +6,75 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
     var listType = (List<SelectListItem>)ViewBag.tableType;
 }
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title">Edit Table</h4>
+                    <p class="category">Table ID: @Model.IdTable</p>
+                </div>
 
-<h2 class="text-center">Edit</h2>
+                <div class="card-content">
 
-@using (Html.BeginForm("Edit","Table", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+                    @using (Html.BeginForm("Edit", "Table", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-12">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(m => m.IdTable)
-                    @Html.HiddenFor(m => m.RestaurantId)
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.RestaurantId, htmlAttributes: new { @class = "control-label col-md-4" })
-                        <div class="col-md-8">
-                            @Html.TextBox("Branch",  BranchSingleTon.GetDescription(Model.RestaurantId), new { @class = "form-control", @readonly = "readonly" })
-                            @Html.ValidationMessageFor(model => model.RestaurantId, "", new { @class = "text-danger" })
+                        <div class="">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(m => m.IdTable)
+                                        @Html.HiddenFor(m => m.RestaurantId)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group label-floating">
+                                            @Html.LabelFor(model => model.RestaurantId, new { @class = "control-label" })
+                                            @Html.TextBox("Branch", BranchSingleTon.GetDescription(Model.RestaurantId), new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group label-floating">
+                                            @Html.LabelFor(model => model.IdTableType, htmlAttributes: new { @class = "control-label" })
+                                            @Html.DropDownList("IdTableType", listType, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group label-floating">
+                                            @Html.LabelFor(model => model.TableNumber, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.TableNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group label-floating">
+                                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <input type="submit" value="Save" class="btn btn-success" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.IdTableType, htmlAttributes: new { @class = "control-label col-md-4" })
-                        <div class="col-md-8">
-                            @Html.DropDownList("IdTableType", listType, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.IdTableType, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TableNumber, htmlAttributes: new { @class = "control-label col-md-4" })
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.TableNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.TableNumber, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
-                        </div>
-                    </div>
+                    }
+
                 </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    
+    <div>
+        @Html.ActionLink("Back to List", "View", new {id = Model.RestaurantId}, new { @class = "btn btn-default" })
+    </div>
 </div>
+
+

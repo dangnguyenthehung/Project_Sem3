@@ -1,4 +1,5 @@
-﻿@using Web.SingleTon
+﻿@using Web.Security
+@using Web.SingleTon
 @model List<Model.Models.Table>
 @{
     ViewBag.Title = "View";
@@ -8,6 +9,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
+            <div>
+                @Html.ActionLink("Back", "Selection", new { id = Model.First().RestaurantId }, new { @class = "btn btn-default" })
+            </div>
             <div class="card">
                 <div class="card-header" data-background-color="purple">
                     <h4 class="title">Table List</h4>
@@ -16,37 +20,42 @@
                 <div class="card-content table-responsive">
                     <table class="table table-hover">
                         <thead class="text-primary">
-                            <tr>
-                                <th>Table Number</th>
-                                <th>Table Type</th>
-                                <th>Capacity</th>
-                                <th>Deposit</th>
-                                <th></th>
-                            </tr>
+                        <tr>
+                            <th>Table Number</th>
+                            <th>Table Type</th>
+                            <th>Capacity</th>
+                            <th>Deposit</th>
+                            <th></th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @if (Model != null)
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
                             {
-                                foreach (var item in Model)
-                                {
-                            <tr>
-                                <td>Table @item.TableNumber</td>
-                                <td>@TableTypeSingleTon.GetDescription(item.IdTableType)</td>
-                                <td>@TableTypeSingleTon.GetCapacity(item.IdTableType)</td>
-                                <td class="text-primary">$@TableTypeSingleTon.GetDepositFee(item.IdTableType)</td>
+                                <tr>
+                                    <td>Table @item.TableNumber</td>
+                                    <td>@TableTypeSingleTon.GetDescription(item.IdTableType)</td>
+                                    <td>@TableTypeSingleTon.GetCapacity(item.IdTableType)</td>
+                                    <td class="text-primary">$@TableTypeSingleTon.GetDepositFee(item.IdTableType)</td>
 
-                                <td>
-                                    <a href="@Url.Action("Edit","Table", new {idTable = item.IdTable})">Edit</a>
-                                </td>
-                            </tr>
-                                }
+                                    <td>
+                                    
+                                        @if (SessionPersister.MenuLayoutVisibility.TableType.UpdateTable)
+                                        {
+                                            <a href="@Url.Action("Edit", "Table", new {idTable = item.IdTable})">Edit</a>
+                                        }
+                                    </td>
+                                </tr>
                             }
+                        }
 
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 

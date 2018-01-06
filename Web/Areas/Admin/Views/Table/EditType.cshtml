@@ -1,0 +1,72 @@
+﻿@using Web.SingleTon
+@model Model.Models.TableType
+@{
+    ViewBag.Title = "Edit Type";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title">Edit Table Type</h4>
+                    <p class="category">Table Type: @Model.Description</p>
+                </div>
+
+                <div class="card-content">
+
+                    @using (Html.BeginForm("EditType", "Table", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(m => m.Id_Table_Type)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="form-group label-floating">
+                                            @Html.LabelFor(model => model.TableCapacity, new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.TableCapacity, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="form-group label-floating">
+                                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4">
+                                        <div class="form-group label-floating">
+                                            @Html.LabelFor(model => model.DepositFee, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.DepositFee, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="form-group">
+                                            <input type="submit" value="Save" class="btn btn-success" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        @Html.ActionLink("Go Back", "Type", null, new {@class="btn btn-default"})
+    </div>
+</div>
+
+
+

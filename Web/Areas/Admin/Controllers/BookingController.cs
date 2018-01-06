@@ -28,21 +28,25 @@ namespace Web.Areas.Admin.Controllers
 
             return View(model);
         }
-        
 
+
+        [CustomAuthorize(Permission = PermissionConstants.Order.Get)]
         public ActionResult Details(int id)
         {
             if (id > 0)
             {
                 var order = OrderModel.GetById(id);
-                if (order.IdCustomer > 0)
+                if (order != null)
                 {
+                    var listOrderTable = OrderModel.GetListOrderTable(id);
+
                     var customer = CustomerModel.GetById(order.IdCustomer);
 
                     var viewModel = new BookingDetailsViewModel()
                     {
                         Order = order,
-                        Customer = customer
+                        Customer = customer,
+                        ListIdTable = listOrderTable.Select(t => t.IdTable).ToList()
                     };
 
                     return View(viewModel);

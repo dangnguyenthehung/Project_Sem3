@@ -197,5 +197,27 @@ namespace Api.Controllers
             return response;
         }
 
+        [Route("update_tabletype/")]
+        [HttpPut]
+        public HttpResponseMessage Update_TableType([FromBody] TableType type)
+        {
+            var response = new HttpResponseMessage();
+
+            if (type != null)
+            {
+                var result = Helper.Update_TableType(type);
+
+                if (result)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                    return response;
+                }
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
     }
 }

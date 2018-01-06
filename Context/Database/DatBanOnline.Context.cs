@@ -428,5 +428,26 @@ namespace Context.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Get_List_Permissions_By_ID_Account_Result>("Get_List_Permissions_By_ID_Account", idAccountParameter);
         }
+    
+        public virtual int Update_TableType_By_Id(Nullable<int> idTableType, Nullable<int> capacity, string description, Nullable<decimal> deposit)
+        {
+            var idTableTypeParameter = idTableType.HasValue ?
+                new ObjectParameter("IdTableType", idTableType) :
+                new ObjectParameter("IdTableType", typeof(int));
+    
+            var capacityParameter = capacity.HasValue ?
+                new ObjectParameter("Capacity", capacity) :
+                new ObjectParameter("Capacity", typeof(int));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var depositParameter = deposit.HasValue ?
+                new ObjectParameter("Deposit", deposit) :
+                new ObjectParameter("Deposit", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Update_TableType_By_Id", idTableTypeParameter, capacityParameter, descriptionParameter, depositParameter);
+        }
     }
 }

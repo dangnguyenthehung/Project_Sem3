@@ -79,5 +79,12 @@ namespace Web.Models
 
             return Helper.GetListTableTypes(token, url);
         }
+        public static bool UpdateTableType(TableType model)
+        {
+            var token = SessionPersister.ApiToken;
+            var url = ApiUrl.Update_TableType;
+
+            return Helper.UpdateTableType(token, url, model);
+        }
     }
 }

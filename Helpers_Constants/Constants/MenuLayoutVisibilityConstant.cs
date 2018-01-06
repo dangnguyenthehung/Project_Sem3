@@ -13,13 +13,15 @@ namespace Helpers_Constants.Constants
         private static Employee _loginAccount = null;
 
         public _Order Order = new _Order();
+        public _TableType TableType = new _TableType();
 
         #region Modules
 
         public class _Order
         {
             public bool Any = false;
-            
+
+            public bool Get = false;
             public bool Get_New = false;
             public bool Get_Verified = false;
             public bool Get_Completed = false;
@@ -29,7 +31,15 @@ namespace Helpers_Constants.Constants
             public bool Update = false;
             public bool Delete = false;
         }
-        
+        public class _TableType
+        {
+            public bool Any = false;
+
+            public bool Get = false;
+            public bool GetTable = false;
+            public bool UpdateTable = false;
+            public bool UpdateType = false;
+        }
         #endregion
 
 
@@ -44,11 +54,13 @@ namespace Helpers_Constants.Constants
             #region ModuleVisibilityState
 
             Order.Any = CheckModuleVisibility<PermissionConstants.Order>();
-            
+            TableType.Any = CheckModuleVisibility<PermissionConstants.TableType>();
+
             #endregion
 
             #region ModuleActionVisibilityState
-            
+
+            Order.Get = CheckModuleActionVisibility(PermissionConstants.Order.Get);
             Order.Get_New = CheckModuleActionVisibility(PermissionConstants.Order.Get_New);
             Order.Get_Verified = CheckModuleActionVisibility(PermissionConstants.Order.Get_Verified);
             Order.Get_Completed = CheckModuleActionVisibility(PermissionConstants.Order.Get_Completed);
@@ -57,7 +69,12 @@ namespace Helpers_Constants.Constants
             Order.Insert = CheckModuleActionVisibility(PermissionConstants.Order.Insert);
             Order.Update = CheckModuleActionVisibility(PermissionConstants.Order.Update);
             Order.Delete = CheckModuleActionVisibility(PermissionConstants.Order.Delete);
-            
+
+            TableType.Get = CheckModuleActionVisibility(PermissionConstants.TableType.Get);
+            TableType.GetTable = CheckModuleActionVisibility(PermissionConstants.TableType.GetTable);
+            TableType.UpdateTable = CheckModuleActionVisibility(PermissionConstants.TableType.UpdateTable);
+            TableType.UpdateType = CheckModuleActionVisibility(PermissionConstants.TableType.UpdateType);
+
             #endregion
 
         }

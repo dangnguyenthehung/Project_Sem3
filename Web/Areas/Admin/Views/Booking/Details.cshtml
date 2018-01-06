@@ -28,7 +28,7 @@
                         <div class="col-md-6">
                             @if (SessionPersister.MenuLayoutVisibility.Order.Update)
                             {
-                                if (Model.Order.OrderStatus == (int) Enums.OrderStatus.New)
+                                if (Model.Order.OrderStatus == (int)Enums.OrderStatus.New)
                                 {
                                     <a href="@Url.Action("Update", "Booking", new {id = Model.Order.IdOrder})">
                                         <div class="btn btn-warning pull-right">
@@ -105,6 +105,22 @@
                                 @Html.TextBoxFor(b => b.Order.Deposit, new { @class = "form-control", @readonly = true })
                             </div>
                         </div>
+                        <div class="col-xs-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">List Table</label>
+                                <p class="form-control">
+                                    @{
+                                        var str = "Table ";
+                                        foreach (var item in Model.ListIdTable)
+                                        {
+                                            str += TableSingleTon.GetTableNumber(item).ToString() + ", ";
+                                        }
+                                        str = str.Remove(str.Length - 2, 2);
+                                    }
+                                    <span>@str</span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -146,4 +162,3 @@
         </div>
     </div>
 </div>
-
