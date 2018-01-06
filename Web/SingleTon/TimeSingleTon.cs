@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using Model.Models;
 using Web.Models;
@@ -81,13 +83,23 @@ namespace Web.SingleTon
 
         public static SelectList GetListBegin(DateTime beginTime)
         {
+            var imbalance = int.Parse(WebConfigurationManager.AppSettings["ServerHourImbalance"]);
             var beginIndex = 0;
-            if (DateTime.Today == beginTime)
+            var dateTimeNow = DateTime.Now.AddHours(imbalance);
+            
+            if (dateTimeNow.Date == beginTime)
             {
-                if (DateTime.Now.Hour >= 10 && DateTime.Now.Hour <= 23)
+                if (dateTimeNow.Hour >= 10 && dateTimeNow.Hour <= 23)
                 {
-                    var minute = DateTime.Now.Minute > 30 ? "00" : "30";
-                    var now = DateTime.Now.Hour + ":" + minute;
+                    string minute = "30";
+                    string now = (dateTimeNow.Hour) + ":" + minute;
+
+                    if (dateTimeNow.Minute > 30)
+                    {
+                        minute = "00";
+                        now = (dateTimeNow.Hour + 1) + ":" + minute;
+                    }
+                    
                     beginIndex = GioBegin.IndexOf(now);
                     //GioBegin.RemoveRange(0, beginIndex);
                 }

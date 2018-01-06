@@ -12,8 +12,19 @@ namespace Web
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/admin").Include(
+                        "~/Scripts/admin/js/material.min.js",
+                        "~/Scripts/admin/js/chartist.min.js",
+                        "~/Scripts/admin/js/arrive.min.js",
+                        "~/Scripts/admin/js/perfect-scrollbar.jquery.min.js",
+                        "~/Scripts/admin/js/bootstrap-notify.js",
+                        "~/Scripts/admin/js/material-dashboard.js?v=1.2.0",
+                        "~/Scripts/admin/js/demo.js",
+                        "~/Scripts/admin/js/layout.js"));
+
+            
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

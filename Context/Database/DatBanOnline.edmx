@@ -1239,6 +1239,7 @@
           <Property Type="DateTime" Name="EndTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
           <Property Type="Decimal" Name="Deposit" Nullable="true" Precision="12" Scale="2" />
+          <Property Type="String" Name="VerifyBy" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="Get_All_Table_Result">
           <Property Type="Int32" Name="IdTable" Nullable="false" />
@@ -1277,6 +1278,7 @@
           <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
           <Property Type="Decimal" Name="Deposit" Nullable="true" Precision="12" Scale="2" />
           <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="VerifyBy" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="Get_Customer_By_Id_Result">
           <Property Type="Int32" Name="IdCustomer" Nullable="false" />
@@ -1631,6 +1633,7 @@
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Deposit" ColumnName="Deposit" />
+                <ScalarProperty Name="VerifyBy" ColumnName="VerifyBy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1683,6 +1686,7 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Deposit" ColumnName="Deposit" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="VerifyBy" ColumnName="VerifyBy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

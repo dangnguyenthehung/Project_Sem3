@@ -13,6 +13,10 @@
                 <div class="card-header" data-background-color="purple">
                     <h4 class="title">Booking Details <span style="float: right">Status: @Enum.GetName(typeof(Enums.OrderStatus), Model.Order.OrderStatus)</span></h4>
                     <p class="category">Order ID: @Model.Order.IdOrder</p>
+                    @if (!string.IsNullOrEmpty(Model.Order.VerifyBy))
+                    {
+                        <p class="category">Verify By: @Model.Order.VerifyBy</p>
+                    }
 
                 </div>
                 <div class="card-content">
