@@ -15,6 +15,7 @@ namespace Helpers_Constants.Constants
 
         public static string Order = "Order";
         public static string DepositToken = "CheckoutToken";
+        public static string ApiToken = "ApiToken";
 
         public static string MenuLayoutVisibility = "MenuLayoutVisibility";
     }

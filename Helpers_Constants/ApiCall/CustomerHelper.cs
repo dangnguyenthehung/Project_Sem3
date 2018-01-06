@@ -9,19 +9,19 @@ namespace Helpers_Constants.ApiCall
 {
     public class CustomerHelper : BaseHelper
     {
-        public Customer GetById(string apiUrl, int id)
+        public Customer GetById(string token, string apiUrl, int id)
         {
-            return _Get_By_Id<Customer>(apiUrl, id);
+            return _Get_By_Id<Customer>(token, apiUrl, id);
         }
 
-        public Customer GetByUserName(string apiUrl, string cmnd, string phone)
+        public Customer GetByUserName(string token, string apiUrl, string cmnd, string phone)
         {
-            return _Get_By_Keyword_Multiple<Customer>(apiUrl, cmnd, phone);
+            return _Get_By_Keyword_Multiple<Customer>(token, apiUrl, cmnd, phone);
         }
 
-        public int Insert(string apiUrl, Customer model)
+        public int Insert(string token, string apiUrl, Customer model)
         {
-            return _Insert(apiUrl, model);
+            return _Insert(token, apiUrl, model);
         }
     }
 }

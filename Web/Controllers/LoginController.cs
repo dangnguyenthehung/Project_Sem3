@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using Helpers_Constants.Constants;
+using Helpers_Constants.Utilities;
 using Model.Models;
 using Model.Security;
 using Web.Models;
@@ -42,6 +44,11 @@ namespace Web.Controllers
                 {
                     //Save login info to session
                     SessionPersister.CustomerAccount = loginAccount;
+                    SessionPersister.ApiToken = Utilities.CreateLoginToken(new Login()
+                    {
+                        UserName = WebConfigurationManager.AppSettings["ApiUserName"],
+                        Password = WebConfigurationManager.AppSettings["ApiPassword"]
+                    });
                 }
 
                 return RedirectToAction("Index", "Home");

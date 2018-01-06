@@ -9,9 +9,9 @@ namespace Helpers_Constants.ApiCall
 {
     public class RestaurantBranchHelper : BaseHelper
     {
-        public List<RestaurantBranch> GetAll(string apiUrl)
+        public List<RestaurantBranch> GetAll(string token, string apiUrl)
         {
-            return _Get_All<RestaurantBranch>(apiUrl);
+            return _Get_All<RestaurantBranch>(token, apiUrl);
         }
     }
 }

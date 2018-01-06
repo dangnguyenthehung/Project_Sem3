@@ -102,5 +102,24 @@ namespace Web.Security
                 HttpContext.Current.Session[SessionConstants.DepositToken] = value;
             }
         }
+
+
+        public static string ApiToken
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    return null;
+                }
+
+                var session = HttpContext.Current.Session[SessionConstants.ApiToken] as string;
+                return session;
+            }
+            set
+            {
+                HttpContext.Current.Session[SessionConstants.ApiToken] = value;
+            }
+        }
     }
 }

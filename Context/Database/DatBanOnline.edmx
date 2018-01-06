@@ -498,6 +498,12 @@
           <Parameter Name="TableNumber" Type="int" Mode="In" />
           <Parameter Name="Description" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="Update_TableType_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdTableType" Type="int" Mode="In" />
+          <Parameter Name="Capacity" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+          <Parameter Name="Deposit" Type="decimal" Mode="In" />
+        </Function>
         <Function Name="Update_Verify_Order_By_Id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdOrder" Type="int" Mode="In" />
           <Parameter Name="IdEmployee" Type="int" Mode="In" />
@@ -792,6 +798,12 @@
             <End Role="Permission" EntitySet="Permissions" />
             <End Role="Role" EntitySet="Roles" />
           </AssociationSet>
+          <FunctionImport Name="Update_TableType_By_Id">
+            <Parameter Name="IdTableType" Mode="In" Type="Int32" />
+            <Parameter Name="Capacity" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Deposit" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Branch_Manager">
           <Key>
@@ -1754,6 +1766,7 @@
               <ScalarProperty Name="IdPermission" ColumnName="IdPermission" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="Update_TableType_By_Id" FunctionName="DatBanOnLineModel.Store.Update_TableType_By_Id" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

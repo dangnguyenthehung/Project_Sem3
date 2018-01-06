@@ -43,8 +43,8 @@ namespace Web.Security
                     {
                         filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                         {
-                            action = "Index",
-                            controller = "UnAuthorize"
+                            action = "UnAuthorize",
+                            controller = "Error"
                         }));
                     }
                 }

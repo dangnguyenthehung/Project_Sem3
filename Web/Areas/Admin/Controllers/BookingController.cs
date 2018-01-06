@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Helpers_Constants.Constants;
 using Model.Enum;
 using Model.Models;
 using Model.ViewModels;
@@ -27,21 +28,25 @@ namespace Web.Areas.Admin.Controllers
 
             return View(model);
         }
-        
 
+
+        [CustomAuthorize(Permission = PermissionConstants.Order.Get)]
         public ActionResult Details(int id)
         {
             if (id > 0)
             {
                 var order = OrderModel.GetById(id);
-                if (order.IdCustomer > 0)
+                if (order != null)
                 {
+                    var listOrderTable = OrderModel.GetListOrderTable(id);
+
                     var customer = CustomerModel.GetById(order.IdCustomer);
 
                     var viewModel = new BookingDetailsViewModel()
                     {
                         Order = order,
-                        Customer = customer
+                        Customer = customer,
+                        ListIdTable = listOrderTable.Select(t => t.IdTable).ToList()
                     };
 
                     return View(viewModel);
@@ -51,6 +56,7 @@ namespace Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [CustomAuthorize(Permission = PermissionConstants.Order.Update)]
         public ActionResult Update(int id)
         {
             var order = OrderModel.GetById(id);
@@ -66,6 +72,7 @@ namespace Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Permission = PermissionConstants.Order.Update)]
         public ActionResult Update(BookingDetailsViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -94,6 +101,7 @@ namespace Web.Areas.Admin.Controllers
             return View(viewModel);
         }
 
+        [CustomAuthorize(Permission = PermissionConstants.Order.Update)]
         public ActionResult Verify(int id)
         {
             if (SessionPersister.EmployeeAccount != null)
@@ -117,6 +125,7 @@ namespace Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [CustomAuthorize(Permission = PermissionConstants.Order.Update)]
         public ActionResult Cancel(int id)
         {
             if (SessionPersister.EmployeeAccount != null)
@@ -140,6 +149,7 @@ namespace Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [CustomAuthorize(Permission = PermissionConstants.Order.Update)]
         public ActionResult Refund(int id)
         {
             if (SessionPersister.EmployeeAccount != null)
@@ -163,6 +173,7 @@ namespace Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [CustomAuthorize(Permission = PermissionConstants.Order.Update)]
         public ActionResult Complete(int id)
         {
             if (SessionPersister.EmployeeAccount != null)

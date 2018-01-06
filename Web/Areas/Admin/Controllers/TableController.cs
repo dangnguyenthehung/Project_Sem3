@@ -9,6 +9,7 @@ using Model.ViewModels;
 using Web.Models;
 using Web.Security;
 using Web.SingleTon;
+using Helpers_Constants.Constants;
 
 namespace Web.Areas.Admin.Controllers
 {
@@ -27,6 +28,7 @@ namespace Web.Areas.Admin.Controllers
         }
 
 
+        [CustomAuthorize(Permission = PermissionConstants.TableType.GetTable)]
         public ActionResult Available(int id)
         {
             var viewModel = new OrderViewModel()
@@ -39,6 +41,7 @@ namespace Web.Areas.Admin.Controllers
             return View(viewModel);
         }
 
+        [CustomAuthorize(Permission = PermissionConstants.TableType.GetTable)]
         public ActionResult View(int id)
         {
             var model = TableModel.GetByIdRestaurant(id);
@@ -46,6 +49,7 @@ namespace Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [CustomAuthorize(Permission = PermissionConstants.TableType.UpdateTable)]
         public ActionResult Edit(int idTable)
         {
             var model = TableModel.GetTableById(idTable);
@@ -75,13 +79,16 @@ namespace Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Permission = PermissionConstants.TableType.UpdateTable)]
         public ActionResult Edit(Table model)
         {
             if (ModelState.IsValid)
             {
                 var result = TableModel.UpdateTableById(model);
+
                 if (result)
                 {
+                    TableSingleTon.UpdateData();
                     return RedirectToAction("View", "Table", new { id = model.RestaurantId });
                 }
             }
@@ -90,6 +97,41 @@ namespace Web.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        [CustomAuthorize(Permission = PermissionConstants.TableType.Get)]
+        public ActionResult Type()
+        {
+            var model = TableModel.GetListTableTypes();
+            
+            return View(model);
+        }
+
+        [CustomAuthorize(Permission = PermissionConstants.TableType.UpdateType)]
+        public ActionResult EditType(int id)
+        {
+            var model = TableTypeSingleTon.GetById(id);
+
+
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [CustomAuthorize(Permission = PermissionConstants.TableType.UpdateType)]
+        public ActionResult EditType(TableType model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = TableModel.UpdateTableType(model);
+                if (result)
+                {
+                    TableTypeSingleTon.UpdateData();
+                    return RedirectToAction("Type", "Table");
+                }
+            }
+
+            return View(model);
+        }
+
         //func
         private void GetTableData(ref OrderViewModel viewModel)
         {

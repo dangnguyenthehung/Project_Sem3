@@ -11,9 +11,9 @@ namespace Helpers_Constants.ApiCall
 {
     public class SecurityHelper : BaseHelper
     {
-        public List<RolesMapping> Get_ListRoles_And_Permission(string apiUrl)
+        public List<RolesMapping> Get_ListRoles_And_Permission(string token, string apiUrl)
         {
-            return _Get<List<RolesMapping>>(apiUrl);
+            return _Get<List<RolesMapping>>(token, apiUrl);
         }
     }
 }

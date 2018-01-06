@@ -5,6 +5,7 @@ using System.Web;
 using Helpers_Constants.ApiCall;
 using Helpers_Constants.Constants;
 using Model.DTO;
+using Web.Security;
 
 namespace Web.Models
 {
@@ -15,9 +16,10 @@ namespace Web.Models
 
         public static List<RolesMapping> Get_ListRoles_And_Permission()
         {
+            var token = SessionPersister.ApiToken;
             var url = ApiUrl.GetListRoleAndPermission;
 
-            return Helper.Get_ListRoles_And_Permission(url);
+            return Helper.Get_ListRoles_And_Permission(token, url);
         }
     }
 }

@@ -47,6 +47,7 @@ namespace Helpers_Constants.Constants
             public string Insert_Table = $"{BaseUrl}/insert_table/";
             public string Delete_Table_By_Id = $"{BaseUrl}/delete_table_by_id/";
             public string Update_Table_By_Id = $"{BaseUrl}/update_table_by_id/";
+            public string Update_TableType = $"{BaseUrl}/update_tabletype/";
 
             public string Get_By_Id_Restaurant = $"{BaseUrl}/get_by_id_restaurant/";
             public string Get_Table_Available = $"{BaseUrl}/get_table_available/";

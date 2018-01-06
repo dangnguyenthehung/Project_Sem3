@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Api.Helper;
+using Api.Security;
 using Model.DTO;
 using Model.Models;
 using Newtonsoft.Json;
@@ -12,6 +13,7 @@ using Newtonsoft.Json;
 namespace Api.Controllers
 {
     [RoutePrefix("api/table")]
+    [CustomBasicAuthenticationFilter]
     public class TableApiController : ApiController
     {
         private static readonly TableApiHelper Helper = new TableApiHelper();
@@ -195,5 +197,27 @@ namespace Api.Controllers
             return response;
         }
 
+        [Route("update_tabletype/")]
+        [HttpPut]
+        public HttpResponseMessage Update_TableType([FromBody] TableType type)
+        {
+            var response = new HttpResponseMessage();
+
+            if (type != null)
+            {
+                var result = Helper.Update_TableType(type);
+
+                if (result)
+                {
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Content = new StringContent(JsonConvert.SerializeObject(result));
+
+                    return response;
+                }
+            }
+
+            response.StatusCode = HttpStatusCode.BadRequest;
+            return response;
+        }
     }
 }

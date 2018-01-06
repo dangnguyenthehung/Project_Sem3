@@ -1,4 +1,5 @@
 ﻿@using Web.Models
+@using Web.Security
 @using Web.SingleTon
 
 @{
@@ -7,14 +8,29 @@
     var id = ViewBag.id;
     var item = BranchSingleTon.GetById(id);
 }
-<a href="@Url.Action("Available","Table", new {id})">
-    <div class="btn btn-success">
-        <h4>Avaitable Table</h4>
-    </div>
-</a>
 
-<a href="@Url.Action("View","Table", new {id})">
-    <div class="btn btn-primary">
-        <h4>View List Table</h4>
-    </div>
-</a>
+@if (SessionPersister.MenuLayoutVisibility.TableType.GetTable)
+{
+    
+    <a href="@Url.Action("Available","Table", new {id})">
+        <div class="btn btn-success">
+            <h4>Avaitable Table</h4>
+        </div>
+    </a>
+
+    <a href="@Url.Action("View","Table", new {id})">
+        <div class="btn btn-primary">
+            <h4>View List Table</h4>
+        </div>
+    </a>
+}
+
+@if (SessionPersister.MenuLayoutVisibility.TableType.Get)
+{
+    <a href="@Url.Action("Type","Table")">
+        <div class="btn btn-info">
+            <h4>View Table Type</h4>
+        </div>
+    </a>
+}
+

@@ -87,6 +87,9 @@ new SelectListItem { Text = "23:00", Value = "23:00" }
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
+            <div>
+                @Html.ActionLink("Back", "Selection", new { id = Model.Order.IdBranch}, new { @class = "btn btn-default" })
+            </div>
             <div class="card">
                 <div class="card-header" data-background-color="purple">
                     <h4 class="title">Table Statistic</h4>

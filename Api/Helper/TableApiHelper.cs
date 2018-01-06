@@ -190,5 +190,22 @@ namespace Api.Helper
                 return null;
             }
         }
+
+        public bool Update_TableType(TableType type)
+        {
+            try
+            {
+                using (var context = new DatBanOnlineEntities())
+                {
+                    var response = context.Update_TableType_By_Id(type.Id_Table_Type, type.TableCapacity, type.Description, type.DepositFee);
+                    
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

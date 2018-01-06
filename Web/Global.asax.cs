@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Helpers_Constants.Constants;
+using Helpers_Constants.Utilities;
+using Model.Models;
+using Web.Security;
 
 namespace Web
 {
