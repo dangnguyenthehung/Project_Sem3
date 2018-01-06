@@ -27,5 +27,6 @@ namespace Context.Database
         public string Description { get; set; }
         public Nullable<decimal> Deposit { get; set; }
         public string CustomerName { get; set; }
+        public string VerifyBy { get; set; }
     }
 }

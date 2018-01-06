@@ -20,12 +20,14 @@
                                         <h4 class="title title-up">Infomation</h4>
                                     </div>
                                     <div class="card-body">
+                                        
+                                        <p class="text-center wow fadeInRight"><strong>Order Date</strong></p>
 
                                         <div class="input-group form-group-no-border wow fadeInLeft">
                                             <span class="input-group-addon">
                                                 <i class="now-ui-icons ui-1_calendar-60"></i>
                                             </span>
-                                            @Html.TextBox("BeginTime", System.DateTime.Today, new { @class = "form-control date-picker" })
+                                            @Html.TextBox("BeginTime", System.DateTime.Today, new {@class = "form-control date-picker"})
                                         </div>
                                         <div>
                                             <p class="text-center wow fadeInRight"><strong>Select Branch</strong></p>

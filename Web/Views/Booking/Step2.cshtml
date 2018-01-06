@@ -8,20 +8,20 @@
     var tableAvailable = Model.ListAvailableTables.GroupBy(t => t.IdTableType).Select(gr => gr.ToList()).ToList();
     var tableType = TableTypeSingleTon.GetListTypes();
 
-    var gioHienTai = DateTime.Now.TimeOfDay.Hours;
-    var gioDefaultBegin = "8:00";
-    var gioDefaultEnd = "9:00";
+    //var gioHienTai = DateTime.Now.TimeOfDay.Hours;
+    //var gioDefaultBegin = "8:00";
+    //var gioDefaultEnd = "9:00";
 
-    if (gioHienTai >= 21)
-    {
-        gioDefaultBegin = "8:00";
-        gioDefaultEnd = "9:00";
-    }
-    else
-    {
-        gioDefaultBegin = gioHienTai + 2 + ":00";
-        gioDefaultEnd = gioHienTai + 3 + ":00";
-    }
+    //if (gioHienTai >= 21)
+    //{
+    //    gioDefaultBegin = "8:00";
+    //    gioDefaultEnd = "9:00";
+    //}
+    //else
+    //{
+    //    gioDefaultBegin = gioHienTai + 2 + ":00";
+    //    gioDefaultEnd = gioHienTai + 3 + ":00";
+    //}
     var listGioBegin = TimeSingleTon.GetListBegin(Model.Order.BeginTime);
 
 
